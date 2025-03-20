@@ -16,4 +16,4 @@
 15. Ca utilizator, vreau sa beneficiez de transport gratuit sau reduceri începând cu suma x din cosul de cumparaturi.
 16. Ca utilizator, vreau sa am posibilitatea de a ma abona la newsletter pentru a ma informa din cele mai recente surse si a descoperi cele mai noi reduceri.
 17. Ca utilizator, pe langa aplicatia web mentionata mai sus, vreau sa pot descarca o aplicatie mobila cu toate functionalitatile.
-18. Ca outlizator, vrea sa pot folosi coduri promotionale in comenzile mele.
+18. Ca uitlizator, vrea sa pot folosi coduri promotionale in comenzile mele.
