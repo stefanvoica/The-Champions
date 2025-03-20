@@ -1,6 +1,7 @@
 # Backlog
 ## Sprint 1: Gestionare Utilizatori
- Implementare sistem de înregistrare utilizatori (email + parolă).
+ Implementare sistem de înregistrare utilizatori (email + parolă). 
+ 
  Implementare autentificare cu 2 factori (SMS/email cu cod de validare).
  Restricționare utilizatori neînregistrați de la adăugarea produselor în coș și lăsarea recenziilor.
  Permitere plasare comenzi doar pentru utilizatori înregistrați.
