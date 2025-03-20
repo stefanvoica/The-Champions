@@ -5,6 +5,7 @@
  Restricționare utilizatori neînregistrați de la adăugarea produselor în coș și lăsarea recenziilor.
  Permitere plasare comenzi doar pentru utilizatori înregistrați.
  Implementare funcționalitate abonare la newsletter.
+ceva
 ## Sprint 2: Gestionare Produse și Categorii
  Implementare funcționalitate pentru colaboratori de a adăuga produse.
  Implementare sistem de aprobare a produselor de către administratori.
