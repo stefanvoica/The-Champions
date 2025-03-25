@@ -18,3 +18,4 @@
 16. Ca utilizator, vreau sa am posibilitatea de a ma abona la newsletter pentru a ma informa din cele mai recente surse si a descoperi cele mai noi reduceri.
 17. Ca utilizator, pe langa aplicatia web mentionata mai sus, vreau sa pot descarca o aplicatie mobila cu toate functionalitatile.
 18. Ca utilizator, vrea sa pot folosi coduri promotionale in comenzile mele.
+19. Ca utilizator, vreau să am acces la un HelpAI care să includă o opțiune de chat pentru a primi asistență rapidă și clarificări legate de produse, comenzi și funcționalitățile platformei.
