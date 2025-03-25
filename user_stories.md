@@ -1,17 +1,17 @@
 # User stories
 
 1. Ca vizitator, vreau sa ma pot inregistra pentru a avea acces la functionalitati suplimentare.
-2. Ca utilizator colaborator, vreau sa pot adauga, edita si sterge produse in magazin, care sa fie apoi aprobate sau respinse de administrator.
-3. Ca administrator, vreau sa pot adauga, edita si sterge categorii de produse pentru a organiza magazinul.
-4. Ca administrator, vreau sa pot schimba drepturile de acces ale utilizatorilor.
-5. Ca utilizator, vreau sa pot lasa un rating si un review text pentru produsele achizitionate.
-6. Ca utilizator neinregistrat, vreau doar sa pot vizualiza produsele si comentariile, fara a putea adauga produse in cos si lasa recenzii.
-7. Ca utilizator inregistrat, vreau sa pot adauga produse in cos si sa plasez comenzi.
-8. Ca utilizator, vreau sa pot cauta produse dupa denumire sau fragmente din numele acestora.
-9. Ca utilizator, vreau sa pot sorta produsele dupa pret sau rating, crescator sau descrescator.
-10. Ca administrator, vreau sa pot edita si sterge produse si comentarii.
-11. Ca utilizator, vreau ca la finalul comenzii sa fiu redirectionat catre o pagina de plati online.
-12. Ca utilizator, vreau sa ma pot autentifica in 2 pasi, primind un mail/sms cu un cod de validare.
+2. Ca utilizator, vreau sa ma pot autentifica in 2 pasi, primind un mail/sms cu un cod de validare.
+3. Ca utilizator colaborator, vreau sa pot adauga, edita si sterge produse in magazin, care sa fie apoi aprobate sau respinse de administrator.
+4. Ca administrator, vreau sa pot adauga, edita si sterge categorii de produse pentru a organiza magazinul.
+5. Ca administrator, vreau sa pot schimba drepturile de acces ale utilizatorilor.
+6. Ca utilizator, vreau sa pot lasa un rating si un review text pentru produsele achizitionate.
+7. Ca utilizator neinregistrat, vreau doar sa pot vizualiza produsele si comentariile, fara a putea adauga produse in cos si lasa recenzii.
+8. Ca utilizator inregistrat, vreau sa pot adauga produse in cos si sa plasez comenzi.
+9. Ca utilizator, vreau sa pot cauta produse dupa denumire sau fragmente din numele acestora.
+10. Ca utilizator, vreau sa pot sorta produsele dupa pret sau rating, crescator sau descrescator.
+11. Ca administrator, vreau sa pot edita si sterge produse si comentarii.
+12. Ca utilizator, vreau ca la finalul comenzii sa fiu redirectionat catre o pagina de plati online.
 13. Ca utilizator, vreau sa primesc mail cu factura autogenerata in urma comenzii efectuate in magazin.
 14. Ca utilizator, vreau sa pot alege din mai multe metode de livrare (ridicare din depozit, easybox, livrare prin curier).
 15. Ca utilizator, vreau sa beneficiez de transport gratuit sau reduceri începând cu suma x din cosul de cumparaturi.
