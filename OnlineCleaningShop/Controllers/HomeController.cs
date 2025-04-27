@@ -10,7 +10,7 @@ namespace OnlineCleaningShop.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
-        private readonly ApplicationDbContext db;
+        private readonly ApplicationDbContext _db;
 
         private readonly UserManager<ApplicationUser> _userManager;
 
@@ -24,7 +24,7 @@ namespace OnlineCleaningShop.Controllers
 
             )
         {
-            db = context;
+            _db = context;
 
             _userManager = userManager;
 
@@ -36,21 +36,26 @@ namespace OnlineCleaningShop.Controllers
 
         public IActionResult Index()
         {
-            if (User.Identity.IsAuthenticated)
+            if (User.IsInRole("Admin"))
             {
-                return RedirectToAction("Index", "Products");
+                var categories = _db.Categories.OrderBy(c => c.CategoryName).ToList();
+                ViewBag.Categories = categories;
+            }
+            else
+            {
+                ViewBag.Categories = null;
             }
 
-            var products = from product in db.Products
+            // de selectat doar produsele aprobate de admin; in curand!
+            var products = from product in _db.Products
                            select product;
             if (products.Count() == 0)
             {
-                TempData["message"] = "No products in the database!";
+                //TempData["message"] = "No products in the database!";
                 return View();
             }
             ViewBag.FirstProduct = products.First();
-            ViewBag.Products = products.OrderBy(o => o.Title).Skip(1).Take(2);
-            ViewBag.Message = TempData["message"];
+            ViewBag.Products = products.OrderBy(o => o.Name).Skip(1).Take(2);
             return View();
         }
 

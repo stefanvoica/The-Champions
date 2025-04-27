@@ -16,7 +16,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("OnlineCleaningShop")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+18071f066df11e13699cb20b49a8533c77ceccd0")]
 [assembly: System.Reflection.AssemblyProductAttribute("OnlineCleaningShop")]
 [assembly: System.Reflection.AssemblyTitleAttribute("OnlineCleaningShop")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

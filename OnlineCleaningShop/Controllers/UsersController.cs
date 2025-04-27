@@ -29,144 +29,146 @@ namespace OnlineCleaningShop.Controllers
 
             _roleManager = roleManager;
         }
-        public IActionResult Index()
+
+        public async Task<IActionResult> Index()
         {
-            var users = from user in db.Users
-                        orderby user.UserName
-                        select user;
+            var users = _userManager.Users.ToList();
+            var userRoles = new Dictionary<string, List<string>>();
 
-            ViewBag.UsersList = users;
+            foreach (var user in users)
+            {
+                var roles = await _userManager.GetRolesAsync(user);
+                userRoles[user.Id] = roles.ToList();
+            }
 
-            return View();
+            ViewBag.UserRoles = userRoles;
+            return View(users);
         }
 
-        public async Task<ActionResult> Show(string id)
+        public async Task<IActionResult> Edit(string id)
         {
-            ApplicationUser user = db.Users.Find(id);
+            if (string.IsNullOrEmpty(id))
+            {
+                return NotFound();
+            }
+
+            var user = await _userManager.FindByIdAsync(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            var userRoles = await _userManager.GetRolesAsync(user);
+            ViewBag.AllRoles = _roleManager.Roles.Select(r => r.Name).ToList();
+            ViewBag.UserRoles = userRoles;
+
+            return View(user);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(string id, string Email, string UserName, string UserRole)
+        {
+            var user = await _userManager.FindByIdAsync(id);
+            if (user == null)
+            {
+                TempData["message"] = "Utilizatorul nu a fost găsit.";
+                TempData["messageType"] = "alert-danger";
+                return RedirectToAction("Index");
+            }
+
+            user.Email = Email;
+            user.UserName = UserName;
+
+            // Actualizare rol
+            var currentRoles = await _userManager.GetRolesAsync(user);
+            var removeRolesResult = await _userManager.RemoveFromRolesAsync(user, currentRoles);
+
+            if (!removeRolesResult.Succeeded)
+            {
+                TempData["message"] = "Eroare la eliminarea rolurilor existente.";
+                TempData["messageType"] = "alert-danger";
+                return RedirectToAction("Index");
+            }
+
+            var addRoleResult = await _userManager.AddToRoleAsync(user, UserRole);
+
+            if (!addRoleResult.Succeeded)
+            {
+                TempData["message"] = "Eroare la actualizarea rolului.";
+                TempData["messageType"] = "alert-danger";
+                return RedirectToAction("Index");
+            }
+
+            TempData["message"] = "Utilizatorul a fost actualizat cu succes.";
+            TempData["messageType"] = "alert-success";
+
+            return RedirectToAction("Index");
+        }
+
+        public async Task<IActionResult> UpdateUserRole(string userId, string newRole)
+        {
+            var user = await _userManager.FindByIdAsync(userId);
+            if (user == null)
+            {
+                TempData["message"] = "Utilizatorul nu a fost găsit.";
+                TempData["messageType"] = "alert-danger";
+                return RedirectToAction("Index");
+            }
+
+            var currentRoles = await _userManager.GetRolesAsync(user);
+            var removeRolesResult = await _userManager.RemoveFromRolesAsync(user, currentRoles);
+
+            if (!removeRolesResult.Succeeded)
+            {
+                TempData["message"] = "Eroare la eliminarea rolurilor existente.";
+                TempData["messageType"] = "alert-danger";
+                return RedirectToAction("Index");
+            }
+
+            var addRoleResult = await _userManager.AddToRoleAsync(user, newRole);
+
+            if (!addRoleResult.Succeeded)
+            {
+                TempData["message"] = "Eroare la adăugarea noului rol.";
+                TempData["messageType"] = "alert-danger";
+                return RedirectToAction("Index");
+            }
+
+            TempData["message"] = "Rolul utilizatorului a fost actualizat cu succes.";
+            TempData["messageType"] = "alert-success";
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> RevokeUserRoles(string userId)
+        {
+            var user = await _userManager.FindByIdAsync(userId);
+            if (user == null)
+            {
+                TempData["message"] = "Utilizatorul nu a fost găsit.";
+                TempData["messageType"] = "alert-danger";
+                return RedirectToAction("Index");
+            }
+
             var roles = await _userManager.GetRolesAsync(user);
+            var result = await _userManager.RemoveFromRolesAsync(user, roles);
 
-            ViewBag.Roles = roles;
-
-            ViewBag.UserCurent = await _userManager.GetUserAsync(User);
-
-            return View(user);
-        }
-
-        public async Task<ActionResult> Edit(string id)
-        {
-            ApplicationUser user = db.Users.Find(id);
-
-            ViewBag.AllRoles = GetAllRoles();
-
-            var roleNames = await _userManager.GetRolesAsync(user); // Lista de nume de roluri
-
-            // Cautam ID-ul rolului in baza de date
-            ViewBag.UserRole = _roleManager.Roles
-                                              .Where(r => roleNames.Contains(r.Name))
-                                              .Select(r => r.Id)
-                                              .First(); // Selectam 1 singur rol
-
-            return View(user);
-        }
-
-        [HttpPost]
-        public async Task<ActionResult> Edit(string id, ApplicationUser newData, [FromForm] string newRole)
-        {
-            ApplicationUser user = db.Users.Find(id);
-
-            user.AllRoles = GetAllRoles();
-
-
-            if (ModelState.IsValid)
+            if (result.Succeeded)
             {
-                user.UserName = newData.UserName;
-                user.Email = newData.Email;
-                user.FirstName = newData.FirstName;
-                user.LastName = newData.LastName;
-                user.PhoneNumber = newData.PhoneNumber;
+                user.LockoutEnd = DateTimeOffset.UtcNow.AddYears(100);
+                await _userManager.UpdateAsync(user);
 
-
-                // Cautam toate rolurile din baza de date
-                var roles = db.Roles.ToList();
-
-                foreach (var role in roles)
-                {
-                    // Scoatem userul din rolurile anterioare
-                    await _userManager.RemoveFromRoleAsync(user, role.Name);
-                }
-                // Adaugam noul rol selectat
-                var roleName = await _roleManager.FindByIdAsync(newRole);
-                await _userManager.AddToRoleAsync(user, roleName.ToString());
-
-                db.SaveChanges();
-
+                TempData["message"] = "Utilizatorul a fost blocat și toate rolurile i-au fost revocate.";
+                TempData["messageType"] = "alert-success";
             }
-            return RedirectToAction("Index");
-        }
-
-
-        [HttpPost]
-        public IActionResult Delete(string id)
-        {
-            var user = db.Users
-                         .Include("Products")
-                         .Include("Comments")
-                         .Include("Bookmarks")
-                         .Where(u => u.Id == id)
-                         .First();
-
-            // Delete user comments
-            if (user.Comments.Count > 0)
+            else
             {
-                foreach (var comment in user.Comments)
-                {
-                    db.Comments.Remove(comment);
-                }
+                TempData["message"] = "A apărut o eroare la revocarea rolurilor.";
+                TempData["messageType"] = "alert-danger";
             }
-
-            // Delete user bookmarks
-            if (user.Bookmarks.Count > 0)
-            {
-                foreach (var bookmark in user.Bookmarks)
-                {
-                    db.Bookmarks.Remove(bookmark);
-                }
-            }
-
-            // Delete user products
-            if (user.Products.Count > 0)
-            {
-                foreach (var product in user.Products)
-                {
-                    db.Products.Remove(product);
-                }
-            }
-
-            db.ApplicationUsers.Remove(user);
-
-            db.SaveChanges();
 
             return RedirectToAction("Index");
         }
 
-
-        [NonAction]
-        public IEnumerable<SelectListItem> GetAllRoles()
-        {
-            var selectList = new List<SelectListItem>();
-
-            var roles = from role in db.Roles
-                        select role;
-
-            foreach (var role in roles)
-            {
-                selectList.Add(new SelectListItem
-                {
-                    Value = role.Id.ToString(),
-                    Text = role.Name.ToString()
-                });
-            }
-            return selectList;
-        }
     }
 }

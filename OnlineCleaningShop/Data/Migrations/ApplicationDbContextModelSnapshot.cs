@@ -17,7 +17,7 @@ namespace OnlineCleaningShop.Data.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.8")
+                .HasAnnotation("ProductVersion", "8.0.11")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -178,6 +178,12 @@ namespace OnlineCleaningShop.Data.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
 
+                    b.Property<string>("FirstName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
 
@@ -224,28 +230,6 @@ namespace OnlineCleaningShop.Data.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
-            modelBuilder.Entity("OnlineCleaningShop.Models.Bookmark", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Bookmarks");
-                });
-
             modelBuilder.Entity("OnlineCleaningShop.Models.Category", b =>
                 {
                     b.Property<int>("Id")
@@ -263,39 +247,6 @@ namespace OnlineCleaningShop.Data.Migrations
                     b.ToTable("Categories");
                 });
 
-            modelBuilder.Entity("OnlineCleaningShop.Models.Comment", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Content")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int?>("ProductId")
-                        .HasColumnType("int");
-
-                    b.Property<decimal?>("Rating")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ProductId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Comments");
-                });
-
             modelBuilder.Entity("OnlineCleaningShop.Models.Product", b =>
                 {
                     b.Property<int>("Id")
@@ -305,28 +256,28 @@ namespace OnlineCleaningShop.Data.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int?>("CategoryId")
-                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ImageUrl")
+                    b.Property<string>("Image")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool?>("IsApproved")
-                        .HasColumnType("bit");
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<double>("Price")
+                        .HasColumnType("float");
+
+                    b.Property<double?>("Score")
+                        .HasColumnType("float");
 
                     b.Property<int>("Stock")
                         .HasColumnType("int");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
@@ -340,7 +291,7 @@ namespace OnlineCleaningShop.Data.Migrations
                     b.ToTable("Products");
                 });
 
-            modelBuilder.Entity("OnlineCleaningShop.Models.ProductBookmarks+ProductBookmark", b =>
+            modelBuilder.Entity("OnlineCleaningShop.Models.Review", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -348,22 +299,28 @@ namespace OnlineCleaningShop.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("ProductId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("BookmarkId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("BookmarkDate")
+                    b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
-                    b.HasKey("Id", "ProductId", "BookmarkId");
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
 
-                    b.HasIndex("BookmarkId");
+                    b.Property<int>("Rating")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Text")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("ProductBookmarks");
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Reviews");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -417,40 +374,14 @@ namespace OnlineCleaningShop.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("OnlineCleaningShop.Models.Bookmark", b =>
-                {
-                    b.HasOne("OnlineCleaningShop.Models.ApplicationUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("OnlineCleaningShop.Models.Comment", b =>
-                {
-                    b.HasOne("OnlineCleaningShop.Models.Product", "Product")
-                        .WithMany("Comments")
-                        .HasForeignKey("ProductId");
-
-                    b.HasOne("OnlineCleaningShop.Models.ApplicationUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
-
-                    b.Navigation("Product");
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("OnlineCleaningShop.Models.Product", b =>
                 {
                     b.HasOne("OnlineCleaningShop.Models.Category", "Category")
                         .WithMany("Products")
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CategoryId");
 
                     b.HasOne("OnlineCleaningShop.Models.ApplicationUser", "User")
-                        .WithMany()
+                        .WithMany("Products")
                         .HasForeignKey("UserId");
 
                     b.Navigation("Category");
@@ -458,28 +389,28 @@ namespace OnlineCleaningShop.Data.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("OnlineCleaningShop.Models.ProductBookmarks+ProductBookmark", b =>
+            modelBuilder.Entity("OnlineCleaningShop.Models.Review", b =>
                 {
-                    b.HasOne("OnlineCleaningShop.Models.Bookmark", "Bookmark")
-                        .WithMany("ProductBookmarks")
-                        .HasForeignKey("BookmarkId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("OnlineCleaningShop.Models.Product", "Product")
-                        .WithMany("ProductBookmarks")
+                        .WithMany("Reviews")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Bookmark");
+                    b.HasOne("OnlineCleaningShop.Models.ApplicationUser", "User")
+                        .WithMany("Reviews")
+                        .HasForeignKey("UserId");
 
                     b.Navigation("Product");
+
+                    b.Navigation("User");
                 });
 
-            modelBuilder.Entity("OnlineCleaningShop.Models.Bookmark", b =>
+            modelBuilder.Entity("OnlineCleaningShop.Models.ApplicationUser", b =>
                 {
-                    b.Navigation("ProductBookmarks");
+                    b.Navigation("Products");
+
+                    b.Navigation("Reviews");
                 });
 
             modelBuilder.Entity("OnlineCleaningShop.Models.Category", b =>
@@ -489,9 +420,7 @@ namespace OnlineCleaningShop.Data.Migrations
 
             modelBuilder.Entity("OnlineCleaningShop.Models.Product", b =>
                 {
-                    b.Navigation("Comments");
-
-                    b.Navigation("ProductBookmarks");
+                    b.Navigation("Reviews");
                 });
 #pragma warning restore 612, 618
         }
