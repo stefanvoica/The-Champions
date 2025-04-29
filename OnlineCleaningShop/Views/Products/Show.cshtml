@@ -115,12 +115,16 @@
                     }
                 </div>
                 <small class="text-muted">Data: @review.Date.ToShortDateString()</small>
-                <div class="d-flex justify-content-end mt-2">
-                    <a class="btn btn-outline-primary btn-sm me-2" href="/Reviews/Edit/@review.Id">Editează</a>
-                    <form method="post" asp-controller="Reviews" asp-action="Delete" asp-route-id="@review.Id">
-                        <button class="btn btn-outline-danger btn-sm" type="submit">Șterge</button>
-                    </form>
-                </div>
+                @if ((ViewBag.AfisareButoane == true && review.UserId == ViewBag.UserCurent)
+               || ViewBag.EsteAdmin == true)
+                {
+                    <div class="d-flex justify-content-end mt-2">
+                        <a class="btn btn-outline-primary btn-sm me-2" href="/Reviews/Edit/@review.Id">Editează</a>
+                        <form method="post" asp-controller="Reviews" asp-action="Delete" asp-route-id="@review.Id">
+                            <button class="btn btn-outline-danger btn-sm" type="submit">Șterge</button>
+                        </form>
+                    </div>
+                }
             </div>
             <div class="col-md-2"></div>
         </div>
