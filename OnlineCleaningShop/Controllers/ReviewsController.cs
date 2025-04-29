@@ -29,6 +29,7 @@ namespace OnlineCleaningShop.Controllers
         public IActionResult New(Review review)
         {
             review.Date = DateTime.Now;
+            review.UserId = _userManager.GetUserId(User);
 
             try
             {

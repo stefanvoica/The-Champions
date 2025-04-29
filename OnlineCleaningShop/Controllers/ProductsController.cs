@@ -183,6 +183,39 @@ namespace OnlineCleaningShop.Controllers
 
         // Se plaseaza o comanda de catre un utilizator; in curand!
 
+        // Adaugarea unui review asociat unui produs in baza de date
+        // Toate rolurile pot adauga review-uri in baza de date
+        [HttpPost]
+        [Authorize(Roles = "User,Colaborator,Admin")]
+        public IActionResult Show([FromForm] Review review)
+        {
+            review.Date = DateTime.Now;
+
+            // preluam Id-ul utilizatorului care posteaza review-ul
+            review.UserId = _userManager.GetUserId(User);
+
+            if (ModelState.IsValid)
+            {
+                db.Reviews.Add(review);
+                db.SaveChanges();
+                return Redirect("/Products/Show/" + review.ProductId);
+            }
+            else
+            {
+                Product prod = db.Products.Include("Category")
+                                         .Include("User")
+                                         .Include("Reviews")
+                                         .Include("Reviews.User")
+                                         .Where(prod => prod.Id == review.ProductId)
+                                         .First();
+
+                SetAccessRights();
+
+                return View(prod);
+            }
+        }
+
+
 
         // Se afiseaza formularul in care se vor completa datele unui produs
         // impreuna cu selectarea categoriei din care face parte
@@ -214,7 +247,7 @@ namespace OnlineCleaningShop.Controllers
                 var fileExtension = Path.GetExtension(Image.FileName).ToLower();
                 if (!allowedExtensions.Contains(fileExtension))
                 {
-                    ModelState.AddModelError("ArticleImage", "Fișierul trebuie să fie o imagine (jpg, jpeg, png, gif) sau un video (mp4,  mov).");
+                    ModelState.AddModelError("ProductImage", "Fișierul trebuie să fie o imagine (jpg, jpeg, png, gif) sau un video (mp4,  mov).");
                     return View(product);
                 }
 
@@ -313,7 +346,7 @@ namespace OnlineCleaningShop.Controllers
                 var fileExtension = Path.GetExtension(Image.FileName).ToLower();
                 if (!allowedExtensions.Contains(fileExtension))
                 {
-                    ModelState.AddModelError("ArticleImage", "Fișierul trebuie să fie o imagine (jpg, jpeg, png, gif) sau un video (mp4,  mov).");
+                    ModelState.AddModelError("ProductImage", "Fișierul trebuie să fie o imagine (jpg, jpeg, png, gif) sau un video (mp4,  mov).");
                     return View(product);
                 }
 

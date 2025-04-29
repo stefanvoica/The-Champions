@@ -7,6 +7,14 @@
 <br />
 
 @* Motorul de cautare *@
+<form method="GET">
+    <div class="input-group mb-3">
+        <input type="text" class="form-control" placeholder="Search topics or keywords" name="search"
+               value="@ViewBag.SearchString">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+    </div>
+</form>
+
     @*filtrare; in curand*@ 
 
 
@@ -33,6 +41,7 @@
 
         <a class="btn btn-success" asp-controller="Products" asp-action="Show" asp-route-id="@product.Id">Afisare produs</a>
 
+        @* Butoane pentru editare si stergere produse 
         @if (User.IsInRole("Colaborator") || User.IsInRole("Admin"))
         {
             <div class="d-flex justify-content-between align-items-center">
@@ -43,6 +52,7 @@
                 </form>
             </div>
         }
+        *@
 
 
     </div>

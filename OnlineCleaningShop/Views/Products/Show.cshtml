@@ -60,6 +60,21 @@
                 <span class="ms-2 text-muted">Fără recenzii</span>
             }
         </div>
+        @if ((ViewBag.AfisareButoane == true && Model.UserId == ViewBag.UserCurent)
+        || ViewBag.EsteAdmin == true)
+        {
+            <div class="d-flex flex-row justify-content-between">
+
+                <a class="btn btn-success" asp-controller="Products" asp-action="Edit" asp-route-id="@Model.Id">Editeaza produs</a>
+
+                <form method="post" asp-controller="Products" asp-action="Delete" asp-route-id="@Model.Id">
+
+                    <button class="btn btn-danger" type="submit">Sterge produs</button>
+
+                </form>
+
+            </div>
+        }
 
 
         <div class="d-flex justify-content-between mt-3">
