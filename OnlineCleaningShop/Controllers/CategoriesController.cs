@@ -10,7 +10,9 @@ namespace OnlineCleaningShop.Controllers
     [Authorize(Roles = "Admin")]
     public class CategoriesController : Controller
     {
-        private readonly ApplicationDbContext db;
+        //PASUL 10: useri si roluri
+
+        private readonly ApplicationDbContext _db;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
         public CategoriesController(
@@ -19,7 +21,7 @@ namespace OnlineCleaningShop.Controllers
         RoleManager<IdentityRole> roleManager
         )
         {
-            db = context;
+            _db = context;
             _userManager = userManager;
             _roleManager = roleManager;
         }
@@ -30,7 +32,7 @@ namespace OnlineCleaningShop.Controllers
                 ViewBag.message = TempData["message"].ToString();
             }
 
-            var categories = from category in db.Categories
+            var categories = from category in _db.Categories
                              orderby category.CategoryName
                              select category;
             ViewBag.Categories = categories;
@@ -39,7 +41,7 @@ namespace OnlineCleaningShop.Controllers
 
         public ActionResult Show(int id)
         {
-            Category category = db.Categories.Find(id);
+            Category category = _db.Categories.Find(id);
             return View(category);
         }
 
@@ -53,9 +55,9 @@ namespace OnlineCleaningShop.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Categories.Add(cat);
-                db.SaveChanges();
-                TempData["message"] = "Categoria a fost adaugata";
+                _db.Categories.Add(cat);
+                _db.SaveChanges();
+                TempData["message"] = "Categoria a fost adaugata!";
                 return RedirectToAction("Index");
             }
 
@@ -67,20 +69,20 @@ namespace OnlineCleaningShop.Controllers
 
         public ActionResult Edit(int id)
         {
-            Category category = db.Categories.Find(id);
+            Category category = _db.Categories.Find(id);
             return View(category);
         }
 
         [HttpPost]
         public ActionResult Edit(int id, Category requestCategory)
         {
-            Category category = db.Categories.Find(id);
+            Category category = _db.Categories.Find(id);
 
             if (ModelState.IsValid)
             {
 
                 category.CategoryName = requestCategory.CategoryName;
-                db.SaveChanges();
+                _db.SaveChanges();
                 TempData["message"] = "Categoria a fost modificata!";
                 return RedirectToAction("Index");
             }
@@ -93,14 +95,11 @@ namespace OnlineCleaningShop.Controllers
         [HttpPost]
         public ActionResult Delete(int id)
         {
-            //Category category = db.Categories.Find(id);
-            Category category = db.Categories.Include("Products")
-                                             .Include("Products.Comments")
-                                             .Where(c => c.Id == id)
-                                             .First();
-            db.Categories.Remove(category);
-            TempData["message"] = "Categoria a fost stearsa";
-            db.SaveChanges();
+            //Category category = _db.Categories.Find(id);
+            Category category = _db.Categories.Find(id);
+            _db.Categories.Remove(category);
+            _db.SaveChanges();
+            TempData["message"] = "Categoria a fost stearsa!";
             return RedirectToAction("Index");
         }
     }
