@@ -1,0 +1,171 @@
+﻿@model OnlineCleaningShop.Models.Product
+<partial name="_Notifications" />
+
+
+@* Afișarea detaliilor unui produs *@
+<div class="card shadow-sm">
+    <div class="card-body">
+        <!-- Titlul produsului -->
+        <h3 class="card-title alert-success py-3 px-3 rounded-2 text-center">@Model.Name</h3>
+
+        <!-- Afișare imagine sau video -->
+        @if (Model.Image.Contains(".mp4") || Model.Image.Contains(".mov"))
+        {
+            <div class="text-center mb-3">
+                <video width="100%" height="400px" controls>
+                    <source src="@Model.Image" type="video/mp4">
+                    Browser-ul nu suportă redarea acestui video.
+                </video>
+            </div>
+        }
+        else
+        {
+            <div class="text-center mb-3">
+                <img src="@Model.Image" alt="Imagine Produs"
+                     style="width: 100%; height: 400px; object-fit: cover;" />
+            </div>
+        }
+
+        <!-- Descrierea produsului -->
+        <p class="card-text">@Model.Description</p>
+
+        <!-- Detalii produs -->
+        <div class="d-flex justify-content-between mt-3">
+            <div><strong>Preț:</strong> @Model.Price RON</div>
+            <div><strong>Stoc:</strong> @Model.Stock</div>
+        </div>
+
+        <!-- Afișare rating mediu -->
+        <div class="d-flex justify-content-start mt-3">
+            <strong>Rating mediu:</strong>
+            @if (Model.Score.HasValue)
+            {
+                <span class="ms-2">@Model.Score.Value.ToString("0.0")</span> <!-- Media afișată cu o singură zecimală -->
+                <div class="ms-2">
+                    @for (int i = 1; i <= 5; i++)
+                    {
+                        if (i <= Math.Round(Model.Score.Value))
+                        {
+                            <i class="bi bi-star-fill text-warning"></i> <!-- Stea plină -->
+                        }
+                        else
+                        {
+                            <i class="bi bi-star text-secondary"></i> <!-- Stea goală -->
+                        }
+                    }
+                </div>
+            }
+            else
+            {
+                <span class="ms-2 text-muted">Fără recenzii</span>
+            }
+        </div>
+        @if ((ViewBag.AfisareButoane == true && Model.UserId == ViewBag.UserCurent)
+        || ViewBag.EsteAdmin == true)
+        {
+            <div class="d-flex flex-row justify-content-between">
+
+                <a class="btn btn-success" asp-controller="Products" asp-action="Edit" asp-route-id="@Model.Id">Editeaza produs</a>
+
+                <form method="post" asp-controller="Products" asp-action="Delete" asp-route-id="@Model.Id">
+
+                    <button class="btn btn-danger" type="submit">Sterge produs</button>
+
+                </form>
+
+            </div>
+        }
+
+
+        <div class="d-flex justify-content-between mt-3">
+            <div>
+                <i class="bi bi-tags"></i>
+                Categorie: <strong>@(Model.Category != null ? Model.Category.CategoryName : "Fără categorie")</strong>
+            </div>
+            <span class="text-muted">@DateTime.Now.ToShortDateString()</span>
+        </div>
+    </div>
+</div>
+
+<hr />
+
+@* Formular pentru adăugarea produsului într-o comandă; in curand! *@
+
+@* Afișare recenzii pentru produs *@
+<h4 class="mt-4">Recenzii</h4>
+@foreach (var review in Model.Reviews)
+{
+    <div class="container mb-3">
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8 border rounded p-3">
+                <p>@review.Text</p>
+                <div>
+                    <small class="text-muted">Rating: </small>
+                    @for (int i = 1; i <= 5; i++)
+                    {
+                        if (i <= review.Rating)
+                        {
+                            <i class="bi bi-star-fill text-warning"></i> @* Steluță plină galbenă *@
+                        }
+                        else
+                        {
+                            <i class="bi bi-star text-secondary"></i> @* Steluță goală gri *@
+                        }
+                    }
+                </div>
+                <small class="text-muted">Data: @review.Date.ToShortDateString()</small>
+                @if ((ViewBag.AfisareButoane == true && review.UserId == ViewBag.UserCurent)
+               || ViewBag.EsteAdmin == true)
+                {
+                    <div class="d-flex justify-content-end mt-2">
+                        <a class="btn btn-outline-primary btn-sm me-2" href="/Reviews/Edit/@review.Id">Editează</a>
+                        <form method="post" asp-controller="Reviews" asp-action="Delete" asp-route-id="@review.Id">
+                            <button class="btn btn-outline-danger btn-sm" type="submit">Șterge</button>
+                        </form>
+                    </div>
+                }
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+    </div>
+}
+
+
+@* Formular pentru adăugarea unei recenzii *@
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            <div class="card p-4">
+                <form method="post" asp-controller="Reviews" asp-action="New">
+                    <input type="hidden" name="ProductId" value="@Model.Id" />
+                    <div class="form-group">
+                        <label for="Text">Conținut recenzie</label>
+                        <textarea class="form-control" name="Text" rows="3"></textarea>
+                    </div>
+
+
+                    <div class="form-group mt-3">
+                        <label for="Rating">Alege rating</label>
+                        <select name="Rating" class="form-control" required>
+                            <option value="" disabled selected>-- Selectează un rating --</option>
+                            <option value="1">1 - Foarte slab</option>
+                            <option value="2">2 - Slab</option>
+                            <option value="3">3 - Mediu</option>
+                            <option value="4">4 - Bun</option>
+                            <option value="5">5 - Excelent</option>
+                        </select>
+                    </div>
+
+
+                    <div class="form-group mt-3">
+                        <button class="btn btn-success" type="submit">Adaugă recenzie</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+</div>
+

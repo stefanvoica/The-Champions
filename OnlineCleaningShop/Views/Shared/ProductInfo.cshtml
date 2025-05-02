@@ -1,0 +1,55 @@
+﻿@model OnlineCleaningShop.Models.Product
+
+<div class="card mb-3 shadow-sm">
+    <div class="card-body">
+        <!-- Titlul produsului -->
+        <h3 class="card-title alert-success py-3 px-3 rounded-2">@Model.Name</h3>
+
+        <!-- Descrierea produsului -->
+        <p class="card-text">@Model.Description</p>
+
+        <!-- Preț și stoc -->
+        <div class="d-flex justify-content-between flex-row mt-4">
+            <div>
+                <i class="bi bi-currency-dollar"></i> <strong>Preț:</strong> @Model.Price.ToString("0.00") RON
+            </div>
+
+            <div>
+                <i class="bi bi-box"></i> <strong>Stoc:</strong> @Model.Stock buc.
+            </div>
+        </div>
+
+        <!-- Rating și categorie -->
+        <div class="d-flex justify-content-between flex-row mt-3">
+            
+            <div class="d-flex justify-content-start mt-3">
+                <strong>Rating mediu:</strong>
+                @if (Model.Score.HasValue)
+                {
+                    <span class="ms-2">@Model.Score.Value.ToString("0.0")</span> 
+                    <div class="ms-2">
+                        @for (int i = 1; i <= 5; i++)
+                        {
+                            if (i <= Math.Round(Model.Score.Value))
+                            {
+                                <i class="bi bi-star-fill text-warning"></i>  
+                            }
+                            else
+                            {
+                                <i class="bi bi-star text-secondary"></i>  
+                            }
+                        }
+                    </div>
+                }
+                else
+                {
+                    <span class="ms-2 text-muted">Fără recenzii</span>
+                }
+            </div>
+  
+            <div>
+                <i class="bi bi-tags"></i> <strong>Categorie:</strong> @Model.Category?.CategoryName
+            </div>
+        </div>
+    </div>
+</div>

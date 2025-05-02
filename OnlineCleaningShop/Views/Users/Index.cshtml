@@ -1,0 +1,46 @@
+﻿@model IEnumerable<OnlineCleaningShop.Models.ApplicationUser>
+<partial name="_Notifications" />
+
+<h1>Lista utilizatorilor</h1>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Email</th>
+            <th>Nume utilizator</th>
+            <th>Roluri</th>
+            <th>Acțiuni</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td>@user.Email</td>
+                <td>@user.UserName</td>
+
+                <td>
+                    @if (ViewBag.UserRoles[user.Id] != null && ViewBag.UserRoles[user.Id].Count > 0)
+                    {
+                        @foreach (var role in ViewBag.UserRoles[user.Id])
+                        {
+                            <span class="badge bg-primary">@role</span>
+                        }
+                    }
+                    else
+                    {
+                        <span class="text-muted">Fără roluri</span>
+                    }
+                </td>
+
+                <td>
+                    <a href="/Users/Edit/@user.Id" class="btn btn-warning btn-sm">Editează</a>
+                    <form action="/Users/RevokeUserRoles" method="post" style="display:inline;">
+                        <input type="hidden" name="userId" value="@user.Id" />
+                        <button type="submit" class="btn btn-danger btn-sm">Revocă Roluri</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
