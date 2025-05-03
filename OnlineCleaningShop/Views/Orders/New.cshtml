@@ -1,0 +1,24 @@
+﻿@model OnlineCleaningShop.Models.Order
+
+
+<br />
+
+<partial name="_Notifications" />
+
+
+
+<h2 class="mb-5 text-center">Adaugare coș de cumpărături</h2>
+
+<br />
+
+<form asp-action="New" asp-controller="Orders" method="post">
+
+    <label asp-for="Name">Denumire cos de cumparaturi</label>
+    <br />
+    <input asp-for="Name" class="form-control" />
+    <span asp-validation-for="Name" class="text-danger"></span>
+    <br  />
+    <br  />
+    <button type="submit" class="btn btn-success">Adauga cos</button>
+
+</form>
