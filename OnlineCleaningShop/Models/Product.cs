@@ -34,8 +34,7 @@ namespace OnlineCleaningShop.Models
         //prop virtuala - un produs este postat de catre un user
         public virtual ApplicationUser? User { get; set; }
         public virtual ICollection<Review>? Reviews { get; set; }
-
-        // colectie de comenzi; in curand!
+        public virtual ICollection<OrderDetail>? OrderDetails { get; set; }
 
         [NotMapped]
         public IEnumerable<SelectListItem>? Categ { get; set; }
