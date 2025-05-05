@@ -23,6 +23,11 @@
       "type": "mssql",
       "connectionId": "ConnectionStrings:DB1",
       "dynamicId": null
+    },
+    "mssql6": {
+      "type": "mssql",
+      "connectionId": "ConnectionStrings:DatabaseConnection",
+      "dynamicId": null
     }
   }
 }

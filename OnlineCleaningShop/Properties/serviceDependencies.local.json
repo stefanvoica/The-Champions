@@ -31,6 +31,12 @@
       "type": "mssql.local",
       "connectionId": "ConnectionStrings:DB1",
       "dynamicId": null
+    },
+    "mssql6": {
+      "secretStore": "LocalSecretsFile",
+      "type": "mssql.local",
+      "connectionId": "ConnectionStrings:DatabaseConnection",
+      "dynamicId": null
     }
   }
 }
