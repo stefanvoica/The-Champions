@@ -1,0 +1,60 @@
+# Visual Studio
+.vs/
+*.user
+*.suo
+.vs\OnlineCleaningShop
+
+# Build results
+bin/
+obj/
+*.exe
+*.dll
+*.pdb
+
+# ASP.NET
+project.lock.json
+project.fragment.lock.json
+
+# Rider
+.idea/
+
+# Others
+*.log
+*.vsidx
+
+# Copilot ?i cache-uri VS
+.vs/CopilotIndices/
+.vs/**/CopilotIndices/
+.vs/**/v17/
+.vs/**/.suo
+.vs/**/DocumentLayout.json
+
+# MSBuild ?i build intermediar
+*.db
+*.db-shm
+*.db-wal
+*.cache
+*.bak
+*.orig
+*.rej
+
+# Static Web Assets
+**/wwwroot/lib/
+**/staticwebassets/
+
+# NuGet
+*.nupkg
+*.snupkg
+*.nuspec
+*.nuget.props
+*.nuget.targets
+project.assets.json
+project.nuget.cache
+
+# Test results
+TestResults/
+*.trx
+
+# User-specific
+*.userosscache
+*.sln.docstates
