@@ -1,0 +1,37 @@
+﻿<br />
+<br />
+<partial name="_Notifications" />
+
+
+<br />
+
+<a asp-controller="Orders" asp-action="New" class="btn btn-success rounded-pill mb-5">
+    <i class="bi bi-plus"></i> Adăugare coș de cumpărături
+</a>
+
+<div class="row">
+
+    @foreach (var order in ViewBag.Orders)
+    {
+        <div class="col-4 mb-4">
+
+            <div class="card">
+
+                <div class="card-body">
+
+                    <h5 class="card-title" name="Name">@order.Name</h5>
+                    @if (ViewBag.EsteAdmin)
+                    {
+                        <div><i class="bi bi-person"> Creat de: </i> @order.User.UserName</div>
+                    }
+
+                    <br />
+
+                    <a asp-controller="Orders" asp-action="Show" asp-route-id="@order.Id" class="btn alert-success">Afisare Coșuri</a>
+
+                </div>
+            </div>
+        </div>
+    }
+
+</div>
