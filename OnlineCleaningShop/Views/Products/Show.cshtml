@@ -89,8 +89,40 @@
 
 <hr />
 
-@* Formular pentru adăugarea produsului într-o comandă; in curand! *@
+@* Formular pentru adăugarea produsului într-o comandă*@
+<h4>Adaugă produsul într-o comandă</h4>
+<form method="post" asp-controller="Products" asp-action="AddOrder">
+    <input type="hidden" name="ProductId" value="@Model.Id" />
+    <div class="d-flex flex-row justify-content-center p-3">
+        <div>
+            <select name="OrderId" class="form-control">
+                <option selected>Alege o comandă</option>
+                @if (ViewBag.UserOrders != null)
+                {
+                    @foreach (var order in ViewBag.UserOrders)
+                    {
+                        <option value="@order.Id">@order.Name</option>
+                    }
+                }
+                else
+                {
+                    <option disabled>Nu există comenzi disponibile</option>
+                }
+            </select>
+        </div>
 
+        <div class="ms-3">
+            <label for="Quantity" class="form-label">Cantitate</label>
+            <input type="number" name="Quantity" class="form-control" value="1" min="1" required />
+        </div>
+
+        <div class="ms-2">
+            <button type="submit" class="btn btn-success">Adaugă</button>
+        </div>
+    </div>
+</form>
+
+<hr />
 @* Afișare recenzii pentru produs *@
 <h4 class="mt-4">Recenzii</h4>
 @foreach (var review in Model.Reviews)
