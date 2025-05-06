@@ -53,7 +53,7 @@ namespace OnlineCleaningShop.Controllers
             // MOTOR DE CAUTARE
 
             var search = Convert.ToString(HttpContext.Request.Query["search"])?.Trim(); // eliminam spatiile libere
-            
+
             // de pus sortarile; in curand!
 
             if (!string.IsNullOrEmpty(search))
@@ -81,7 +81,7 @@ namespace OnlineCleaningShop.Controllers
                 // fie in produs -> Title si Description
                 // fie in comentarii -> Content
                 products = db.Products.Where(product => mergedIds.Contains(product.Id))
-                    //filtram produsele care sunt aprobate; in curand!
+                                      //filtram produsele care sunt aprobate; in curand!
                                       .OrderBy(product => product.Name);
 
             }
@@ -91,7 +91,7 @@ namespace OnlineCleaningShop.Controllers
                 products = db.Products
                         .Include(p => p.Category)
                         .Include(p => p.Reviews)
-                         // Include doar produsele aprobate; in curand!
+                        // Include doar produsele aprobate; in curand!
                         .OrderBy(p => p.Name);
             }
 
@@ -168,7 +168,9 @@ namespace OnlineCleaningShop.Controllers
                 return NotFound();
             }
 
-            // obtinem comenzile utilizatorului curent; in curand!
+            ViewBag.UserOrders = db.Orders
+            .Where(o => o.UserId == _userManager.GetUserId(User))
+            .ToList();
 
             SetAccessRights();
 
@@ -181,7 +183,55 @@ namespace OnlineCleaningShop.Controllers
             return View(product);
         }
 
-        // Se plaseaza o comanda de catre un utilizator; in curand!
+        // Se plaseaza o comanda de catre un utilizator
+        [HttpPost]
+        [Authorize(Roles = "User,Editor,Admin")]
+        public IActionResult AddOrder([FromForm] OrderDetail orderDetail)
+        {
+            // Daca modelul este valid
+            if (ModelState.IsValid)
+            {
+                // Verificam daca avem deja produsul in colectie
+                if (db.OrderDetails
+                    .Where(ab => ab.ProductId == orderDetail.ProductId)
+                    .Where(ab => ab.OrderId == orderDetail.OrderId)
+                    .Count() > 0)
+                {
+                    TempData["message"] = "Acest produs este deja adăugat în coș.";
+                    TempData["messageType"] = "alert-danger";
+                }
+                else
+                {
+                    var product = db.Products.FirstOrDefault(p => p.Id == orderDetail.ProductId);
+
+                    if (orderDetail.Quantity > product.Stock)
+                    {
+                        TempData["message"] = "Cantitatea selectată este mai mare decât stocul disponibil.";
+                        TempData["messageType"] = "alert-danger";
+                        return Redirect("/Products/Show/" + orderDetail.ProductId);
+                    }
+
+                    product.Stock -= orderDetail.Quantity;
+
+                    // Adăugăm asocierea între produs și comandă 
+                    db.OrderDetails.Add(orderDetail);
+                    // Salvăm modificările
+                    db.SaveChanges();
+
+                    // Adăugăm un mesaj de succes
+                    TempData["message"] = "Produsul a fost adăugat în coș.";
+                    TempData["messageType"] = "alert-success";
+                }
+            }
+            else
+            {
+                TempData["message"] = "Nu s-a putut adăuga produsul în coș.";
+                TempData["messageType"] = "alert-danger";
+            }
+
+            // Ne întoarcem la pagina articolului
+            return Redirect("/Products/Show/" + orderDetail.ProductId);
+        }
 
         // Adaugarea unui review asociat unui produs in baza de date
         // Toate rolurile pot adauga review-uri in baza de date
@@ -272,7 +322,7 @@ namespace OnlineCleaningShop.Controllers
                 await db.SaveChangesAsync();
 
                 // cream o cerere de aprobare si o adaugam in baza de date; in curand!
-               
+
 
                 TempData["message"] = "Produsul a fost adaugat!";
                 TempData["messageType"] = "alert-success";
