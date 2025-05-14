@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using OnlineCleaningShop.Models;
+using OnlineShop.Models;
 
 namespace OnlineCleaningShop.Data
 {
@@ -14,6 +15,8 @@ namespace OnlineCleaningShop.Data
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
         
         public DbSet<Product> Products { get; set; }
+        public DbSet<ProductRequest> ProductRequests { get; set; }
+
         public DbSet<Category> Categories { get; set; }
         public DbSet<Review> Reviews { get; set; }
         public DbSet<Order> Orders { get; set; }
