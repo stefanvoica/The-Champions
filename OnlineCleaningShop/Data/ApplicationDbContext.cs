@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using OnlineCleaningShop.Models;
-using OnlineShop.Models;
 
 namespace OnlineCleaningShop.Data
 {

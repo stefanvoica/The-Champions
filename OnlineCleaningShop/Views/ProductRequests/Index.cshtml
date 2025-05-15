@@ -1,0 +1,29 @@
+﻿<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Produs</th>
+            <th>Categorie</th>
+            <th>Status</th>
+            <th>Acțiuni</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var request in Model)
+        {
+            <tr>
+                <td>@request.Id</td>
+                <td>@request.Product.Name</td>
+                <td>@request.Product.Category?.CategoryName</td>
+                <td>@request.Status</td>
+                <td>
+                    @if (request.Status == "Pending")
+                    {
+                        <a href="/ProductRequests/Approve/@request.Id" class="btn btn-success">Aprobă</a>
+                        <a href="/ProductRequests/Reject/@request.Id" class="btn btn-danger">Respinge</a>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
