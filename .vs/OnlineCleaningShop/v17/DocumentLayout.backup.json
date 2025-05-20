@@ -3,6 +3,22 @@
   "WorkspaceRootPath": "C:\\Users\\Asus\\source\\repos\\Presentation-1\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{0ED1F88C-CC79-4A79-B955-2110547BA3F2}|OnlineCleaningShop\\OnlineCleaningShop.csproj|c:\\users\\asus\\source\\repos\\presentation-1\\onlinecleaningshop\\controllers\\productscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0ED1F88C-CC79-4A79-B955-2110547BA3F2}|OnlineCleaningShop\\OnlineCleaningShop.csproj|solutionrelative:onlinecleaningshop\\controllers\\productscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0ED1F88C-CC79-4A79-B955-2110547BA3F2}|OnlineCleaningShop\\OnlineCleaningShop.csproj|c:\\users\\asus\\source\\repos\\presentation-1\\onlinecleaningshop\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{0ED1F88C-CC79-4A79-B955-2110547BA3F2}|OnlineCleaningShop\\OnlineCleaningShop.csproj|solutionrelative:onlinecleaningshop\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0ED1F88C-CC79-4A79-B955-2110547BA3F2}|OnlineCleaningShop\\OnlineCleaningShop.csproj|c:\\users\\asus\\source\\repos\\presentation-1\\onlinecleaningshop\\views\\categories\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{0ED1F88C-CC79-4A79-B955-2110547BA3F2}|OnlineCleaningShop\\OnlineCleaningShop.csproj|solutionrelative:onlinecleaningshop\\views\\categories\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0ED1F88C-CC79-4A79-B955-2110547BA3F2}|OnlineCleaningShop\\OnlineCleaningShop.csproj|c:\\users\\asus\\source\\repos\\presentation-1\\onlinecleaningshop\\views\\categories\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{0ED1F88C-CC79-4A79-B955-2110547BA3F2}|OnlineCleaningShop\\OnlineCleaningShop.csproj|solutionrelative:onlinecleaningshop\\views\\categories\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{0ED1F88C-CC79-4A79-B955-2110547BA3F2}|OnlineCleaningShop\\OnlineCleaningShop.csproj|c:\\users\\asus\\source\\repos\\presentation-1\\onlinecleaningshop\\views\\productrequests\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{0ED1F88C-CC79-4A79-B955-2110547BA3F2}|OnlineCleaningShop\\OnlineCleaningShop.csproj|solutionrelative:onlinecleaningshop\\views\\productrequests\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
@@ -15,20 +31,8 @@
       "RelativeMoniker": "D:0:0:{0ED1F88C-CC79-4A79-B955-2110547BA3F2}|OnlineCleaningShop\\OnlineCleaningShop.csproj|solutionrelative:onlinecleaningshop\\models\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{0ED1F88C-CC79-4A79-B955-2110547BA3F2}|OnlineCleaningShop\\OnlineCleaningShop.csproj|c:\\users\\asus\\source\\repos\\presentation-1\\onlinecleaningshop\\models\\productrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0ED1F88C-CC79-4A79-B955-2110547BA3F2}|OnlineCleaningShop\\OnlineCleaningShop.csproj|solutionrelative:onlinecleaningshop\\models\\productrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0ED1F88C-CC79-4A79-B955-2110547BA3F2}|OnlineCleaningShop\\OnlineCleaningShop.csproj|c:\\users\\asus\\source\\repos\\presentation-1\\onlinecleaningshop\\controllers\\productrequestscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0ED1F88C-CC79-4A79-B955-2110547BA3F2}|OnlineCleaningShop\\OnlineCleaningShop.csproj|solutionrelative:onlinecleaningshop\\controllers\\productrequestscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{0ED1F88C-CC79-4A79-B955-2110547BA3F2}|OnlineCleaningShop\\OnlineCleaningShop.csproj|c:\\users\\asus\\source\\repos\\presentation-1\\onlinecleaningshop\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{0ED1F88C-CC79-4A79-B955-2110547BA3F2}|OnlineCleaningShop\\OnlineCleaningShop.csproj|solutionrelative:onlinecleaningshop\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0ED1F88C-CC79-4A79-B955-2110547BA3F2}|OnlineCleaningShop\\OnlineCleaningShop.csproj|c:\\users\\asus\\source\\repos\\presentation-1\\onlinecleaningshop\\views\\productrequests\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{0ED1F88C-CC79-4A79-B955-2110547BA3F2}|OnlineCleaningShop\\OnlineCleaningShop.csproj|solutionrelative:onlinecleaningshop\\views\\productrequests\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{0ED1F88C-CC79-4A79-B955-2110547BA3F2}|OnlineCleaningShop\\OnlineCleaningShop.csproj|c:\\users\\asus\\source\\repos\\presentation-1\\onlinecleaningshop\\.gitignore||{3B902123-F8A7-4915-9F01-361F908088D0}",
@@ -45,14 +49,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{0ED1F88C-CC79-4A79-B955-2110547BA3F2}|OnlineCleaningShop\\OnlineCleaningShop.csproj|c:\\users\\asus\\source\\repos\\presentation-1\\onlinecleaningshop\\views\\products\\show.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{0ED1F88C-CC79-4A79-B955-2110547BA3F2}|OnlineCleaningShop\\OnlineCleaningShop.csproj|solutionrelative:onlinecleaningshop\\views\\products\\show.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0ED1F88C-CC79-4A79-B955-2110547BA3F2}|OnlineCleaningShop\\OnlineCleaningShop.csproj|c:\\users\\asus\\source\\repos\\presentation-1\\onlinecleaningshop\\controllers\\productscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0ED1F88C-CC79-4A79-B955-2110547BA3F2}|OnlineCleaningShop\\OnlineCleaningShop.csproj|solutionrelative:onlinecleaningshop\\controllers\\productscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0ED1F88C-CC79-4A79-B955-2110547BA3F2}|OnlineCleaningShop\\OnlineCleaningShop.csproj|c:\\users\\asus\\source\\repos\\presentation-1\\onlinecleaningshop\\data\\migrations\\20250514104559_product-requests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0ED1F88C-CC79-4A79-B955-2110547BA3F2}|OnlineCleaningShop\\OnlineCleaningShop.csproj|solutionrelative:onlinecleaningshop\\data\\migrations\\20250514104559_product-requests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -62,11 +58,11 @@
       "DocumentGroups": [
         {
           "DockedHeight": 20,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 11,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 9,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\Asus\\source\\repos\\Presentation-1\\OnlineCleaningShop\\Program.cs",
               "RelativeDocumentMoniker": "OnlineCleaningShop\\Program.cs",
@@ -78,56 +74,8 @@
               "IsPinned": true
             },
             {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "UsersController.cs",
-              "DocumentMoniker": "C:\\Users\\Asus\\source\\repos\\Presentation-1\\OnlineCleaningShop\\Controllers\\UsersController.cs",
-              "RelativeDocumentMoniker": "OnlineCleaningShop\\Controllers\\UsersController.cs",
-              "ToolTip": "C:\\Users\\Asus\\source\\repos\\Presentation-1\\OnlineCleaningShop\\Controllers\\UsersController.cs",
-              "RelativeToolTip": "OnlineCleaningShop\\Controllers\\UsersController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-15T15:56:59.311Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Product.cs",
-              "DocumentMoniker": "C:\\Users\\Asus\\source\\repos\\Presentation-1\\OnlineCleaningShop\\Models\\Product.cs",
-              "RelativeDocumentMoniker": "OnlineCleaningShop\\Models\\Product.cs",
-              "ToolTip": "C:\\Users\\Asus\\source\\repos\\Presentation-1\\OnlineCleaningShop\\Models\\Product.cs",
-              "RelativeToolTip": "OnlineCleaningShop\\Models\\Product.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-15T15:31:59.628Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\Users\\Asus\\source\\repos\\Presentation-1\\OnlineCleaningShop\\Views\\ProductRequests\\Index.cshtml",
-              "RelativeDocumentMoniker": "OnlineCleaningShop\\Views\\ProductRequests\\Index.cshtml",
-              "ToolTip": "C:\\Users\\Asus\\source\\repos\\Presentation-1\\OnlineCleaningShop\\Views\\ProductRequests\\Index.cshtml*",
-              "RelativeToolTip": "OnlineCleaningShop\\Views\\ProductRequests\\Index.cshtml*",
-              "ViewState": "AgIAAAQAAAAAAAAAAAAQwAsAAAAnAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-05-15T15:30:04.671Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "Create.cshtml",
-              "DocumentMoniker": "C:\\Users\\Asus\\source\\repos\\Presentation-1\\OnlineCleaningShop\\Views\\ProductRequests\\Create.cshtml",
-              "RelativeDocumentMoniker": "OnlineCleaningShop\\Views\\ProductRequests\\Create.cshtml",
-              "ToolTip": "C:\\Users\\Asus\\source\\repos\\Presentation-1\\OnlineCleaningShop\\Views\\ProductRequests\\Create.cshtml",
-              "RelativeToolTip": "OnlineCleaningShop\\Views\\ProductRequests\\Create.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAqAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-05-15T15:29:33.201Z",
-              "EditorCaption": ""
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
             },
             {
               "$type": "Bookmark",
@@ -147,45 +95,56 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "ProductRequestsController.cs",
-              "DocumentMoniker": "C:\\Users\\Asus\\source\\repos\\Presentation-1\\OnlineCleaningShop\\Controllers\\ProductRequestsController.cs",
-              "RelativeDocumentMoniker": "OnlineCleaningShop\\Controllers\\ProductRequestsController.cs",
-              "ToolTip": "C:\\Users\\Asus\\source\\repos\\Presentation-1\\OnlineCleaningShop\\Controllers\\ProductRequestsController.cs",
-              "RelativeToolTip": "OnlineCleaningShop\\Controllers\\ProductRequestsController.cs",
-              "ViewState": "AgIAAB4AAAAAAAAAAAAYwIMAAAAsAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-14T10:47:06.208Z",
+              "DocumentIndex": 1,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\Asus\\source\\repos\\Presentation-1\\OnlineCleaningShop\\Views\\Home\\Index.cshtml",
+              "RelativeDocumentMoniker": "OnlineCleaningShop\\Views\\Home\\Index.cshtml",
+              "ToolTip": "C:\\Users\\Asus\\source\\repos\\Presentation-1\\OnlineCleaningShop\\Views\\Home\\Index.cshtml",
+              "RelativeToolTip": "OnlineCleaningShop\\Views\\Home\\Index.cshtml",
+              "ViewState": "AgIAAC0AAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-15T16:30:19.495Z",
               "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "ProductRequest.cs",
-              "DocumentMoniker": "C:\\Users\\Asus\\source\\repos\\Presentation-1\\OnlineCleaningShop\\Models\\ProductRequest.cs",
-              "RelativeDocumentMoniker": "OnlineCleaningShop\\Models\\ProductRequest.cs",
-              "ToolTip": "C:\\Users\\Asus\\source\\repos\\Presentation-1\\OnlineCleaningShop\\Models\\ProductRequest.cs",
-              "RelativeToolTip": "OnlineCleaningShop\\Models\\ProductRequest.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAQAAAAjAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-14T10:43:25.026Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "20250514104559_product-requests.cs",
-              "DocumentMoniker": "C:\\Users\\Asus\\source\\repos\\Presentation-1\\OnlineCleaningShop\\Data\\Migrations\\20250514104559_product-requests.cs",
-              "RelativeDocumentMoniker": "OnlineCleaningShop\\Data\\Migrations\\20250514104559_product-requests.cs",
-              "ToolTip": "C:\\Users\\Asus\\source\\repos\\Presentation-1\\OnlineCleaningShop\\Data\\Migrations\\20250514104559_product-requests.cs",
-              "RelativeToolTip": "OnlineCleaningShop\\Data\\Migrations\\20250514104559_product-requests.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-14T10:45:59.638Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 5,
+              "Title": "UsersController.cs",
+              "DocumentMoniker": "C:\\Users\\Asus\\source\\repos\\Presentation-1\\OnlineCleaningShop\\Controllers\\UsersController.cs",
+              "RelativeDocumentMoniker": "OnlineCleaningShop\\Controllers\\UsersController.cs",
+              "ToolTip": "C:\\Users\\Asus\\source\\repos\\Presentation-1\\OnlineCleaningShop\\Controllers\\UsersController.cs",
+              "RelativeToolTip": "OnlineCleaningShop\\Controllers\\UsersController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-15T15:56:59.311Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Product.cs",
+              "DocumentMoniker": "C:\\Users\\Asus\\source\\repos\\Presentation-1\\OnlineCleaningShop\\Models\\Product.cs",
+              "RelativeDocumentMoniker": "OnlineCleaningShop\\Models\\Product.cs",
+              "ToolTip": "C:\\Users\\Asus\\source\\repos\\Presentation-1\\OnlineCleaningShop\\Models\\Product.cs",
+              "RelativeToolTip": "OnlineCleaningShop\\Models\\Product.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-15T15:31:59.628Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\Asus\\source\\repos\\Presentation-1\\OnlineCleaningShop\\Views\\ProductRequests\\Index.cshtml",
+              "RelativeDocumentMoniker": "OnlineCleaningShop\\Views\\ProductRequests\\Index.cshtml",
+              "ToolTip": "C:\\Users\\Asus\\source\\repos\\Presentation-1\\OnlineCleaningShop\\Views\\ProductRequests\\Index.cshtml",
+              "RelativeToolTip": "OnlineCleaningShop\\Views\\ProductRequests\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAnAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-15T15:30:04.671Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
               "Title": "ApplicationDbContext.cs",
               "DocumentMoniker": "C:\\Users\\Asus\\source\\repos\\Presentation-1\\OnlineCleaningShop\\Data\\ApplicationDbContext.cs",
               "RelativeDocumentMoniker": "OnlineCleaningShop\\Data\\ApplicationDbContext.cs",
@@ -193,12 +152,48 @@
               "RelativeToolTip": "OnlineCleaningShop\\Data\\ApplicationDbContext.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAgAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-14T10:44:02.525Z",
+              "WhenOpened": "2025-05-14T10:44:02.525Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ProductsController.cs",
+              "DocumentMoniker": "C:\\Users\\Asus\\source\\repos\\Presentation-1\\OnlineCleaningShop\\Controllers\\ProductsController.cs",
+              "RelativeDocumentMoniker": "OnlineCleaningShop\\Controllers\\ProductsController.cs",
+              "ToolTip": "C:\\Users\\Asus\\source\\repos\\Presentation-1\\OnlineCleaningShop\\Controllers\\ProductsController.cs*",
+              "RelativeToolTip": "OnlineCleaningShop\\Controllers\\ProductsController.cs*",
+              "ViewState": "AgIAACYAAAAAAAAAAAAwwDcAAAAmAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-06T14:09:58.191Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 2,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\Asus\\source\\repos\\Presentation-1\\OnlineCleaningShop\\Views\\Categories\\Index.cshtml",
+              "RelativeDocumentMoniker": "OnlineCleaningShop\\Views\\Categories\\Index.cshtml",
+              "ToolTip": "C:\\Users\\Asus\\source\\repos\\Presentation-1\\OnlineCleaningShop\\Views\\Categories\\Index.cshtml",
+              "RelativeToolTip": "OnlineCleaningShop\\Views\\Categories\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAATAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-15T16:28:08.757Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Edit.cshtml",
+              "DocumentMoniker": "C:\\Users\\Asus\\source\\repos\\Presentation-1\\OnlineCleaningShop\\Views\\Categories\\Edit.cshtml",
+              "RelativeDocumentMoniker": "OnlineCleaningShop\\Views\\Categories\\Edit.cshtml",
+              "ToolTip": "C:\\Users\\Asus\\source\\repos\\Presentation-1\\OnlineCleaningShop\\Views\\Categories\\Edit.cshtml",
+              "RelativeToolTip": "OnlineCleaningShop\\Views\\Categories\\Edit.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-15T16:28:05.91Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
               "Title": ".gitignore",
               "DocumentMoniker": "C:\\Users\\Asus\\source\\repos\\Presentation-1\\OnlineCleaningShop\\.gitignore",
               "RelativeDocumentMoniker": "OnlineCleaningShop\\.gitignore",
@@ -210,7 +205,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 11,
               "Title": "Show.cshtml",
               "DocumentMoniker": "C:\\Users\\Asus\\source\\repos\\Presentation-1\\OnlineCleaningShop\\Views\\Products\\Show.cshtml",
               "RelativeDocumentMoniker": "OnlineCleaningShop\\Views\\Products\\Show.cshtml",
@@ -222,19 +217,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "ProductsController.cs",
-              "DocumentMoniker": "C:\\Users\\Asus\\source\\repos\\Presentation-1\\OnlineCleaningShop\\Controllers\\ProductsController.cs",
-              "RelativeDocumentMoniker": "OnlineCleaningShop\\Controllers\\ProductsController.cs",
-              "ToolTip": "C:\\Users\\Asus\\source\\repos\\Presentation-1\\OnlineCleaningShop\\Controllers\\ProductsController.cs",
-              "RelativeToolTip": "OnlineCleaningShop\\Controllers\\ProductsController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACQCAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-06T14:09:58.191Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 10,
               "Title": "qr.js",
               "DocumentMoniker": "C:\\Users\\Asus\\source\\repos\\Presentation-1\\OnlineCleaningShop\\wwwroot\\js\\qr.js",
               "RelativeDocumentMoniker": "OnlineCleaningShop\\wwwroot\\js\\qr.js",
