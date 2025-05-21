@@ -1,37 +1,25 @@
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using OnlineCleaningShop.Models;
+using OnlineCleaningShop.Data;
+using System.Diagnostics;
 using OnlineCleaningShop.Data;
 using OnlineCleaningShop.Models;
-using System.Diagnostics;
 
 namespace OnlineCleaningShop.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-
         private readonly ApplicationDbContext _db;
-
         private readonly UserManager<ApplicationUser> _userManager;
 
-        private readonly RoleManager<IdentityRole> _roleManager;
-
-        public HomeController(
-            ApplicationDbContext context,
-            UserManager<ApplicationUser> userManager,
-            RoleManager<IdentityRole> roleManager,
-            ILogger<HomeController> logger
-
-            )
+        public HomeController(ILogger<HomeController> logger, ApplicationDbContext db, UserManager<ApplicationUser> userManager)
         {
-            _db = context;
-
-            _userManager = userManager;
-
-            _roleManager = roleManager;
-
             _logger = logger;
-
+            _db = db;
+            _userManager = userManager;
         }
 
         public IActionResult Index()
@@ -46,16 +34,22 @@ namespace OnlineCleaningShop.Controllers
                 ViewBag.Categories = null;
             }
 
-            // de selectat doar produsele aprobate de admin; in curand!
-            var products = from product in _db.Products
-                           select product;
-            if (products.Count() == 0)
-            {
-                //TempData["message"] = "No products in the database!";
-                return View();
-            }
-            ViewBag.FirstProduct = products.First();
-            ViewBag.Products = products.OrderBy(o => o.Name).Skip(1).Take(2);
+            var acceptedProducts = _db.Products
+    .Join(
+        _db.ProductRequests,
+        product => product.Id,
+        requestProduct => requestProduct.ProductId,
+        (product, requestProduct) => new { Product = product, RequestProduct = requestProduct }
+    )
+    .Where(pr => pr.RequestProduct.Status == "Approved" && pr.Product.Stock > 0)
+    .OrderBy(r => Guid.NewGuid())
+    .Take(4)
+    .Select(pr => pr.Product)
+    .ToList();
+
+
+            ViewBag.Products = acceptedProducts;
+
             return View();
         }
 

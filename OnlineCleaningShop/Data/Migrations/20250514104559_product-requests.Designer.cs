@@ -377,7 +377,7 @@ namespace OnlineCleaningShop.Data.Migrations
                     b.ToTable("Reviews");
                 });
 
-            modelBuilder.Entity("OnlineShop.Models.ProductRequest", b =>
+            modelBuilder.Entity("OnlineCleaningShop.Models.ProductRequest", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -514,7 +514,7 @@ namespace OnlineCleaningShop.Data.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("OnlineShop.Models.ProductRequest", b =>
+            modelBuilder.Entity("OnlineCleaningShop.Models.ProductRequest", b =>
                 {
                     b.HasOne("OnlineCleaningShop.Models.Product", "Product")
                         .WithMany()

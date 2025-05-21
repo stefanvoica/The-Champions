@@ -33,8 +33,8 @@ namespace OnlineCleaningShop.Controllers
             return View(requests);
         }
 
-        // Editor trimite o cerere pentru un produs
-        [Authorize(Roles = "Editor")]
+        // Colaborator trimite o cerere pentru un produs
+        [Authorize(Roles = "Colaborator")]
         public IActionResult Create(int productId)
         {
             var request = new ProductRequest
@@ -47,7 +47,7 @@ namespace OnlineCleaningShop.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "Editor")]
+        [Authorize(Roles = "Colaborator")]
         public async Task<IActionResult> Create(ProductRequest request)
         {
             if (ModelState.IsValid)

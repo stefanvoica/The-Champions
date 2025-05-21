@@ -46,7 +46,7 @@ a.nav-link {
         color: #00b894 !important;
     }
 
-.note-editor .dropdown-toggle::after {
+.note-Colaborator .dropdown-toggle::after {
     display: none;
 }
 
