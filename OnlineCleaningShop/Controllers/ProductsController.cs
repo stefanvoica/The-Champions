@@ -53,36 +53,31 @@ namespace OnlineCleaningShop.Controllers
             // MOTOR DE CAUTARE
 
             var search = Convert.ToString(HttpContext.Request.Query["search"])?.Trim(); // eliminam spatiile libere
+            var sortBy = Convert.ToString(HttpContext.Request.Query["sortBy"]); // Parametru pentru sortare
+            var sortOrder = Convert.ToString(HttpContext.Request.Query["sortOrder"]); // Ordine sortare
 
-            // de pus sortarile; in curand!
-
+            // Verificăm dacă există parametrul de căutare în query
             if (!string.IsNullOrEmpty(search))
             {
-                // Cautare in produse si Review-uri
-                List<int> productIds = db.Products.Where
-                                        (
-                                         at => at.Name.Contains(search)
-                                         || at.Description.Contains(search)
-                                        ).Select(a => a.Id).ToList();
+                // Căutare în produse și review-uri
+                // Căutare în produse și review-uri
+                List<int> productIds = db.Products
+                    .Where(p => (p.Name.Contains(search) || p.Description.Contains(search)) && // Căutăm în nume și descriere
+                                !db.ProductRequests.Any(pr => pr.ProductId == p.Id && pr.Status != "Approved")) // Excludem produsele neaprobate
+                    .Select(p => p.Id).ToList();
 
                 List<int> productIdsOfReviewsWithSearchString = db.Reviews
-                                        .Where
-                                        (
-                                         c => c.Text.Contains(search)
-                                        ).Select(c => (int)c.ProductId).ToList();
+                    .Where(r => r.Text.Contains(search) &&
+                                !db.ProductRequests.Any(pr => pr.ProductId == r.ProductId && pr.Status != "Approved")) // Excludem produsele neaprobate
+                    .Select(r => r.ProductId).ToList();
 
-                //de exclus produsele neaprobate; in curand!
-
-                // Se formeaza o singura lista formata din toate id-urile selectate anterior
                 List<int> mergedIds = productIds.Union(productIdsOfReviewsWithSearchString).ToList();
 
-
-                // Lista produselor care contin cuvantul cautat
-                // fie in produs -> Title si Description
-                // fie in comentarii -> Content
-                products = db.Products.Where(product => mergedIds.Contains(product.Id))
-                                      //filtram produsele care sunt aprobate; in curand!
-                                      .OrderBy(product => product.Name);
+                // Filtrăm doar produsele care sunt aprobate și le ordonăm explicit
+                products = db.Products
+                    .Where(p => mergedIds.Contains(p.Id) &&
+                                !db.ProductRequests.Any(pr => pr.ProductId == p.Id && pr.Status != "Approved"))
+                    .OrderBy(p => p.Name); // Aplicăm ordonarea explicită aici
 
             }
             else
@@ -91,13 +86,31 @@ namespace OnlineCleaningShop.Controllers
                 products = db.Products
                         .Include(p => p.Category)
                         .Include(p => p.Reviews)
-                        // Include doar produsele aprobate; in curand!
+                        .Where(p => db.ProductRequests.Any(pr => pr.ProductId == p.Id && pr.Status == "Approved")) // Include doar produsele aprobate
                         .OrderBy(p => p.Name);
             }
 
             ViewBag.SearchString = search;
 
-            //de adaugat sortarea; in curand!
+            switch (sortBy)
+            {
+                case "price":
+                    products = sortOrder == "desc"
+                        ? products.OrderByDescending(p => p.Price)
+                        : products.OrderBy(p => p.Price);
+                    break;
+
+                case "stars":
+                    products = sortOrder == "desc"
+                        ? products.OrderByDescending(p => p.Reviews.Any() ? p.Reviews.Average(r => r.Rating) : 0)
+                        : products.OrderBy(p => p.Reviews.Any() ? p.Reviews.Average(r => r.Rating) : 0);
+                    break;
+
+                default:
+                    products = products.OrderBy(p => p.Name);
+                    break;
+            }
+
 
             // AFIȘARE PAGINATĂ
 

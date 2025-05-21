@@ -7,15 +7,50 @@
 <br />
 
 @* Motorul de cautare *@
-<form method="GET">
-    <div class="input-group mb-3">
-        <input type="text" class="form-control" placeholder="Search topics or keywords" name="search"
-               value="@ViewBag.SearchString">
-        <button class="btn btn-outline-success" type="submit">Search</button>
-    </div>
+<form method="get" action="/Products/Index">
+    <input type="text" name="search" placeholder="Căutare" value="@ViewBag.SearchString" />
+
+    <select name="sortBy">
+        @if (Context.Request.Query["sortBy"] == "price")
+        {
+            <option value="price" selected>Preț</option>
+        }
+        else
+        {
+            <option value="price">Preț</option>
+        }
+        @if (Context.Request.Query["sortBy"] == "stars")
+        {
+            <option value="stars" selected>Rating</option>
+        }
+        else
+        {
+            <option value="stars">Rating</option>
+        }
+    </select>
+
+    <select name="sortOrder">
+        @if (Context.Request.Query["sortOrder"] == "asc")
+        {
+            <option value="asc" selected>Crescător</option>
+        }
+        else
+        {
+            <option value="asc">Crescător</option>
+        }
+        @if (Context.Request.Query["sortOrder"] == "desc")
+        {
+            <option value="desc" selected>Descrescător</option>
+        }
+        else
+        {
+            <option value="desc">Descrescător</option>
+        }
+    </select>
+
+    <button type="submit">Filtrează</button>
 </form>
 
-    @*filtrare; in curand*@ 
 
 
 @if (User.IsInRole("Colaborator") || User.IsInRole("Admin"))
@@ -41,7 +76,6 @@
 
         <a class="btn btn-success" asp-controller="Products" asp-action="Show" asp-route-id="@product.Id">Afisare produs</a>
 
-        @* Butoane pentru editare si stergere produse 
         @if (User.IsInRole("Colaborator") || User.IsInRole("Admin"))
         {
             <div class="d-flex justify-content-between align-items-center">
@@ -52,7 +86,6 @@
                 </form>
             </div>
         }
-        *@
 
 
     </div>
