@@ -1,29 +1,32 @@
-﻿using Azure.Core;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using OnlineCleaningShop.Data;
+using OnlineCleaningShop.Models;
 using OnlineCleaningShop.Data;
 using OnlineCleaningShop.Models;
 using System.Globalization;
+using static NuGet.Packaging.PackagingConstants;
 
 namespace OnlineCleaningShop.Controllers
 {
+    [Authorize]
     public class ProductsController : Controller
     {
-        // PASUL 10: useri si roluri 
-
         private readonly ApplicationDbContext db;
         private readonly IWebHostEnvironment _env;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
+
         public ProductsController(
-        ApplicationDbContext context,
-        IWebHostEnvironment env,
-        UserManager<ApplicationUser> userManager,
-        RoleManager<IdentityRole> roleManager
+            ApplicationDbContext context,
+            IWebHostEnvironment env,
+            UserManager<ApplicationUser> userManager,
+            RoleManager<IdentityRole> roleManager
         )
         {
             db = context;
@@ -32,27 +35,26 @@ namespace OnlineCleaningShop.Controllers
             _roleManager = roleManager;
         }
 
-        // Se afiseaza lista tuturor produselor impreuna cu categoria 
-        // din care fac parte
-        // Pentru fiecare produs se afiseaza si userul care a postat produsul respectiv
-        // [HttpGet] care se executa implicit
+
+        //afisare produse impreuna cu categoria
+        //httpget implicit 
         [AllowAnonymous]
         public IActionResult Index()
         {
-            var products = db.Products.Include(p => p.Category)
-                                    .Include(p => p.Reviews)
-                                    //de pus conditia ca produsele sa fie aprobate de admin; in curand!
-                                    .OrderBy(p => p.Name);
+            var products = db.Products
+                        .Include(p => p.Category)
+                        .Include(p => p.Reviews)
+                        .Where(p => db.ProductRequests.Any(pr => pr.ProductId == p.Id && pr.Status == "Approved"))
+                        .OrderBy(p => p.Name);
 
             if (TempData.ContainsKey("message"))
             {
                 ViewBag.Message = TempData["message"];
-                ViewBag.Alert = TempData["messageType"];
+                ViewBag.AlertType = TempData["messageType"];
             }
 
-            // MOTOR DE CAUTARE
-
-            var search = Convert.ToString(HttpContext.Request.Query["search"])?.Trim(); // eliminam spatiile libere
+            ///MOTOR DE CAUTARE 
+            var search = Convert.ToString(HttpContext.Request.Query["search"])?.Trim();
             var sortBy = Convert.ToString(HttpContext.Request.Query["sortBy"]); // Parametru pentru sortare
             var sortOrder = Convert.ToString(HttpContext.Request.Query["sortOrder"]); // Ordine sortare
 
@@ -111,7 +113,6 @@ namespace OnlineCleaningShop.Controllers
                     break;
             }
 
-
             // AFIȘARE PAGINATĂ
 
             int _perPage = 3; // Afișăm 3 produse pe pagină
@@ -143,8 +144,10 @@ namespace OnlineCleaningShop.Controllers
             if (!string.IsNullOrEmpty(search))
             {
                 var queryParams = new Dictionary<string, string>
-                {
-                    { "search", search } //de pus si sortarea; in curand!
+            {
+                { "search", search },
+                { "sortBy", sortBy },
+                { "sortOrder", sortOrder }
             };
                 ViewBag.PaginationBaseUrl = "/Products/Index/?" + string.Join("&", queryParams
                     .Where(p => !string.IsNullOrEmpty(p.Value))
@@ -158,32 +161,38 @@ namespace OnlineCleaningShop.Controllers
             return View();
         }
 
-        // Se afiseaza un singur produs in functie de id-ul sau 
-        // impreuna cu categoria din care face parte
-        // In plus sunt preluate si toate comentariile asociate unui produs
-        // Se afiseaza si userul care a postat produsul respectiv
-        // [HttpGet] se executa implicit implicit
         [AllowAnonymous]
-        public IActionResult Show(int id)
+        public ActionResult Show(int id)
         {
-            //verificam daca produsul are o cerere neaprobata; in curand!
+            // Verificăm dacă produsul are o cerere neaprobată
+            var productRequest = db.ProductRequests.FirstOrDefault(pr => pr.ProductId == id && pr.Status != "Approved");
+
+            if (productRequest != null)
+            {
+                // Produsul nu este aprobat
+                TempData["message"] = "Acest produs nu este aprobat și nu poate fi vizualizat.";
+                TempData["messageType"] = "alert-danger";
+                return RedirectToAction("Index");
+            }
 
             // Obținem produsul împreună cu toate relațiile necesare
-            Product product = db.Products.Include("Category")
-                                         .Include("Reviews")
-                                         .Include("User")
-                                         .Include("Reviews.User")
-                              .Where(prod => prod.Id == id)
-                              .First();
+            Product product = db.Products
+             .Include("Category")
+             .Include("Reviews")
+             .Include("User")
+             .Include("Reviews.User")
+             .Where(prod => prod.Id == id)
+             .First();
 
             if (product == null)
             {
                 return NotFound();
             }
 
+            // Obținem comenzile utilizatorului curent (dropdown pentru adăugare)
             ViewBag.UserOrders = db.Orders
-            .Where(o => o.UserId == _userManager.GetUserId(User))
-            .ToList();
+                .Where(o => o.UserId == _userManager.GetUserId(User))
+                .ToList();
 
             SetAccessRights();
 
@@ -196,14 +205,22 @@ namespace OnlineCleaningShop.Controllers
             return View(product);
         }
 
-        // Se plaseaza o comanda de catre un utilizator
         [HttpPost]
-        [Authorize(Roles = "User,Editor,Admin")]
+        [Authorize(Roles = "User,Colaborator,Admin")]
         public IActionResult AddOrder([FromForm] OrderDetail orderDetail)
         {
             // Daca modelul este valid
             if (ModelState.IsValid)
             {
+                // Verificăm dacă produsul este aprobat
+                var productRequest = db.ProductRequests.FirstOrDefault(pr => pr.ProductId == orderDetail.ProductId && pr.Status != "Approved");
+                if (productRequest != null)
+                {
+                    TempData["message"] = "Acest produs nu este aprobat și nu poate fi adăugat în coș.";
+                    TempData["messageType"] = "alert-danger";
+                    return Redirect("/Products/Show/" + orderDetail.ProductId);
+                }
+
                 // Verificam daca avem deja produsul in colectie
                 if (db.OrderDetails
                     .Where(ab => ab.ProductId == orderDetail.ProductId)
@@ -246,45 +263,11 @@ namespace OnlineCleaningShop.Controllers
             return Redirect("/Products/Show/" + orderDetail.ProductId);
         }
 
-        // Adaugarea unui review asociat unui produs in baza de date
-        // Toate rolurile pot adauga review-uri in baza de date
-        [HttpPost]
-        [Authorize(Roles = "User,Colaborator,Admin")]
-        public IActionResult Show([FromForm] Review review)
-        {
-            review.Date = DateTime.Now;
-
-            // preluam Id-ul utilizatorului care posteaza review-ul
-            review.UserId = _userManager.GetUserId(User);
-
-            if (ModelState.IsValid)
-            {
-                db.Reviews.Add(review);
-                db.SaveChanges();
-                return Redirect("/Products/Show/" + review.ProductId);
-            }
-            else
-            {
-                Product prod = db.Products.Include("Category")
-                                         .Include("User")
-                                         .Include("Reviews")
-                                         .Include("Reviews.User")
-                                         .Where(prod => prod.Id == review.ProductId)
-                                         .First();
-
-                SetAccessRights();
-
-                return View(prod);
-            }
-        }
 
 
-
-        // Se afiseaza formularul in care se vor completa datele unui produs
-        // impreuna cu selectarea categoriei din care face parte
-        // Doar utilizatorii cu rolul de Colaborator si Admin pot adauga produse in platforma
-        // [HttpGet] - care se executa implicit
-
+        //se afiseaza formularul in care completam datele produsului
+        //impreuna cu selectarea categoriei
+        //httpget implicit
         [Authorize(Roles = "Colaborator,Admin")]
         public IActionResult New()
         {
@@ -296,8 +279,8 @@ namespace OnlineCleaningShop.Controllers
         }
 
         //proceseaza datele introduse in formularul de mai sus
-        [HttpPost]
         [Authorize(Roles = "Colaborator,Admin")]
+        [HttpPost]
         public async Task<IActionResult> New(Product product, IFormFile Image)
         {
             // Preluăm Id-ul utilizatorului care postează articolul
@@ -310,7 +293,7 @@ namespace OnlineCleaningShop.Controllers
                 var fileExtension = Path.GetExtension(Image.FileName).ToLower();
                 if (!allowedExtensions.Contains(fileExtension))
                 {
-                    ModelState.AddModelError("ProductImage", "Fișierul trebuie să fie o imagine (jpg, jpeg, png, gif) sau un video (mp4,  mov).");
+                    ModelState.AddModelError("ArticleImage", "Fișierul trebuie să fie o imagine (jpg, jpeg, png, gif) sau un video (mp4,  mov).");
                     return View(product);
                 }
 
@@ -334,10 +317,19 @@ namespace OnlineCleaningShop.Controllers
                 db.Products.Add(product);
                 await db.SaveChangesAsync();
 
-                // cream o cerere de aprobare si o adaugam in baza de date; in curand!
+                // Creăm o cerere de aprobare
+                var productRequest = new ProductRequest
+                {
+                    ProductId = product.Id,
+                    UserId = _userManager.GetUserId(User),
+                    Status = "Pending" // Cererea trebuie aprobată
+                };
 
+                // Adăugăm cererea în baza de date
+                db.ProductRequests.Add(productRequest);
+                await db.SaveChangesAsync();
 
-                TempData["message"] = "Produsul a fost adaugat!";
+                TempData["message"] = "Cererea de adăugare a fost trimisă pentru aprobare!";
                 TempData["messageType"] = "alert-success";
                 return RedirectToAction("Index", "Products");
             }
@@ -346,21 +338,13 @@ namespace OnlineCleaningShop.Controllers
             return View(product);
         }
 
-        // Se editeaza un produs existent in baza de date impreuna cu categoria din care face parte
-        // Categoria se selecteaza dintr-un dropdown
-        // Se afiseaza formularul impreuna cu datele aferente produsului din baza de date
-        // Doar utilizatorii cu rolul de Colaborator si Admin pot edita produse
-        // Adminii pot edita orice produs din baza de date
-        // Colaboratorii pot edita doar produsele proprii (cele pe care ei le-au postat)
-        // [HttpGet] - se executa implicit
-
-        [Authorize(Roles = "Colaborator,Admin")]
         public IActionResult Edit(int id)
         {
-
             Product product = db.Products.Include("Category")
-                                         .Where(art => art.Id == id)
-                                         .First();
+                               .Where(prod => prod.Id == id)
+                               .First();
+
+
             if (product == null)
             {
                 TempData["message"] = "Produsul nu a fost găsit!";
@@ -368,26 +352,29 @@ namespace OnlineCleaningShop.Controllers
                 return RedirectToAction("Index");
             }
 
-            // verificam daca produsul are cererea aprobată; in curand!
+            var productRequest = db.ProductRequests.FirstOrDefault(pr => pr.ProductId == id && pr.Status == "Approved");
+
+            if (productRequest == null)
+            {
+                TempData["message"] = "Cererea de editare nu a fost aprobată!";
+                TempData["messageType"] = "alert-danger";
+                return RedirectToAction("Index");
+            }
 
             product.Categ = GetAllCategories();
 
-            if ((product.UserId == _userManager.GetUserId(User)) ||
-                User.IsInRole("Admin"))
+            if ((product.UserId == _userManager.GetUserId(User)) || User.IsInRole("Admin"))
             {
                 return View(product);
             }
             else
             {
-
                 TempData["message"] = "Nu aveți dreptul să editați produse care nu vă aparțin!";
                 TempData["messageType"] = "alert-danger";
                 return RedirectToAction("Index");
             }
         }
 
-        // Se adauga produsul modificat in baza de date
-        // Se verifica rolul utilizatorilor care au dreptul sa editeze (Colaborator si Admin)
         [HttpPost]
         [Authorize(Roles = "Colaborator,Admin")]
         public async Task<IActionResult> Edit(int id, Product requestProduct, IFormFile Image)
@@ -397,7 +384,7 @@ namespace OnlineCleaningShop.Controllers
 
             if (product == null)
             {
-                TempData["message"] = "Produsul nu a fost gasit!";
+                TempData["message"] = "Produsul nu a fost găsit!";
                 TempData["messageType"] = "alert-danger";
                 return RedirectToAction("Index");
             }
@@ -409,7 +396,7 @@ namespace OnlineCleaningShop.Controllers
                 var fileExtension = Path.GetExtension(Image.FileName).ToLower();
                 if (!allowedExtensions.Contains(fileExtension))
                 {
-                    ModelState.AddModelError("ProductImage", "Fișierul trebuie să fie o imagine (jpg, jpeg, png, gif) sau un video (mp4,  mov).");
+                    ModelState.AddModelError("ArticleImage", "Fișierul trebuie să fie o imagine (jpg, jpeg, png, gif) sau un video (mp4,  mov).");
                     return View(product);
                 }
 
@@ -432,19 +419,28 @@ namespace OnlineCleaningShop.Controllers
             {
                 if ((product.UserId == _userManager.GetUserId(User)) || User.IsInRole("Admin"))
                 {
-                    // Creăm o cerere de aprobare; in curand!
+                    // Creăm o cerere de aprobare
+                    var productRequest = new ProductRequest
+                    {
+                        ProductId = product.Id,
+                        UserId = _userManager.GetUserId(User),
+                        Status = "Pending", // Cererea trebuie aprobată
+                        Product = new Product
+                        {
+                            Name = requestProduct.Name,
+                            Description = requestProduct.Description,
+                            Price = requestProduct.Price,
+                            Stock = requestProduct.Stock,
+                            CategoryId = requestProduct.CategoryId,
+                            Image = requestProduct.Image
+                        }
+                    };
 
-                    product.Name = requestProduct.Name;
-                    product.Description = requestProduct.Description;
-                    product.Price = requestProduct.Price;
-                    product.Stock = requestProduct.Stock;
-                    product.CategoryId = requestProduct.CategoryId;
-                    product.Image = requestProduct.Image;
-
-                    // Adăugăm cererea în baza de date; in curand!
+                    // Adăugăm cererea în baza de date
+                    db.ProductRequests.Add(productRequest);
                     await db.SaveChangesAsync();
 
-                    TempData["message"] = "Produsul a fost editat!";
+                    TempData["message"] = "Cererea de editare a fost trimisă pentru aprobare!";
                     TempData["messageType"] = "alert-success";
                     return RedirectToAction("Index");
                 }
@@ -464,23 +460,17 @@ namespace OnlineCleaningShop.Controllers
 
 
 
-        // Se sterge un produs din baza de date 
-        // Utilizatorii cu rolul de Colaborator sau Admin pot sterge produse
-        // Colaboratorii pot sterge doar produsele publicate de ei
-        // Adminii pot sterge orice produs de baza de date
-
         [HttpPost]
         [Authorize(Roles = "Colaborator,Admin")]
         public ActionResult Delete(int id)
         {
-            // Product product = db.Products.Find(id);
+            //Product product = db.Products.Find(id);
 
             Product product = db.Products.Include("Reviews")
                                .Where(prod => prod.Id == id)
                                .First();
 
-            if ((product.UserId == _userManager.GetUserId(User))
-                    || User.IsInRole("Admin"))
+            if ((product.UserId == _userManager.GetUserId(User)) || User.IsInRole("Admin"))
             {
                 db.Products.Remove(product);
                 db.SaveChanges();
@@ -549,10 +539,6 @@ namespace OnlineCleaningShop.Controllers
             return selectList;
         }
 
-        // Metoda utilizata pentru exemplificarea Layout-ului
-        // Am adaugat un nou Layout in Views -> Shared -> numit _LayoutNou.cshtml
-        // Aceasta metoda are un View asociat care utilizeaza noul layout creat
-        // in locul celui default generat de framework numit _Layout.cshtml
         public IActionResult IndexNou()
         {
             return View();

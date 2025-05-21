@@ -34,7 +34,7 @@ namespace OnlineCleaningShop.Controllers
         // Fiecare utilizator vede cosurile pe care le-a creat
         // Userii cu rolul de Admin pot sa vizualizeze toate cosurile existente
         // HttpGet - implicit
-        [Authorize(Roles = "User,Editor,Admin")]
+        [Authorize(Roles = "User,Colaborator,Admin")]
         public IActionResult Index()
         {
             if (TempData.ContainsKey("message"))
@@ -45,7 +45,7 @@ namespace OnlineCleaningShop.Controllers
 
             SetAccessRights();
 
-            if (User.IsInRole("User") || User.IsInRole("Editor"))
+            if (User.IsInRole("User") || User.IsInRole("Colaborator"))
             {
                 var orders = from order in db.Orders.Include("User")
                                .Where(b => b.UserId == _userManager.GetUserId(User))
@@ -76,12 +76,12 @@ namespace OnlineCleaningShop.Controllers
         }
 
         // Afisarea tuturor produselor pe care utilizatorul le-a salvat
-        [Authorize(Roles = "User,Editor,Admin")]
+        [Authorize(Roles = "User,Colaborator,Admin")]
         public IActionResult Show(int id)
         {
             SetAccessRights();
 
-            if (User.IsInRole("User") || User.IsInRole("Editor"))
+            if (User.IsInRole("User") || User.IsInRole("Colaborator"))
             {
                 var orders = db.Orders
                                   .Include("OrderDetails.Product.Category")
@@ -134,7 +134,7 @@ namespace OnlineCleaningShop.Controllers
 
         // Randarea formularului in care se completeaza datele unui bookmark
         // [HttpGet] - se executa implicit
-        [Authorize(Roles = "User,Editor,Admin")]
+        [Authorize(Roles = "User,Colaborator,Admin")]
         public IActionResult New()
         {
             return View();
@@ -142,7 +142,7 @@ namespace OnlineCleaningShop.Controllers
 
         // Adaugarea cosului in baza de date
         [HttpPost]
-        [Authorize(Roles = "User,Editor,Admin")]
+        [Authorize(Roles = "User,Colaborator,Admin")]
         public ActionResult New(Order cos)
         {
             cos.UserId = _userManager.GetUserId(User);
@@ -168,7 +168,7 @@ namespace OnlineCleaningShop.Controllers
         {
             ViewBag.AfisareButoane = false;
 
-            if (User.IsInRole("Editor") || User.IsInRole("User"))
+            if (User.IsInRole("Colaborator") || User.IsInRole("User"))
             {
                 ViewBag.AfisareButoane = true;
             }

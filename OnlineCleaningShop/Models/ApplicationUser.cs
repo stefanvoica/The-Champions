@@ -13,7 +13,8 @@ namespace OnlineCleaningShop.Models
         //un user poate posta mai multe produse
         public virtual ICollection<Product>? Products { get; set; }
 
-        //un user poate plasa mai multe comenzi; in curand!
+        //un user poate plasa mai multe comenzi;
+        public virtual ICollection<Order>? Orders { get; set; }
 
         public string? FirstName { get; set; }
         public string? LastName { get; set; }
