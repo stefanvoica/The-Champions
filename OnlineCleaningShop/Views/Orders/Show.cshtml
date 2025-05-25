@@ -21,26 +21,61 @@
     </div>
     <br />
 
-    @if (Model.OrderDetails.Count > 0)
-
-        @foreach (var orderDetail in Model.OrderDetails)
-        {
-            <div class="col-12">
-                <div class="card" style="width: 100%;">
-                    @*<img src="..." class="card-img-top" alt="..."> *@
-
-                    <div class="card-body">
-
-                        <partial name="ProductInfo" model="orderDetail.Product" />
-
-                        <p><strong>Cantitate:</strong> @orderDetail.Quantity</p>
-
-
-                    </div>
+  @if (Model.OrderDetails.Count > 0)
+{
+    foreach (var orderDetail in Model.OrderDetails)
+    {
+        <div class="col-12">
+            <div class="card" style="width: 100%;">
+                <div class="card-body">
+                    <partial name="ProductInfo" model="orderDetail.Product" />
+                    <p><strong>Cantitate:</strong> @orderDetail.Quantity</p>
                 </div>
-                <br /> <br />
             </div>
-        }
+            <br /><br />
+        </div>
+    }
+
+    <hr class="my-4" />
+
+    <div class="col-12">
+        <h5 class="text-end">Total: <strong>@ViewBag.TotalInitial.ToString("0.00") RON</strong></h5>
+        @if (ViewBag.CodAplicat != null)
+{
+    <p class="text-success text-end">
+        Cod <strong>@ViewBag.CodAplicat</strong> aplicat: -@ViewBag.ReducereProcent%
+    </p>
+    <p class="text-end">
+        Total cu reducere: <strong>@ViewBag.Total.ToString("0.00") RON</strong>
+    </p>
+}
+else
+{
+    <p class="text-end">
+        Total: <strong>@ViewBag.Total.ToString("0.00") RON</strong>
+    </p>
+}
+
+
+        @* <form method="post" action="#" class="mt-3">
+            <label for="promoCode">Ai un cod promoțional?</label>
+            <div class="input-group mt-1">
+                <input type="text" class="form-control" id="promoCode" name="promoCode" placeholder="Ex: SAVE10" disabled />
+                <button class="btn btn-outline-secondary" type="submit" disabled>Aplică</button>
+            </div>
+        </form> *@
+        <form method="get" asp-action="Show" asp-controller="Orders">
+        <input type="hidden" name="id" value="@Model.Id" />
+        <label for="promoCode">Ai un cod promoțional?</label>
+        <div class="input-group mt-1">
+        <input type="text" class="form-control" id="promoCode" name="promoCode" placeholder="Ex: SAVE10" />
+        <button class="btn btn-outline-secondary" type="submit">Aplică</button>
+        </div>
+        </form>
+
+    </div>
+}
+
 
 </div>
 

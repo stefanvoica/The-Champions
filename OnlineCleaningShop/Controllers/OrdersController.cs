@@ -97,6 +97,32 @@ namespace OnlineCleaningShop.Controllers
                     TempData["messageType"] = "alert-danger";
                     return RedirectToAction("Index", "Products");
                 }
+                var total = orders.OrderDetails
+                  .Sum(od => od.Product.Price * od.Quantity);
+
+                ViewBag.Total = total;
+                ViewBag.TotalInitial = total;
+
+
+                var cod = Request.Query["promoCode"].ToString().Trim().ToUpper();
+                var codPromo = db.CoduriPromotionale.FirstOrDefault(c => c.Nume.ToUpper() == cod);
+
+                if (!string.IsNullOrEmpty(cod))
+                {
+                    if (codPromo != null)
+                    {
+                        var reducere = codPromo.ProcentReducere;
+                        ViewBag.ReducereProcent = reducere * 100;
+                        ViewBag.CodAplicat = cod;
+                        ViewBag.TotalInitial = ViewBag.Total;
+                        ViewBag.Total = (double)ViewBag.Total * (1 - (double)reducere);
+                    }
+                    else
+                    {
+                        TempData["message"] = "Codul promoțional nu există.";
+                        TempData["messageType"] = "alert-danger";
+                    }
+                }
 
                 return View(orders);
             }
@@ -117,6 +143,33 @@ namespace OnlineCleaningShop.Controllers
                     TempData["message"] = "Resursa cautata nu poate fi gasita";
                     TempData["messageType"] = "alert-danger";
                     return RedirectToAction("Index", "Products");
+                }
+
+                var total = orders.OrderDetails
+                    .Sum(od => od.Product.Price * od.Quantity);
+
+                ViewBag.Total = total;
+                ViewBag.TotalInitial = total;
+
+
+                var cod = Request.Query["promoCode"].ToString().Trim().ToUpper();
+                var codPromo = db.CoduriPromotionale.FirstOrDefault(c => c.Nume.ToUpper() == cod);
+
+                if (!string.IsNullOrEmpty(cod))
+                {
+                    if (codPromo != null)
+                    {
+                        var reducere = codPromo.ProcentReducere;
+                        ViewBag.ReducereProcent = reducere * 100;
+                        ViewBag.CodAplicat = cod;
+                        ViewBag.TotalInitial = ViewBag.Total;
+                        ViewBag.Total = ViewBag.Total * (1 - reducere);
+                    }
+                    else
+                    {
+                        TempData["message"] = "Codul promoțional nu există.";
+                        TempData["messageType"] = "alert-danger";
+                    }
                 }
 
 
