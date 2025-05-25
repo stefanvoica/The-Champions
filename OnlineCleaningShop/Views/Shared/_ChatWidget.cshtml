@@ -1,0 +1,28 @@
+﻿@* <div id="chat-widget" style="position: fixed; bottom: 20px; right: 20px; width: 300px; z-index: 1000;">
+    <div style="background-color: #f1f1f1; padding: 10px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.2);">
+        <form asp-controller="Chat" asp-action="Ask" method="post">
+            <input type="text" name="message" class="form-control mb-2" placeholder="Întreabă ceva..." required />
+            <button type="submit" class="btn btn-sm btn-primary">Trimite</button>
+        </form>
+
+        @if (ViewBag.AIResponse != null)
+        {
+            <div class="mt-2 alert alert-success" style="font-size: 0.9em;">
+                <strong>AI:</strong> @ViewBag.AIResponse
+            </div>
+        }
+    </div>
+</div> *@
+<div id="chat-widget" style="position: fixed; bottom: 20px; right: 20px; width: 300px; z-index: 1000;">
+    <div class="bg-light p-3 rounded shadow">
+        <form id="chat-form">
+            <input type="text" id="chat-message" name="message" class="form-control mb-2" placeholder="Scrie o întrebare..." required />
+            <button type="submit" class="btn btn-sm btn-primary w-100">Trimite</button>
+        </form>
+
+        <div id="chat-response" class="mt-2 alert alert-success d-none" style="font-size: 0.9em;"></div>
+
+        <a href="/Chat/Index" class="btn btn-link btn-sm mt-2 w-100 text-center">Vezi conversația completă</a>
+    </div>
+</div>
+
