@@ -268,6 +268,26 @@ namespace OnlineCleaningShop.Data.Migrations
                     b.ToTable("CoduriPromotionale");
                 });
 
+            modelBuilder.Entity("OnlineCleaningShop.Models.NewsletterSubscriber", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("SubscribedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("NewsletterSubscribers");
+                });
+
             modelBuilder.Entity("OnlineCleaningShop.Models.Order", b =>
                 {
                     b.Property<int>("Id")
@@ -276,8 +296,14 @@ namespace OnlineCleaningShop.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<bool>("IsPaid")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Name")
                         .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TransactionId")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserId")

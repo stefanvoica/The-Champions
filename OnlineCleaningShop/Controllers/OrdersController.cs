@@ -159,11 +159,15 @@ namespace OnlineCleaningShop.Controllers
                 {
                     if (codPromo != null)
                     {
-                        var reducere = codPromo.ProcentReducere;
+                        decimal reducere = (decimal)codPromo.ProcentReducere;
+                        decimal totalInitial = (decimal)ViewBag.Total;
+
                         ViewBag.ReducereProcent = reducere * 100;
                         ViewBag.CodAplicat = cod;
-                        ViewBag.TotalInitial = ViewBag.Total;
-                        ViewBag.Total = ViewBag.Total * (1 - reducere);
+                        ViewBag.TotalInitial = totalInitial;
+                        ViewBag.Total = totalInitial * (1 - reducere);
+
+
                     }
                     else
                     {
@@ -204,16 +208,19 @@ namespace OnlineCleaningShop.Controllers
             {
                 db.Orders.Add(cos);
                 db.SaveChanges();
+
                 TempData["message"] = "Comanda a fost adaugata";
                 TempData["messageType"] = "alert-success";
-                return RedirectToAction("Index");
-            }
 
+                // Redirect to Payment page after order creation
+                return RedirectToAction("Index", "Payment", new { orderId = cos.Id });
+            }
             else
             {
                 return View(cos);
             }
         }
+
 
 
         // Conditiile de afisare a butoanelor de editare si stergere

@@ -29,6 +29,9 @@ builder.Services.AddAuthentication()
        options.ClientSecret = googleAuthNSection["ClientSecret"];
    });
 
+builder.Services.AddTransient<EmailService>();
+builder.Services.AddScoped<IBraintreeService, BraintreeService>();
+
 
 var app = builder.Build();
 

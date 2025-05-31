@@ -2,7 +2,6 @@
 <br />
 <partial name="_Notifications" />
 
-
 <br />
 
 <a asp-controller="Orders" asp-action="New" class="btn btn-success rounded-pill mb-5">
@@ -14,15 +13,26 @@
     @foreach (var order in ViewBag.Orders)
     {
         <div class="col-4 mb-4">
-
             <div class="card">
-
                 <div class="card-body">
 
                     <h5 class="card-title" name="Name">@order.Name</h5>
+
                     @if (ViewBag.EsteAdmin)
                     {
-                        <div><i class="bi bi-person"> Creat de: </i> @order.User.UserName</div>
+                        <div><i class="bi bi-person"></i> Creat de: @order.User.UserName</div>
+                    }
+
+                    <div>
+                        <strong>Status plată:</strong>
+                        @(order.IsPaid ? "✔️ Plătită" : "❌ Neplătită")
+                    </div>
+
+                    @if (order.IsPaid && !string.IsNullOrEmpty(order.TransactionId))
+                    {
+                        <div>
+                            <strong>ID Tranzacție:</strong> @order.TransactionId
+                        </div>
                     }
 
                     <br />
