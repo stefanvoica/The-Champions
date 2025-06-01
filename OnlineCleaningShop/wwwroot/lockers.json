@@ -1,0 +1,92 @@
+[
+    {
+        "id": "B001",
+        "name": "Easybox Unirii",
+        "lat": 44.4268,
+        "lng": 26.1025
+    },
+    {
+        "id": "B002",
+        "name": "Easybox Tineretului",
+        "lat": 44.407,
+        "lng": 26.1142
+    },
+    {
+        "id": "B003",
+        "name": "Easybox Militari",
+        "lat": 44.434,
+        "lng": 25.9985
+    },
+    {
+        "id": "B004",
+        "name": "Easybox Pipera",
+        "lat": 44.4966,
+        "lng": 26.1122
+    },
+    {
+        "id": "B005",
+        "name": "Easybox Drumul Taberei",
+        "lat": 44.4121,
+        "lng": 26.0182
+    },
+    {
+        "id": "B006",
+        "name": "Easybox Titan",
+        "lat": 44.4269,
+        "lng": 26.1742
+    },
+    {
+        "id": "B007",
+        "name": "Easybox Rahova",
+        "lat": 44.4031,
+        "lng": 26.0761
+    },
+    {
+        "id": "B008",
+        "name": "Easybox Pantelimon",
+        "lat": 44.4442,
+        "lng": 26.1813
+    },
+    {
+        "id": "B009",
+        "name": "Easybox Crangasi",
+        "lat": 44.4515,
+        "lng": 26.0503
+    },
+    {
+        "id": "B010",
+        "name": "Easybox Berceni",
+        "lat": 44.3751,
+        "lng": 26.1188
+    },
+    {
+        "id": "B011",
+        "name": "Easybox Vitan",
+        "lat": 44.4193,
+        "lng": 26.1371
+    },
+    {
+        "id": "F001",
+        "name": "Easybox Focsani Central",
+        "lat": 45.6966,
+        "lng": 27.1865
+    },
+    {
+        "id": "R001",
+        "name": "Easybox Râmnicu Vâlcea Nord",
+        "lat": 45.1046,
+        "lng": 24.3751
+    },
+    {
+        "id": "BR001",
+        "name": "Easybox Brașov Coresi",
+        "lat": 45.6786,
+        "lng": 25.6061
+    },
+    {
+        "id": "P001",
+        "name": "Easybox Pitești Nord",
+        "lat": 44.8572,
+        "lng": 24.8696
+    }
+]
