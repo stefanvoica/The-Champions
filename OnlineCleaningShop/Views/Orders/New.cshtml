@@ -1,24 +1,57 @@
 ﻿@model OnlineCleaningShop.Models.Order
 
-
 <br />
-
 <partial name="_Notifications" />
 
-
-
-<h2 class="mb-5 text-center">Adaugare coș de cumpărături</h2>
+<h2 class="mb-5 text-center">Adăugare coș de cumpărături</h2>
 
 <br />
 
 <form asp-action="New" asp-controller="Orders" method="post">
 
-    <label asp-for="Name">Denumire cos de cumparaturi</label>
-    <br />
+    <label asp-for="Name">Denumire coș de cumpărături</label>
     <input asp-for="Name" class="form-control" />
     <span asp-validation-for="Name" class="text-danger"></span>
-    <br  />
-    <br  />
-    <button type="submit" class="btn btn-success">Adauga cos</button>
 
+    <br />
+
+    <label>Metodă de livrare:</label>
+    <select id="deliveryMethod" name="DeliveryMethod" class="form-control" onchange="toggleDeliveryOptions()">
+        <option value="WarehousePickup">Ridicare din depozit</option>
+        <option value="Easybox">Easybox</option>
+        <option value="Courier">Curier</option>
+    </select>
+
+    <br />
+
+    <!-- Address for Courier -->
+    <div id="courierFields" style="display:none;">
+        <label>Adresă de livrare:</label>
+        <input type="text" name="DeliveryAddress" class="form-control" />
+        <div id="courierMap" style="height: 300px; margin-top: 10px;"></div>
+    </div>
+
+    <!-- Locker Selection -->
+    <div id="easyboxFields" style="display:none;">
+        <label>Selectează Easybox:</label>
+        <input type="hidden" name="EasyboxLockerId" id="lockerId" />
+        <div id="easyboxMap" style="height: 400px; margin-top: 10px;"></div>
+    </div>
+
+    <br />
+
+    <button type="submit" class="btn btn-success">Adaugă coș</button>
 </form>
+
+@section Scripts {
+    <script>
+        function toggleDeliveryOptions() {
+            const method = document.getElementById('deliveryMethod').value;
+            document.getElementById('courierFields').style.display = method === 'Courier' ? 'block' : 'none';
+            document.getElementById('easyboxFields').style.display = method === 'Easybox' ? 'block' : 'none';
+        }
+    </script>
+
+    <!-- Optional: Include map libraries here -->
+    <!-- Example: Leaflet or Google Maps scripts -->
+}

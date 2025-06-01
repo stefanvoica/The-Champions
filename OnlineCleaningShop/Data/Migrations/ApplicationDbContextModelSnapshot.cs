@@ -296,6 +296,15 @@ namespace OnlineCleaningShop.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("DeliveryAddress")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("DeliveryMethod")
+                        .HasColumnType("int");
+
+                    b.Property<string>("EasyboxLockerId")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("IsPaid")
                         .HasColumnType("bit");
 

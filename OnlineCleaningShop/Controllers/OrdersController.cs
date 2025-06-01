@@ -209,17 +209,21 @@ namespace OnlineCleaningShop.Controllers
                 db.Orders.Add(cos);
                 db.SaveChanges();
 
-                TempData["message"] = "Comanda a fost adaugata";
+                TempData["message"] = "Comanda a fost adăugată";
                 TempData["messageType"] = "alert-success";
 
-                // Redirect to Payment page after order creation
+                // Redirecționare către pagina de plată după crearea comenzii
                 return RedirectToAction("Index", "Payment", new { orderId = cos.Id });
             }
             else
             {
+                // Dacă modelul nu este valid, se reafișează formularul cu datele introduse
+                TempData["message"] = "Datele introduse nu sunt valide. Verificați formularul.";
+                TempData["messageType"] = "alert-danger";
                 return View(cos);
             }
         }
+
 
 
 

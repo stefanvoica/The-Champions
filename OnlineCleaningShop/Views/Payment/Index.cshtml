@@ -3,6 +3,23 @@
 }
 
 <h2 class="mb-4">Plătește comanda</h2>
+@if (ViewBag.Order != null)
+{
+    <div class="mb-4">
+        <h5>Detalii livrare</h5>
+        <p><strong>Metodă de livrare:</strong> @ViewBag.Order.DeliveryMethod</p>
+
+        @if (ViewBag.Order.DeliveryMethod?.ToString() == "Courier")
+        {
+            <p><strong>Adresă de livrare:</strong> @ViewBag.Order.DeliveryAddress</p>
+        }
+        @if (ViewBag.Order.DeliveryMethod?.ToString() == "Easybox")
+        {
+            <p><strong>Easybox selectat:</strong> @ViewBag.Order.EasyboxLockerId</p>
+        }
+    </div>
+}
+
 
 <form id="checkout" method="post" asp-controller="Payment" asp-action="Create">
     <input type="hidden" name="orderId" value="@ViewBag.OrderId" />

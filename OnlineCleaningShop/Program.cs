@@ -31,6 +31,7 @@ builder.Services.AddAuthentication()
 
 builder.Services.AddTransient<EmailService>();
 builder.Services.AddScoped<IBraintreeService, BraintreeService>();
+builder.Services.AddHttpClient();
 
 
 var app = builder.Build();
