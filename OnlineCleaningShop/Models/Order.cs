@@ -22,6 +22,8 @@ namespace OnlineCleaningShop.Models
         public string? TransactionId { get; set; }
 
         // NEW FIELDS
+        [Required(ErrorMessage = "Selectati metoda de livrare")]   
+
         public DeliveryMethod? DeliveryMethod { get; set; }
         public string? DeliveryAddress { get; set; }        // for Courier
         public string? EasyboxLockerId { get; set; }        // for Easybox

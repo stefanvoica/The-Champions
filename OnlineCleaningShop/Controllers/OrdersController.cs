@@ -81,111 +81,55 @@ namespace OnlineCleaningShop.Controllers
         {
             SetAccessRights();
 
-            if (User.IsInRole("User") || User.IsInRole("Colaborator"))
+            var orders = db.Orders
+                              .Include("OrderDetails.Product.Category")
+                              .Include("OrderDetails.Product.User")
+                              .Include("User")
+                              .FirstOrDefault(b => b.Id == id);
+
+            if (orders == null ||
+                (User.IsInRole("User") || User.IsInRole("Colaborator")) && orders.UserId != _userManager.GetUserId(User))
             {
-                var orders = db.Orders
-                                  .Include("OrderDetails.Product.Category")
-                                  .Include("OrderDetails.Product.User")
-                                  .Include("User")
-                                  .Where(b => b.Id == id)
-                                  .Where(b => b.UserId == _userManager.GetUserId(User))
-                                  .FirstOrDefault();
-
-                if (orders == null)
-                {
-                    TempData["message"] = "Resursa cautata nu poate fi gasita";
-                    TempData["messageType"] = "alert-danger";
-                    return RedirectToAction("Index", "Products");
-                }
-                var total = orders.OrderDetails
-                  .Sum(od => od.Product.Price * od.Quantity);
-
-                ViewBag.Total = total;
-                ViewBag.TotalInitial = total;
-
-
-                var cod = Request.Query["promoCode"].ToString().Trim().ToUpper();
-                var codPromo = db.CoduriPromotionale.FirstOrDefault(c => c.Nume.ToUpper() == cod);
-
-                if (!string.IsNullOrEmpty(cod))
-                {
-                    if (codPromo != null)
-                    {
-                        var reducere = codPromo.ProcentReducere;
-                        ViewBag.ReducereProcent = reducere * 100;
-                        ViewBag.CodAplicat = cod;
-                        ViewBag.TotalInitial = ViewBag.Total;
-                        ViewBag.Total = (double)ViewBag.Total * (1 - (double)reducere);
-                    }
-                    else
-                    {
-                        TempData["message"] = "Codul promoțional nu există.";
-                        TempData["messageType"] = "alert-danger";
-                    }
-                }
-
-                return View(orders);
-            }
-
-            else
-            if (User.IsInRole("Admin"))
-            {
-                var orders = db.Orders
-                                  .Include("OrderDetails.Product.Category")
-                                  .Include("OrderDetails.Product.User")
-                                  .Include("User")
-                                  .Where(b => b.Id == id)
-                                  .FirstOrDefault();
-
-
-                if (orders == null)
-                {
-                    TempData["message"] = "Resursa cautata nu poate fi gasita";
-                    TempData["messageType"] = "alert-danger";
-                    return RedirectToAction("Index", "Products");
-                }
-
-                var total = orders.OrderDetails
-                    .Sum(od => od.Product.Price * od.Quantity);
-
-                ViewBag.Total = total;
-                ViewBag.TotalInitial = total;
-
-
-                var cod = Request.Query["promoCode"].ToString().Trim().ToUpper();
-                var codPromo = db.CoduriPromotionale.FirstOrDefault(c => c.Nume.ToUpper() == cod);
-
-                if (!string.IsNullOrEmpty(cod))
-                {
-                    if (codPromo != null)
-                    {
-                        decimal reducere = (decimal)codPromo.ProcentReducere;
-                        decimal totalInitial = (decimal)ViewBag.Total;
-
-                        ViewBag.ReducereProcent = reducere * 100;
-                        ViewBag.CodAplicat = cod;
-                        ViewBag.TotalInitial = totalInitial;
-                        ViewBag.Total = totalInitial * (1 - reducere);
-
-
-                    }
-                    else
-                    {
-                        TempData["message"] = "Codul promoțional nu există.";
-                        TempData["messageType"] = "alert-danger";
-                    }
-                }
-
-
-                return View(orders);
-            }
-
-            else
-            {
-                TempData["message"] = "Nu aveti drepturi";
+                TempData["message"] = "Resursa cautata nu poate fi gasita";
                 TempData["messageType"] = "alert-danger";
                 return RedirectToAction("Index", "Products");
             }
+
+            var subtotal = orders.OrderDetails.Sum(od => od.Product.Price * od.Quantity);
+            decimal deliveryFee = 0;
+
+            if (orders.DeliveryMethod == DeliveryMethod.Courier)
+                deliveryFee = 15;
+            else if (orders.DeliveryMethod == DeliveryMethod.Easybox)
+                deliveryFee = 8;
+
+            decimal total = (decimal)subtotal + (decimal)deliveryFee;
+            ViewBag.TotalInitial = subtotal;
+            ViewBag.DeliveryFee = deliveryFee;
+            ViewBag.Total = total;
+
+            var cod = Request.Query["promoCode"].ToString().Trim().ToUpper();
+            var codPromo = db.CoduriPromotionale.FirstOrDefault(c => c.Nume.ToUpper() == cod);
+
+            if (!string.IsNullOrEmpty(cod))
+            {
+                if (codPromo != null)
+                {
+                    decimal reducere = (decimal)codPromo.ProcentReducere;
+                    ViewBag.ReducereProcent = reducere * 100;
+                    ViewBag.CodAplicat = cod;
+
+                    var totalCuReducere = (decimal) subtotal * ((decimal) (1 - reducere)) + deliveryFee;
+                    ViewBag.Total = totalCuReducere;
+                }
+                else
+                {
+                    TempData["message"] = "Codul promoțional nu există.";
+                    TempData["messageType"] = "alert-danger";
+                }
+            }
+
+            return View(orders);
         }
 
 
@@ -209,11 +153,10 @@ namespace OnlineCleaningShop.Controllers
                 db.Orders.Add(cos);
                 db.SaveChanges();
 
-                TempData["message"] = "Comanda a fost adăugată";
+                TempData["message"] = "Coșul a fost adăugat!";
                 TempData["messageType"] = "alert-success";
 
-                // Redirecționare către pagina de plată după crearea comenzii
-                return RedirectToAction("Index", "Payment", new { orderId = cos.Id });
+                return RedirectToAction("Index", "Products");
             }
             else
             {

@@ -299,7 +299,7 @@ namespace OnlineCleaningShop.Data.Migrations
                     b.Property<string>("DeliveryAddress")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("DeliveryMethod")
+                    b.Property<int>("DeliveryMethod")
                         .HasColumnType("int");
 
                     b.Property<string>("EasyboxLockerId")

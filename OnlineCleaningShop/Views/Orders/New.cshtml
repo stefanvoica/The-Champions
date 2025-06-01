@@ -26,8 +26,18 @@
 
     <!-- Address for Courier -->
     <div id="courierFields" style="display:none;">
-        <label>Adresă de livrare:</label>
-        <input type="text" name="DeliveryAddress" class="form-control" />
+        <label>Oraș:</label>
+        <input type="text" id="city" class="form-control" placeholder="ex: București" />
+
+        <label>Stradă:</label>
+        <input type="text" id="street" class="form-control" placeholder="ex: Str. Exemplu 10" />
+
+        <label>Bloc / Scara / Apartament (opțional):</label>
+        <input type="text" id="extra" class="form-control" />
+
+        <button type="button" class="btn btn-secondary mt-2" onclick="searchCourierAddress()">Vezi locația pe hartă</button>
+
+        <input type="hidden" name="DeliveryAddress" id="fullAddress" />
         <div id="courierMap" style="height: 300px; margin-top: 10px;"></div>
     </div>
 
@@ -44,14 +54,81 @@
 </form>
 
 @section Scripts {
-    <script>
-        function toggleDeliveryOptions() {
-            const method = document.getElementById('deliveryMethod').value;
-            document.getElementById('courierFields').style.display = method === 'Courier' ? 'block' : 'none';
-            document.getElementById('easyboxFields').style.display = method === 'Easybox' ? 'block' : 'none';
-        }
-    </script>
+        <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+        <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
-    <!-- Optional: Include map libraries here -->
-    <!-- Example: Leaflet or Google Maps scripts -->
+        <script>
+            let easyboxMapInitialized = false;
+            let courierMap;
+
+            function toggleDeliveryOptions() {
+                const method = document.getElementById('deliveryMethod').value;
+                document.getElementById('courierFields').style.display = method === 'Courier' ? 'block' : 'none';
+                document.getElementById('easyboxFields').style.display = method === 'Easybox' ? 'block' : 'none';
+
+                if (method === 'Easybox' && !easyboxMapInitialized) {
+                    setTimeout(initializeEasyboxMap, 300);
+                }
+            }
+
+            async function initializeEasyboxMap() {
+                easyboxMapInitialized = true;
+
+                const map = L.map('easyboxMap').setView([44.4268, 26.1025], 11);
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '&copy; OpenStreetMap contributors'
+                }).addTo(map);
+
+                try {
+                    const response = await fetch('/lockers.json');
+                    const lockers = await response.json();
+
+                    lockers.forEach(locker => {
+                        L.marker([locker.lat, locker.lng])
+                            .addTo(map)
+                            .bindPopup(`<b>${locker.name}</b><br /><button onclick=\"selectLocker('${locker.id}')\">Selectează</button>`);
+                    });
+                } catch (error) {
+                    console.error("Eroare la încărcarea lockerelor:", error);
+                }
+            }
+
+            function selectLocker(lockerId) {
+                document.getElementById('lockerId').value = lockerId;
+                alert("Ai selectat Easybox-ul: " + lockerId);
+            }
+
+            async function searchCourierAddress() {
+                const city = document.getElementById('city').value.trim();
+                const street = document.getElementById('street').value.trim();
+                const extra = document.getElementById('extra').value.trim();
+                const address = `${street}, ${city} ${extra}`;
+
+                document.getElementById('fullAddress').value = address;
+
+                if (!courierMap) {
+                    courierMap = L.map('courierMap').setView([44.4268, 26.1025], 13);
+                    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                        attribution: '&copy; OpenStreetMap contributors'
+                    }).addTo(courierMap);
+                }
+
+                try {
+                    const res = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}`);
+                    const data = await res.json();
+
+                    if (data && data.length > 0) {
+                        const lat = parseFloat(data[0].lat);
+                        const lon = parseFloat(data[0].lon);
+                        courierMap.setView([lat, lon], 16);
+                        L.marker([lat, lon]).addTo(courierMap).bindPopup("Adresa de livrare").openPopup();
+                    } else {
+                        alert("Adresa nu a fost găsită. Încearcă din nou.");
+                    }
+                } catch (err) {
+                    console.error("Eroare căutare adresă:", err);
+                    alert("Eroare la căutarea adresei.");
+                }
+            }
+        </script>
 }
