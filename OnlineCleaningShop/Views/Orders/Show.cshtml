@@ -34,7 +34,8 @@
         <hr class="my-4" />
 
         <div class="col-12">
-            <h5 class="text-end">Total: <strong>@ViewBag.TotalInitial.ToString("0.00") RON</strong></h5>
+            <h5 class="text-end">Subtotal: <strong>@ViewBag.TotalInitial.ToString("0.00") RON</strong></h5>
+            <p class="text-end">Transport: @ViewBag.DeliveryFee.ToString("0.00") RON</p>
 
             @if (ViewBag.CodAplicat != null)
             {
@@ -42,15 +43,12 @@
                     Cod <strong>@ViewBag.CodAplicat</strong> aplicat: -@ViewBag.ReducereProcent%
                 </p>
                 <p class="text-end">
-                    Total cu reducere: <strong>@ViewBag.Total.ToString("0.00") RON</strong>
+                    Total cu reducere: <strong>@ViewBag.TotalCuReducere.ToString("0.00") RON</strong>
                 </p>
             }
-            else
-            {
-                <p class="text-end">
-                    Total: <strong>@ViewBag.Total.ToString("0.00") RON</strong>
-                </p>
-            }
+            <p class="text-end">
+                Total: <strong>@ViewBag.Total.ToString("0.00") RON</strong>
+            </p>
 
             <form method="get" asp-action="Show" asp-controller="Orders">
                 <input type="hidden" name="id" value="@Model.Id" />

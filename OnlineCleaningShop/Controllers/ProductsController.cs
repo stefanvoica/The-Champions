@@ -227,8 +227,16 @@ namespace OnlineCleaningShop.Controllers
                     .Where(ab => ab.OrderId == orderDetail.OrderId)
                     .Count() > 0)
                 {
-                    TempData["message"] = "Acest produs este deja adăugat în coș.";
-                    TempData["messageType"] = "alert-danger";
+                    //Crestem cantitatea din cos
+                    var existingOrderDetail = db.OrderDetails
+                        .FirstOrDefault(ab => ab.ProductId == orderDetail.ProductId && ab.OrderId == orderDetail.OrderId);
+                    existingOrderDetail.Quantity += orderDetail.Quantity;
+                    db.SaveChanges();
+                    TempData["message"] = "Cantitatea produsului a fost actualizată în coș.";
+                    TempData["messageType"] = "alert-success";
+
+                    //TempData["message"] = "Acest produs este deja adăugat în coș.";
+                    //TempData["messageType"] = "alert-danger";
                 }
                 else
                 {
