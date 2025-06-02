@@ -299,6 +299,9 @@ namespace OnlineCleaningShop.Data.Migrations
                     b.Property<string>("DeliveryAddress")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<decimal>("DeliveryFee")
+                        .HasColumnType("decimal(18,2)");
+
                     b.Property<int>("DeliveryMethod")
                         .HasColumnType("int");
 
@@ -311,6 +314,18 @@ namespace OnlineCleaningShop.Data.Migrations
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PromoCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("Total")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<double>("TotalInitial")
+                        .HasColumnType("float");
+
+                    b.Property<decimal?>("TotalWithDiscount")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("TransactionId")
                         .HasColumnType("nvarchar(max)");

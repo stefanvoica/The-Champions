@@ -35,7 +35,6 @@
 
         <div class="col-12">
             <h5 class="text-end">Subtotal: <strong>@ViewBag.TotalInitial.ToString("0.00") RON</strong></h5>
-            <p class="text-end">Transport: @ViewBag.DeliveryFee.ToString("0.00") RON</p>
 
             @if (ViewBag.CodAplicat != null)
             {
@@ -46,6 +45,7 @@
                     Total cu reducere: <strong>@ViewBag.TotalCuReducere.ToString("0.00") RON</strong>
                 </p>
             }
+            <p class="text-end">Transport: @ViewBag.DeliveryFee.ToString("0.00") RON</p>
             <p class="text-end">
                 Total: <strong>@ViewBag.Total.ToString("0.00") RON</strong>
             </p>
@@ -58,6 +58,12 @@
                     <button class="btn btn-outline-secondary" type="submit">Aplică</button>
                 </div>
             </form>
+            <div class="mt-4">
+                <a href="@Url.Action("DownloadInvoice", "Orders", new { id = Model.Id })" class="btn btn-secondary">
+                    <i class="bi bi-file-earmark-pdf"></i> Descarcă factura PDF
+                </a>
+            </div>
+
 
             <hr />
 
