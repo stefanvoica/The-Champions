@@ -5,7 +5,7 @@
 namespace OnlineCleaningShop.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class UseEnumAsIntForStatus : Migration
+    public partial class beforeapi : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
