@@ -20,6 +20,8 @@ builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.R
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<OpenAIService>();
+builder.Services.AddSingleton<GeminiService>();
+
 
 builder.Services.AddAuthentication()
    .AddGoogle(options =>

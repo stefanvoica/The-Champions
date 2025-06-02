@@ -6,11 +6,11 @@ namespace OnlineCleaningShop.Controllers
 {
     public class ChatController : Controller
     {
-        private readonly OpenAIService _openAIService;
+        private readonly GeminiService _geminiService;
 
-        public ChatController(OpenAIService openAIService)
+        public ChatController(GeminiService geminiService)
         {
-            _openAIService = openAIService;
+            _geminiService = geminiService;
         }
 
         [HttpGet]
@@ -28,21 +28,21 @@ namespace OnlineCleaningShop.Controllers
                 return View("Index");
             }
 
-            var response = await _openAIService.AskChatGPT(message);
+            var response = await _geminiService.AskGemini(message);
             ViewBag.UserMessage = message;
             ViewBag.AIResponse = response;
 
             return View("Index");
         }
+
         [HttpPost]
         public async Task<JsonResult> AskAjax([FromForm] string message)
         {
             if (string.IsNullOrWhiteSpace(message))
                 return Json(new { success = false, error = "Mesajul este gol." });
 
-            var response = await _openAIService.AskChatGPT(message);
+            var response = await _geminiService.AskGemini(message);
             return Json(new { success = true, answer = response });
         }
-
     }
 }
