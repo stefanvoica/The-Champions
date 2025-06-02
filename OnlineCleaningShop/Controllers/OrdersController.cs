@@ -5,6 +5,11 @@ using Microsoft.EntityFrameworkCore;
 using OnlineCleaningShop.Data;
 using OnlineCleaningShop.Models;
 using static NuGet.Packaging.PackagingConstants;
+using System.IO;
+using iText.Kernel.Pdf;
+using iText.Layout;
+using iText.Layout.Element;
+using iText.Kernel.Colors;
 
 namespace OnlineCleaningShop.Controllers
 {
@@ -118,6 +123,10 @@ namespace OnlineCleaningShop.Controllers
             ViewBag.DeliveryFee = deliveryFee;
             ViewBag.Total = total;
 
+            orders.TotalInitial = subtotal;
+            orders.DeliveryFee = deliveryFee;
+            orders.Total = total;
+
             var cod = Request.Query["promoCode"].ToString().Trim().ToUpper();
             var codPromo = db.CoduriPromotionale.FirstOrDefault(c => c.Nume.ToUpper() == cod);
 
@@ -149,6 +158,11 @@ namespace OnlineCleaningShop.Controllers
                     ViewBag.TotalCuReducere = totalCuReducere;
                     ViewBag.Total = totalCuReducere + deliveryFee;
 
+                    orders.TotalWithDiscount = totalCuReducere;
+                    orders.PromoCode = cod;
+                    orders.DeliveryFee = deliveryFee;
+                    orders.Total = totalCuReducere + deliveryFee;
+
                 }
                 else
                 {
@@ -157,6 +171,8 @@ namespace OnlineCleaningShop.Controllers
                 }
             }
 
+            db.Orders.Update(orders);
+            db.SaveChanges();
             return View(orders);
         }
 
@@ -195,6 +211,68 @@ namespace OnlineCleaningShop.Controllers
             }
         }
 
+        public IActionResult DownloadInvoice(int id)
+        {
+            var order = db.Orders.Include(o => o.User)
+                                 .Include(o => o.OrderDetails)
+                                 .ThenInclude(od => od.Product)
+                                 .FirstOrDefault(o => o.Id == id);
+
+            if (order == null)
+            {
+                return NotFound();
+            }
+
+            // Generate PDF
+            using var stream = new MemoryStream();
+            var writer = new PdfWriter(stream);
+            var pdf = new PdfDocument(writer);
+            var document = new Document(pdf);
+
+            // Add content to the PDF
+            document.Add(new Paragraph($"Factura pentru comanda #{order.Id}").SetFontSize(20).SimulateBold());
+            document.Add(new Paragraph($"Data: {DateTime.Now.Date:dd/MM/yyyy}"));
+            document.Add(new Paragraph($"Client: {order.User.UserName}"));
+            document.Add(new Paragraph(" "));
+
+            var table = new Table(4).UseAllAvailableWidth();
+            table.AddHeaderCell("Produs").SimulateBold();
+            table.AddHeaderCell("Pret unitar").SimulateBold();
+            table.AddHeaderCell("Cantitate").SimulateBold();
+            table.AddHeaderCell("Total").SimulateBold();
+
+            foreach (var detail in order.OrderDetails)
+            {
+                table.AddCell(detail.Product.Name);
+                table.AddCell($"{detail.Product.Price:0.00} lei");
+                table.AddCell(detail.Quantity.ToString());
+                table.AddCell($"{detail.Product.Price * detail.Quantity:0.00} lei");
+            }
+
+            document.Add(table);
+
+            document.Add(new Paragraph(" ").SetMarginTop(10));
+            document.Add(new Paragraph($"Subtotal: {order.TotalInitial:0.00} lei").SimulateBold().SetFontSize(14));
+
+            if (!string.IsNullOrEmpty(order.PromoCode))
+            {
+                document.Add(new Paragraph($"Cod promotional: {order.PromoCode}").SetFontSize(14));
+                document.Add(new Paragraph($"Reducere aplicata: {order.TotalInitial - (double)order.TotalWithDiscount:0.00} lei").SetFontSize(14));
+                document.Add(new Paragraph($"Totalul cu reducere: {order.TotalWithDiscount:0.00} lei").SetFontSize(14));
+            }
+            if (order.DeliveryFee > 0)
+            {
+                document.Add(new Paragraph($"Taxa de livrare: {order.DeliveryFee:0.00} lei").SetFontSize(14));
+            }
+            else
+            {
+                document.Add(new Paragraph("Livrare gratuita!").SetFontSize(14).SetFontColor(ColorConstants.GREEN));
+            }
+            document.Add(new Paragraph($"Total de plata: {order.Total:0.00} lei").SetFontSize(16).SimulateBold());
+            document.Close();
+
+            return File(stream.ToArray(), "application/pdf", $"Invoice_Order_{id}.pdf");
+        }
 
 
 

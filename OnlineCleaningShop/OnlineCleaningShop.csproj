@@ -16,6 +16,8 @@
 
   <ItemGroup>
     <PackageReference Include="Braintree" Version="5.32.0" />
+    <PackageReference Include="iText7" Version="9.2.0" />
+    <PackageReference Include="itext7.bouncy-castle-adapter" Version="9.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Google" Version="8.0.4" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="8.0.8" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.11" />
