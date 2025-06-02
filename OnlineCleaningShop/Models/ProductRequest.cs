@@ -1,9 +1,10 @@
-﻿using OnlineCleaningShop.Models;
-using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace OnlineCleaningShop.Models
 {
+    public enum RequestStatus { Pending, Approved, Rejected }
+
     public class ProductRequest
     {
         [Key]
@@ -15,7 +16,9 @@ namespace OnlineCleaningShop.Models
         [Required]
         public string UserId { get; set; }
 
-        public string Status { get; set; } = "Pending";
+        [Required]
+        [Column(TypeName = "nvarchar(20)")]
+        public RequestStatus Status { get; set; } = RequestStatus.Pending;
 
         public Product Product { get; set; }
     }
