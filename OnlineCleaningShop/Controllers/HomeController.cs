@@ -41,7 +41,7 @@ namespace OnlineCleaningShop.Controllers
         requestProduct => requestProduct.ProductId,
         (product, requestProduct) => new { Product = product, RequestProduct = requestProduct }
     )
-    .Where(pr => pr.RequestProduct.Status == "Approved" && pr.Product.Stock > 0)
+    .Where(pr => pr.RequestProduct.Status == RequestStatus.Approved && pr.Product.Stock > 0)
     .OrderBy(r => Guid.NewGuid())
     .Take(4)
     .Select(pr => pr.Product)

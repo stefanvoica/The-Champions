@@ -44,7 +44,7 @@ namespace OnlineCleaningShop.Controllers
             var products = db.Products
                         .Include(p => p.Category)
                         .Include(p => p.Reviews)
-                        .Where(p => db.ProductRequests.Any(pr => pr.ProductId == p.Id && pr.Status == "Approved"))
+                        .Where(p => db.ProductRequests.Any(pr => pr.ProductId == p.Id && pr.Status == RequestStatus.Approved))
                         .OrderBy(p => p.Name);
 
             if (TempData.ContainsKey("message"))
@@ -65,12 +65,12 @@ namespace OnlineCleaningShop.Controllers
                 // Căutare în produse și review-uri
                 List<int> productIds = db.Products
                     .Where(p => (p.Name.Contains(search) || p.Description.Contains(search)) && // Căutăm în nume și descriere
-                                !db.ProductRequests.Any(pr => pr.ProductId == p.Id && pr.Status != "Approved")) // Excludem produsele neaprobate
+                                !db.ProductRequests.Any(pr => pr.ProductId == p.Id && pr.Status != RequestStatus.Approved)) // Excludem produsele neaprobate
                     .Select(p => p.Id).ToList();
 
                 List<int> productIdsOfReviewsWithSearchString = db.Reviews
                     .Where(r => r.Text.Contains(search) &&
-                                !db.ProductRequests.Any(pr => pr.ProductId == r.ProductId && pr.Status != "Approved")) // Excludem produsele neaprobate
+                                !db.ProductRequests.Any(pr => pr.ProductId == r.ProductId && pr.Status != RequestStatus.Approved)) // Excludem produsele neaprobate
                     .Select(r => r.ProductId).ToList();
 
                 List<int> mergedIds = productIds.Union(productIdsOfReviewsWithSearchString).ToList();
@@ -78,7 +78,7 @@ namespace OnlineCleaningShop.Controllers
                 // Filtrăm doar produsele care sunt aprobate și le ordonăm explicit
                 products = db.Products
                     .Where(p => mergedIds.Contains(p.Id) &&
-                                !db.ProductRequests.Any(pr => pr.ProductId == p.Id && pr.Status != "Approved"))
+                                !db.ProductRequests.Any(pr => pr.ProductId == p.Id && pr.Status != RequestStatus.Approved))
                     .OrderBy(p => p.Name); // Aplicăm ordonarea explicită aici
 
             }
@@ -88,7 +88,7 @@ namespace OnlineCleaningShop.Controllers
                 products = db.Products
                         .Include(p => p.Category)
                         .Include(p => p.Reviews)
-                        .Where(p => db.ProductRequests.Any(pr => pr.ProductId == p.Id && pr.Status == "Approved")) // Include doar produsele aprobate
+                        .Where(p => db.ProductRequests.Any(pr => pr.ProductId == p.Id && pr.Status == RequestStatus.Approved)) // Include doar produsele aprobate
                         .OrderBy(p => p.Name);
             }
 
@@ -165,7 +165,7 @@ namespace OnlineCleaningShop.Controllers
         public ActionResult Show(int id)
         {
             // Verificăm dacă produsul are o cerere neaprobată
-            var productRequest = db.ProductRequests.FirstOrDefault(pr => pr.ProductId == id && pr.Status != "Approved");
+            var productRequest = db.ProductRequests.FirstOrDefault(pr => pr.ProductId == id && pr.Status != RequestStatus.Approved);
 
             if (productRequest != null)
             {
@@ -213,7 +213,7 @@ namespace OnlineCleaningShop.Controllers
             if (ModelState.IsValid)
             {
                 // Verificăm dacă produsul este aprobat
-                var productRequest = db.ProductRequests.FirstOrDefault(pr => pr.ProductId == orderDetail.ProductId && pr.Status != "Approved");
+                var productRequest = db.ProductRequests.FirstOrDefault(pr => pr.ProductId == orderDetail.ProductId && pr.Status != RequestStatus.Approved);
                 if (productRequest != null)
                 {
                     TempData["message"] = "Acest produs nu este aprobat și nu poate fi adăugat în coș.";
@@ -322,7 +322,7 @@ namespace OnlineCleaningShop.Controllers
                 {
                     ProductId = product.Id,
                     UserId = _userManager.GetUserId(User),
-                    Status = "Pending" // Cererea trebuie aprobată
+                    Status = RequestStatus.Pending // Cererea trebuie aprobată
                 };
 
                 // Adăugăm cererea în baza de date
@@ -352,7 +352,7 @@ namespace OnlineCleaningShop.Controllers
                 return RedirectToAction("Index");
             }
 
-            var productRequest = db.ProductRequests.FirstOrDefault(pr => pr.ProductId == id && pr.Status == "Approved");
+            var productRequest = db.ProductRequests.FirstOrDefault(pr => pr.ProductId == id && pr.Status == RequestStatus.Approved);
 
             if (productRequest == null)
             {
@@ -424,7 +424,7 @@ namespace OnlineCleaningShop.Controllers
                     {
                         ProductId = product.Id,
                         UserId = _userManager.GetUserId(User),
-                        Status = "Pending", // Cererea trebuie aprobată
+                        Status = RequestStatus.Pending, // Cererea trebuie aprobată
                         Product = new Product
                         {
                             Name = requestProduct.Name,

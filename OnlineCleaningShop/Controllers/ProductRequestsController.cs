@@ -23,15 +23,18 @@ namespace OnlineCleaningShop.Controllers
 
         // Adminul vizualizează cererile
         [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Index()
         {
             var requests = await _dbContext.ProductRequests
+                .Where(r => r.Status == RequestStatus.Pending) 
                 .Include(pr => pr.Product)
-                .Include(pr => pr.Product.Category) // Dacă vrei să afișezi și categoria produsului
+                .Include(pr => pr.Product.Category)
                 .ToListAsync();
 
             return View(requests);
         }
+
 
         // Colaborator trimite o cerere pentru un produs
         [Authorize(Roles = "Colaborator")]
@@ -68,7 +71,6 @@ namespace OnlineCleaningShop.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Approve(int id)
         {
-            // Găsim cererea
             var request = await _dbContext.ProductRequests
                 .Include(pr => pr.Product)
                 .FirstOrDefaultAsync(pr => pr.Id == id);
@@ -80,12 +82,10 @@ namespace OnlineCleaningShop.Controllers
                 return RedirectToAction("Index");
             }
 
-            // Găsim produsul asociat cererii
             var product = await _dbContext.Products.FindAsync(request.ProductId);
 
             if (product != null)
             {
-                // Aplicăm modificările asupra produsului
                 product.Name = request.Product.Name;
                 product.Description = request.Product.Description;
                 product.Price = request.Product.Price;
@@ -93,11 +93,8 @@ namespace OnlineCleaningShop.Controllers
                 product.CategoryId = request.Product.CategoryId;
                 product.Image = request.Product.Image;
 
-                // Marcăm cererea ca aprobată (opțional) sau o ștergem
-                _dbContext.ProductRequests.Remove(request);
-
-                // Salvăm modificările
-                await _dbContext.SaveChangesAsync();
+                request.Status = RequestStatus.Approved; 
+                await _dbContext.SaveChangesAsync(); 
 
                 TempData["message"] = "Cererea a fost aprobată și modificările au fost aplicate.";
                 TempData["messageType"] = "alert-success";
@@ -110,6 +107,7 @@ namespace OnlineCleaningShop.Controllers
 
             return RedirectToAction("Index");
         }
+
 
 
 

@@ -17,7 +17,7 @@
                 <td>@request.Product.Category?.CategoryName</td>
                 <td>@request.Status</td>
                 <td>
-                    @if (request.Status == "Pending")
+                    @if (request.Status == OnlineCleaningShop.Models.RequestStatus.Pending)
                     {
                         <a href="/ProductRequests/Approve/@request.Id" class="btn btn-success">Aprobă</a>
                         <a href="/ProductRequests/Reject/@request.Id" class="btn btn-danger">Respinge</a>
