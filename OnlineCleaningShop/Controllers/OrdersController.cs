@@ -98,10 +98,20 @@ namespace OnlineCleaningShop.Controllers
             var subtotal = orders.OrderDetails.Sum(od => od.Product.Price * od.Quantity);
             decimal deliveryFee = 0;
 
-            if (orders.DeliveryMethod == DeliveryMethod.Courier)
-                deliveryFee = 15;
-            else if (orders.DeliveryMethod == DeliveryMethod.Easybox)
-                deliveryFee = 8;
+            if (subtotal < 300)
+            {
+                TempData["message"] = "Mai adauga produse in valoare de " + (300 - subtotal) + " lei pentru a beneficia de livrare gratuita!";
+                TempData["messageType"] = "alert-info";
+                if (orders.DeliveryMethod == DeliveryMethod.Courier)
+                    deliveryFee = 15;
+                else if (orders.DeliveryMethod == DeliveryMethod.Easybox)
+                    deliveryFee = 8;
+            }
+            else
+            {
+                TempData["message"] = "Livrare gratuita!";
+                TempData["messageType"] = "alert-success";
+            }
 
             decimal total = (decimal)subtotal + (decimal)deliveryFee;
             ViewBag.TotalInitial = subtotal;
@@ -119,8 +129,26 @@ namespace OnlineCleaningShop.Controllers
                     ViewBag.ReducereProcent = reducere * 100;
                     ViewBag.CodAplicat = cod;
 
-                    var totalCuReducere = (decimal) subtotal * ((decimal) (1 - reducere)) + deliveryFee;
-                    ViewBag.Total = totalCuReducere;
+                    var totalCuReducere = (decimal)subtotal * ((decimal)(1 - reducere)); //+ deliveryFee;
+
+                    if (totalCuReducere < 300)
+                    {
+                        TempData["message"] = "Mai adauga produse in valoare de " + (300 - totalCuReducere) + " lei pentru a beneficia de livrare gratuita!";
+                        TempData["messageType"] = "alert-info";
+                        if (orders.DeliveryMethod == DeliveryMethod.Courier)
+                            deliveryFee = 15;
+                        else if (orders.DeliveryMethod == DeliveryMethod.Easybox)
+                            deliveryFee = 8;
+                    }
+                    else
+                    {
+                        TempData["message"] = "Livrare gratuita!";
+                        TempData["messageType"] = "alert-success";
+                        deliveryFee = 0;
+                    }
+                    ViewBag.TotalCuReducere = totalCuReducere;
+                    ViewBag.Total = totalCuReducere + deliveryFee;
+
                 }
                 else
                 {

@@ -1,21 +1,34 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\ProiectVar5\\",
+  "WorkspaceRootPath": "C:\\Users\\coman\\Facultate\\Anul 2\\Semestrul 2\\MDS\\OnlineCleaningShop2\\The-Champions\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/MDSProject/True/SqlTable/dbo.ProductRequests.sql||{0058A1F7-65F3-4DB9-B3D0-CA7E64DD73CD}"
+      "AbsoluteMoniker": "D:0:0:{0ED1F88C-CC79-4A79-B955-2110547BA3F2}|OnlineCleaningShop\\OnlineCleaningShop.csproj|c:\\users\\coman\\facultate\\anul 2\\semestrul 2\\mds\\onlinecleaningshop2\\the-champions\\onlinecleaningshop\\controllers\\productscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0ED1F88C-CC79-4A79-B955-2110547BA3F2}|OnlineCleaningShop\\OnlineCleaningShop.csproj|solutionrelative:onlinecleaningshop\\controllers\\productscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\ProiectVar5\\OnlineCleaningShop\\Data\\Migrations\\20250602140555_beforeapi.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:OnlineCleaningShop\\Data\\Migrations\\20250602140555_beforeapi.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{0ED1F88C-CC79-4A79-B955-2110547BA3F2}|OnlineCleaningShop\\OnlineCleaningShop.csproj|c:\\users\\coman\\facultate\\anul 2\\semestrul 2\\mds\\onlinecleaningshop2\\the-champions\\onlinecleaningshop\\controllers\\orderscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0ED1F88C-CC79-4A79-B955-2110547BA3F2}|OnlineCleaningShop\\OnlineCleaningShop.csproj|solutionrelative:onlinecleaningshop\\controllers\\orderscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{0ED1F88C-CC79-4A79-B955-2110547BA3F2}|OnlineCleaningShop\\OnlineCleaningShop.csproj|d:\\proiectvar5\\onlinecleaningshop\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{0ED1F88C-CC79-4A79-B955-2110547BA3F2}|OnlineCleaningShop\\OnlineCleaningShop.csproj|solutionrelative:onlinecleaningshop\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\coman\\Facultate\\Anul 2\\Semestrul 2\\MDS\\OnlineCleaningShop2\\The-Champions\\OnlineCleaningShop\\Data\\Migrations\\20250602150153_New.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:OnlineCleaningShop\\Data\\Migrations\\20250602150153_New.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{0ED1F88C-CC79-4A79-B955-2110547BA3F2}|OnlineCleaningShop\\OnlineCleaningShop.csproj|d:\\proiectvar5\\onlinecleaningshop\\views\\products\\show.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{0ED1F88C-CC79-4A79-B955-2110547BA3F2}|OnlineCleaningShop\\OnlineCleaningShop.csproj|solutionrelative:onlinecleaningshop\\views\\products\\show.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{0ED1F88C-CC79-4A79-B955-2110547BA3F2}|OnlineCleaningShop\\OnlineCleaningShop.csproj|c:\\users\\coman\\facultate\\anul 2\\semestrul 2\\mds\\onlinecleaningshop2\\the-champions\\onlinecleaningshop\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{0ED1F88C-CC79-4A79-B955-2110547BA3F2}|OnlineCleaningShop\\OnlineCleaningShop.csproj|solutionrelative:onlinecleaningshop\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0ED1F88C-CC79-4A79-B955-2110547BA3F2}|OnlineCleaningShop\\OnlineCleaningShop.csproj|c:\\users\\coman\\facultate\\anul 2\\semestrul 2\\mds\\onlinecleaningshop2\\the-champions\\onlinecleaningshop\\controllers\\chatcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0ED1F88C-CC79-4A79-B955-2110547BA3F2}|OnlineCleaningShop\\OnlineCleaningShop.csproj|solutionrelative:onlinecleaningshop\\controllers\\chatcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0ED1F88C-CC79-4A79-B955-2110547BA3F2}|OnlineCleaningShop\\OnlineCleaningShop.csproj|c:\\users\\coman\\facultate\\anul 2\\semestrul 2\\mds\\onlinecleaningshop2\\the-champions\\onlinecleaningshop\\views\\chat\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{0ED1F88C-CC79-4A79-B955-2110547BA3F2}|OnlineCleaningShop\\OnlineCleaningShop.csproj|solutionrelative:onlinecleaningshop\\views\\chat\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0ED1F88C-CC79-4A79-B955-2110547BA3F2}|OnlineCleaningShop\\OnlineCleaningShop.csproj|c:\\users\\coman\\facultate\\anul 2\\semestrul 2\\mds\\onlinecleaningshop2\\the-champions\\onlinecleaningshop\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0ED1F88C-CC79-4A79-B955-2110547BA3F2}|OnlineCleaningShop\\OnlineCleaningShop.csproj|solutionrelative:onlinecleaningshop\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -25,76 +38,95 @@
       "DocumentGroups": [
         {
           "DockedHeight": 20,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 0,
           "Children": [
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:1:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{0ad07096-bba9-4900-a651-0598d26f6d24}"
-            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "dbo.ProductRequests [Data]",
-              "DocumentMoniker": "ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/MDSProject/True/SqlTable/dbo.ProductRequests.sql",
-              "ToolTip": "dbo.ProductRequests [Data]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
-              "WhenOpened": "2025-06-02T14:07:22.103Z",
+              "Title": "ProductsController.cs",
+              "DocumentMoniker": "C:\\Users\\coman\\Facultate\\Anul 2\\Semestrul 2\\MDS\\OnlineCleaningShop2\\The-Champions\\OnlineCleaningShop\\Controllers\\ProductsController.cs",
+              "RelativeDocumentMoniker": "OnlineCleaningShop\\Controllers\\ProductsController.cs",
+              "ToolTip": "C:\\Users\\coman\\Facultate\\Anul 2\\Semestrul 2\\MDS\\OnlineCleaningShop2\\The-Champions\\OnlineCleaningShop\\Controllers\\ProductsController.cs",
+              "RelativeToolTip": "OnlineCleaningShop\\Controllers\\ProductsController.cs",
+              "ViewState": "AgIAAM4AAAAAAAAAAAAgwOwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-02T15:37:58.898Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "20250602140555_beforeapi.cs",
-              "DocumentMoniker": "D:\\ProiectVar5\\OnlineCleaningShop\\Data\\Migrations\\20250602140555_beforeapi.cs",
-              "RelativeDocumentMoniker": "OnlineCleaningShop\\Data\\Migrations\\20250602140555_beforeapi.cs",
-              "ToolTip": "D:\\ProiectVar5\\OnlineCleaningShop\\Data\\Migrations\\20250602140555_beforeapi.cs",
-              "RelativeToolTip": "OnlineCleaningShop\\Data\\Migrations\\20250602140555_beforeapi.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAABAAAAAAAAAA==",
+              "Title": "OrdersController.cs",
+              "DocumentMoniker": "C:\\Users\\coman\\Facultate\\Anul 2\\Semestrul 2\\MDS\\OnlineCleaningShop2\\The-Champions\\OnlineCleaningShop\\Controllers\\OrdersController.cs",
+              "RelativeDocumentMoniker": "OnlineCleaningShop\\Controllers\\OrdersController.cs",
+              "ToolTip": "C:\\Users\\coman\\Facultate\\Anul 2\\Semestrul 2\\MDS\\OnlineCleaningShop2\\The-Champions\\OnlineCleaningShop\\Controllers\\OrdersController.cs",
+              "RelativeToolTip": "OnlineCleaningShop\\Controllers\\OrdersController.cs",
+              "ViewState": "AgIAAHkAAAAAAAAAAAAkwJQAAAAzAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-02T14:05:56.05Z",
+              "WhenOpened": "2025-06-02T15:02:51.987Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "appsettings.json",
-              "DocumentMoniker": "D:\\ProiectVar5\\OnlineCleaningShop\\appsettings.json",
-              "RelativeDocumentMoniker": "OnlineCleaningShop\\appsettings.json",
-              "ToolTip": "D:\\ProiectVar5\\OnlineCleaningShop\\appsettings.json",
-              "RelativeToolTip": "OnlineCleaningShop\\appsettings.json",
+              "Title": "20250602150153_New.cs",
+              "DocumentMoniker": "C:\\Users\\coman\\Facultate\\Anul 2\\Semestrul 2\\MDS\\OnlineCleaningShop2\\The-Champions\\OnlineCleaningShop\\Data\\Migrations\\20250602150153_New.cs",
+              "RelativeDocumentMoniker": "OnlineCleaningShop\\Data\\Migrations\\20250602150153_New.cs",
+              "ToolTip": "C:\\Users\\coman\\Facultate\\Anul 2\\Semestrul 2\\MDS\\OnlineCleaningShop2\\The-Champions\\OnlineCleaningShop\\Data\\Migrations\\20250602150153_New.cs",
+              "RelativeToolTip": "OnlineCleaningShop\\Data\\Migrations\\20250602150153_New.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-06-02T14:05:14.259Z",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-02T15:01:53.851Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "Show.cshtml",
-              "DocumentMoniker": "D:\\ProiectVar5\\OnlineCleaningShop\\Views\\Products\\Show.cshtml",
-              "RelativeDocumentMoniker": "OnlineCleaningShop\\Views\\Products\\Show.cshtml",
-              "ToolTip": "D:\\ProiectVar5\\OnlineCleaningShop\\Views\\Products\\Show.cshtml",
-              "RelativeToolTip": "OnlineCleaningShop\\Views\\Products\\Show.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEUAAAAxAAAAAAAAAA==",
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "C:\\Users\\coman\\Facultate\\Anul 2\\Semestrul 2\\MDS\\OnlineCleaningShop2\\The-Champions\\OnlineCleaningShop\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "OnlineCleaningShop\\Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "C:\\Users\\coman\\Facultate\\Anul 2\\Semestrul 2\\MDS\\OnlineCleaningShop2\\The-Champions\\OnlineCleaningShop\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "OnlineCleaningShop\\Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AgIAAFEAAAAAAAAAAAAkwFsAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-05-06T14:11:46.928Z",
+              "WhenOpened": "2025-06-02T14:24:26.175Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\coman\\Facultate\\Anul 2\\Semestrul 2\\MDS\\OnlineCleaningShop2\\The-Champions\\OnlineCleaningShop\\Views\\Chat\\Index.cshtml",
+              "RelativeDocumentMoniker": "OnlineCleaningShop\\Views\\Chat\\Index.cshtml",
+              "ToolTip": "C:\\Users\\coman\\Facultate\\Anul 2\\Semestrul 2\\MDS\\OnlineCleaningShop2\\The-Champions\\OnlineCleaningShop\\Views\\Chat\\Index.cshtml",
+              "RelativeToolTip": "OnlineCleaningShop\\Views\\Chat\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-02T14:21:30.01Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ChatController.cs",
+              "DocumentMoniker": "C:\\Users\\coman\\Facultate\\Anul 2\\Semestrul 2\\MDS\\OnlineCleaningShop2\\The-Champions\\OnlineCleaningShop\\Controllers\\ChatController.cs",
+              "RelativeDocumentMoniker": "OnlineCleaningShop\\Controllers\\ChatController.cs",
+              "ToolTip": "C:\\Users\\coman\\Facultate\\Anul 2\\Semestrul 2\\MDS\\OnlineCleaningShop2\\The-Champions\\OnlineCleaningShop\\Controllers\\ChatController.cs",
+              "RelativeToolTip": "OnlineCleaningShop\\Controllers\\ChatController.cs",
+              "ViewState": "AgIAAB0AAAAAAAAAAAAgwCkAAABIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-02T14:19:10.246Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\coman\\Facultate\\Anul 2\\Semestrul 2\\MDS\\OnlineCleaningShop2\\The-Champions\\OnlineCleaningShop\\Program.cs",
+              "RelativeDocumentMoniker": "OnlineCleaningShop\\Program.cs",
+              "ToolTip": "C:\\Users\\coman\\Facultate\\Anul 2\\Semestrul 2\\MDS\\OnlineCleaningShop2\\The-Champions\\OnlineCleaningShop\\Program.cs",
+              "RelativeToolTip": "OnlineCleaningShop\\Program.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAkwBUAAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-02T14:18:40.762Z"
             }
           ]
         },
@@ -109,6 +141,16 @@
             {
               "$type": "Bookmark",
               "Name": "ST:4:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
+            }
+          ]
+        },
+        {
+          "DockedHeight": 200,
+          "SelectedChildIndex": -1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{0ad07096-bba9-4900-a651-0598d26f6d24}"
             }
           ]
         }
