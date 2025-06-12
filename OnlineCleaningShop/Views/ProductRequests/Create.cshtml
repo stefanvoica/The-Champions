@@ -1,0 +1,18 @@
+﻿@model OnlineCleaningShop.Models.ProductRequest
+<partial name="_Notifications" />
+
+
+<h1>Trimite Cerere de Adăugare Produs</h1>
+
+<form method="post" action="/ProductRequests/Create">
+    <input type="hidden" name="ProductId" value="@Model.ProductId" />
+    <input type="hidden" name="UserId" value="@Model.UserId" />
+
+    <div class="form-group">
+        <label for="ProductName">Produs:</label>
+        <input type="text" id="ProductName" class="form-control" value="@Model.Product?.Name" readonly />
+    </div>
+
+    <button type="submit" class="btn btn-primary mt-3">Trimite Cerere</button>
+    <a href="/Products" class="btn btn-secondary mt-3">Anulează</a>
+</form>
