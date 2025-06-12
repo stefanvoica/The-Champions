@@ -1,0 +1,29 @@
+﻿@{
+    ViewBag.Title = "Asistent AI - OnlineCleaningShop";
+}
+
+<h2>Asistent AI OnlineCleaningShop</h2>
+
+<form asp-action="Ask" method="post" class="mb-3">
+    <div class="form-group">
+        <input type="text" name="message" class="form-control" placeholder="Scrie întrebarea ta aici..." required />
+    </div>
+    <button type="submit" class="btn btn-primary mt-2">Trimite</button>
+</form>
+
+@if (ViewBag.UserMessage != null)
+{
+    <div class="alert alert-info mt-4">
+        <strong>Tu:</strong> @ViewBag.UserMessage
+    </div>
+    <div class="alert alert-success">
+        <strong>AI:</strong> @ViewBag.AIResponse
+    </div>
+}
+
+@if (ViewBag.Error != null)
+{
+    <div class="alert alert-danger">
+        @ViewBag.Error
+    </div>
+}

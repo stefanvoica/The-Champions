@@ -1,0 +1,65 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-4 p-4 rounded" style="background-color: #f8f9fa;">
+    <!-- Mesaj de bun venit -->
+    <div class="text-center py-5">
+        <h1 class="fw-bold display-4 mb-3">Bine ați venit pe <span class="text-primary">Pro Cosmetic</span>!</h1>
+        <p class="lead text-muted">Explorați produsele noastre recomandate și descoperiți cele mai bune oferte personalizate pentru dvs.</p>
+    </div>
+
+
+    <!-- Slider Produse Recomandate -->
+    <div id="productCarousel" class="carousel slide mt-4" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+            @if (ViewBag.Products != null)
+            {
+                @for (var i = 0; i < ((IEnumerable<Product>)ViewBag.Products).Count(); i++)
+                {
+                    <button type="button" data-bs-target="#productCarousel" data-bs-slide-to="@i" class="@(i == 0 ? "active" : "")" aria-current="@(i == 0 ? "true" : "")" aria-label="Slide @(i + 1)"></button>
+                }
+            }
+        </div>
+        <div class="carousel-inner">
+            @if (ViewBag.Products == null)
+            {
+                <div class="carousel-item active">
+                    <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded">
+                        <h5>Ups! Nu avem produse disponibile în acest moment.</h5>
+                    </div>
+                </div>
+            }
+            else
+            {
+                
+                @for (var i = 0; i < ((IEnumerable<Product>)ViewBag.Products).Count(); i++)
+            {
+                var product = ((IEnumerable<Product>)ViewBag.Products).ElementAt(i);
+                <div class="carousel-item @(i == 0 ? "active" : "")">
+                        <img src="@product.Image" class="d-block mx-auto w-100 rounded shadow" style="max-height: 500px; object-fit: cover;" alt="@product.Name">
+                        <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded">
+                        <h5>@product.Name</h5>
+                        <p>@product.Price RON</p>
+                        <a href="/Products/Show/@product.Id" class="btn btn-success">Vezi detalii</a>
+                    </div>
+                </div>
+            }
+            }
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#productCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#productCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+
+
+    <div class="text-center mt-5">
+        <p>Vrei să vezi toate produsele noastre? Apasă pe butonul de mai jos!</p>
+        <a href="/Products/Index" class="btn btn-primary">Vezi toate produsele</a>
+    </div>
+</div>

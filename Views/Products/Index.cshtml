@@ -1,0 +1,101 @@
+﻿<br />
+
+<h2 class="text-center">Afisare produse</h2>
+
+<br />
+
+<br />
+
+@* Motorul de cautare *@
+<form method="get" action="/Products/Index" class="d-flex align-items-center gap-3 mb-4">
+    <input type="text" name="search" class="form-control w-25" placeholder="Căutare produse..."
+           value="@ViewBag.SearchString" />
+
+    <select name="sortBy" class="form-select w-25">
+        <option value="price" selected="@(Context.Request.Query["sortBy"] == "price")">Preț</option>
+        <option value="stars" selected="@(Context.Request.Query["sortBy"] == "stars")">Rating</option>
+    </select>
+
+    <select name="sortOrder" class="form-select w-25">
+        <option value="asc" selected="@(Context.Request.Query["sortOrder"] == "asc")">Crescător</option>
+        <option value="desc" selected="@(Context.Request.Query["sortOrder"] == "desc")">Descrescător</option>
+    </select>
+
+    <button type="submit" class="btn btn-primary">
+        <i class="bi bi-funnel"></i> Filtrează
+    </button>
+</form>
+
+
+
+
+@if (User.IsInRole("Colaborator") || User.IsInRole("Admin"))
+{
+    <a href="@Url.Action("New", "Products")" class="btn btn-primary mb-3">Adaugă Produs</a>
+}
+
+
+@if (User.IsInRole("Admin"))
+{
+    <a href="@Url.Action("Index", "Categories")" class="btn btn-primary mb-3">
+        Gestionare Categorii
+    </a>
+}
+
+
+<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+    @foreach (var product in ViewBag.Products)
+    {
+        <div class="col">
+            <div class="card h-100 shadow-sm d-flex flex-column justify-content-between">
+                <partial name="ProductInfo" model="product" />
+
+                <div class="card-body text-center d-flex flex-column">
+                    <a class="btn btn-primary mb-2" asp-controller="Products" asp-action="Show" asp-route-id="@product.Id">
+                        Afișare produs
+                    </a>
+
+                    @if (User.IsInRole("Colaborator") || User.IsInRole("Admin"))
+                    {
+                        <div class="d-flex justify-content-center gap-2">
+                            <a href="@Url.Action("Edit", "Products", new { id = product.Id })" class="btn btn-warning btn-sm">Editează</a>
+                            <form asp-action="Delete" asp-controller="Products" method="post" onsubmit="return confirm('Ești sigur?');">
+                                <input type="hidden" name="id" value="@product.Id" />
+                                <button type="submit" class="btn btn-danger btn-sm">Șterge</button>
+                            </form>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+
+
+
+
+@* Afisarea paginata a produselor *@
+
+<div>
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            <li class="page-item">
+                <a class="page-link" href="@ViewBag.PaginationBaseUrl=1" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+
+            @for (int i = 1; i <= ViewBag.lastPage; i++)
+            {
+                <li class="page-item"> <a class="page-link" href="@ViewBag.PaginationBaseUrl=@i">@(i)</a> </li>
+            }
+
+            <li class="page-item">
+                <a class="page-link" href="@ViewBag.PaginationBaseUrl=@(ViewBag.lastPage)" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</div>

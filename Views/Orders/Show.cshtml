@@ -1,0 +1,93 @@
+﻿@model OnlineCleaningShop.Models.Order
+<partial name="_Notifications" />
+
+<div class="row">
+
+    <div class="col-12">
+        @if (ViewBag.EsteAdmin)
+        {
+            <i class="bi bi-person"> Creat de: </i> @Model.User.UserName
+        }
+
+        <br /><br />
+        Produse in cos:
+        <br /><br />
+    </div>
+
+    <br />
+
+    @if (Model.OrderDetails.Count > 0)
+    {
+        foreach (var orderDetail in Model.OrderDetails)
+        {
+            <div class="col-12">
+                <div class="card" style="width: 100%;">
+                    <div class="card-body">
+                        <partial name="ProductInfo" model="orderDetail.Product" />
+                        <p><strong>Cantitate:</strong> @orderDetail.Quantity</p>
+                    </div>
+                </div>
+                <br /><br />
+            </div>
+        }
+
+        <hr class="my-4" />
+
+        <div class="col-12">
+            <h5 class="text-end">Subtotal: <strong>@ViewBag.TotalInitial.ToString("0.00") RON</strong></h5>
+
+            @if (ViewBag.CodAplicat != null)
+            {
+                <p class="text-success text-end">
+                    Cod <strong>@ViewBag.CodAplicat</strong> aplicat: -@ViewBag.ReducereProcent%
+                </p>
+                <p class="text-end">
+                    Total cu reducere: <strong>@ViewBag.TotalCuReducere.ToString("0.00") RON</strong>
+                </p>
+            }
+            <p class="text-end">Transport: @ViewBag.DeliveryFee.ToString("0.00") RON</p>
+            <p class="text-end">
+                Total: <strong>@ViewBag.Total.ToString("0.00") RON</strong>
+            </p>
+
+            <form method="get" asp-action="Show" asp-controller="Orders">
+                <input type="hidden" name="id" value="@Model.Id" />
+                <label for="promoCode">Ai un cod promoțional?</label>
+                <div class="input-group mt-1">
+                    <input type="text" class="form-control" id="promoCode" name="promoCode" placeholder="Ex: SAVE10" />
+                    <button class="btn btn-outline-secondary" type="submit">Aplică</button>
+                </div>
+            </form>
+            <div class="mt-4">
+                <a href="@Url.Action("DownloadInvoice", "Orders", new { id = Model.Id })" class="btn btn-secondary">
+                    <i class="bi bi-file-earmark-pdf"></i> Descarcă factura PDF
+                </a>
+            </div>
+
+
+            <hr />
+
+            <div class="mt-4">
+                <p><strong>Status plată:</strong> @(Model.IsPaid ? "✔️ Plătită" : "❌ Neplătită")</p>
+
+                @if (!Model.IsPaid)
+                {
+                    <a href="@Url.Action("Index", "Payment", new { orderId = Model.Id })" class="btn btn-success">
+                        <i class="bi bi-credit-card"></i> Plătește comanda
+                    </a>
+                }
+                else
+                {
+                    <p><strong>ID tranzacție:</strong> @Model.TransactionId</p>
+                }
+            </div>
+        </div>
+    }
+
+</div>
+
+<div class="text-center mt-4">
+    <a href="/Products/Index" class="btn btn-primary">
+        <i class="bi bi-cart-plus"></i> Mai adaugă produse în coș
+    </a>
+</div>

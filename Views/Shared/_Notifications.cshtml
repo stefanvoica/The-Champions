@@ -1,0 +1,8 @@
+﻿@if (TempData.ContainsKey("message"))
+{
+    <div class="alert @TempData["messageType"]">
+        @TempData["message"]
+    </div>
+    TempData.Remove("message");
+    TempData.Remove("messageType");
+}

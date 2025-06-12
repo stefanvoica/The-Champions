@@ -1,0 +1,81 @@
+﻿@{
+    ViewBag.Title = "Plata comenzii";
+}
+
+<h2 class="mb-4">Plătește comanda</h2>
+@if (ViewBag.Order != null)
+{
+    <div class="mb-4">
+        <h5>Detalii livrare</h5>
+        <p><strong>Metodă de livrare:</strong> @ViewBag.Order.DeliveryMethod</p>
+
+        @if (ViewBag.Order.DeliveryMethod?.ToString() == "Courier")
+        {
+            <p><strong>Adresă de livrare:</strong> @ViewBag.Order.DeliveryAddress</p>
+        }
+        @if (ViewBag.Order.DeliveryMethod?.ToString() == "Easybox")
+        {
+            <p><strong>Easybox selectat:</strong> @ViewBag.Order.EasyboxLockerId</p>
+        }
+    </div>
+}
+
+
+<form id="checkout" method="post" asp-controller="Payment" asp-action="Create">
+    <input type="hidden" name="orderId" value="@ViewBag.OrderId" />
+    <div id="dropin-container" class="mb-3"></div>
+
+    <button id="pay-button" type="submit" class="btn btn-success">
+        <i class="bi bi-credit-card"></i> Plătește acum
+    </button>
+
+    <div id="loading" style="display:none;" class="mt-2 text-info">
+        Se procesează plata...
+    </div>
+</form>
+
+<script src="https://js.braintreegateway.com/web/dropin/1.40.0/js/dropin.min.js"></script>
+<script>
+    var form = document.querySelector('#checkout');
+    var button = document.getElementById('pay-button');
+    var loading = document.getElementById('loading');
+
+    braintree.dropin.create({
+        authorization: '@ViewBag.ClientToken',
+        container: '#dropin-container'
+    }, function (err, instance) {
+        if (err) {
+            console.error(err);
+            alert("Eroare la încărcarea metodei de plată.");
+            return;
+        }
+
+        form.addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            // Dezactivează butonul și arată "loading"
+            button.disabled = true;
+            loading.style.display = "block";
+
+            instance.requestPaymentMethod(function (err, payload) {
+                if (err) {
+                    console.error(err);
+                    alert("A apărut o problemă. Încearcă din nou.");
+                    button.disabled = false;
+                    loading.style.display = "none";
+                    return;
+                }
+
+                // Creează input ascuns cu nonce-ul
+                var input = document.createElement('input');
+                input.type = 'hidden';
+                input.name = 'payment_method_nonce';
+                input.value = payload.nonce;
+                form.appendChild(input);
+
+                // Trimite formularul
+                form.submit();
+            });
+        });
+    });
+</script>
