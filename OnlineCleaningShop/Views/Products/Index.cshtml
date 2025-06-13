@@ -7,49 +7,43 @@
 <br />
 
 @* Motorul de cautare *@
-<form method="get" action="/Products/Index">
-    <input type="text" name="search" placeholder="Căutare" value="@ViewBag.SearchString" />
+<form method="get" action="/Products/Index" class="container mb-4">
+    <div class="row g-2 align-items-center justify-content-center">
+        <div class="col-md-4">
+            <div class="form-floating">
+                <input type="text" class="form-control" id="search" name="search" placeholder="Căutare produse..." value="@ViewBag.SearchString" />
+                <label for="search"><i class="bi bi-search"></i> Căutare produse</label>
+            </div>
+        </div>
 
-    <select name="sortBy">
-        @if (Context.Request.Query["sortBy"] == "price")
-        {
-            <option value="price" selected>Preț</option>
-        }
-        else
-        {
-            <option value="price">Preț</option>
-        }
-        @if (Context.Request.Query["sortBy"] == "stars")
-        {
-            <option value="stars" selected>Rating</option>
-        }
-        else
-        {
-            <option value="stars">Rating</option>
-        }
-    </select>
+        <div class="col-md-3">
+            <div class="form-floating">
+                <select class="form-select" id="sortBy" name="sortBy">
+                    <option value="price" selected="@(Context.Request.Query["sortBy"] == "price")">Preț</option>
+                    <option value="stars" selected="@(Context.Request.Query["sortBy"] == "stars")">Rating</option>
+                </select>
+                <label for="sortBy"><i class="bi bi-sort-up"></i> Sortează după</label>
+            </div>
+        </div>
 
-    <select name="sortOrder">
-        @if (Context.Request.Query["sortOrder"] == "asc")
-        {
-            <option value="asc" selected>Crescător</option>
-        }
-        else
-        {
-            <option value="asc">Crescător</option>
-        }
-        @if (Context.Request.Query["sortOrder"] == "desc")
-        {
-            <option value="desc" selected>Descrescător</option>
-        }
-        else
-        {
-            <option value="desc">Descrescător</option>
-        }
-    </select>
+        <div class="col-md-3">
+            <div class="form-floating">
+                <select class="form-select" id="sortOrder" name="sortOrder">
+                    <option value="asc" selected="@(Context.Request.Query["sortOrder"] == "asc")">Crescător</option>
+                    <option value="desc" selected="@(Context.Request.Query["sortOrder"] == "desc")">Descrescător</option>
+                </select>
+                <label for="sortOrder"><i class="bi bi-arrow-down-up"></i> Ordine</label>
+            </div>
+        </div>
 
-    <button type="submit">Filtrează</button>
+        <div class="col-md-2 text-center">
+            <button type="submit" class="btn btn-primary w-100 py-3">
+                <i class="bi bi-funnel-fill"></i> Filtrează
+            </button>
+        </div>
+    </div>
 </form>
+
 
 
 
@@ -67,32 +61,21 @@
 }
 
 
-
+<div class="d-flex flex-wrap gap-4">
 @foreach (var product in ViewBag.Products)
 {
-    <div class="card">
-
-        <partial name="ProductInfo" model="product"></partial>
-
-        <a class="btn btn-success" asp-controller="Products" asp-action="Show" asp-route-id="@product.Id">Afisare produs</a>
-
-        @if (User.IsInRole("Colaborator") || User.IsInRole("Admin"))
-        {
-            <div class="d-flex justify-content-between align-items-center">
-                <a href="@Url.Action("Edit", "Products", new { id = product.Id })" class="btn btn-warning btn-sm">Editează</a>
-                <form asp-action="Delete" asp-controller="Products" method="post" onsubmit="return confirm('Ești sigur?');" style="margin: 0;">
-                    <input type="hidden" name="id" value="@product.Id" />
-                    <button type="submit" class="btn btn-danger btn-sm">Șterge</button>
-                </form>
-            </div>
-        }
-
-
+    <div class="card mb-4 shadow-sm" style="max-width: 300px;">
+        <img src="@product.Image" class="card-img-top" style="height: 200px; object-fit: cover;" alt="@product.Name" />
+        <div class="card-body">
+            <h5 class="card-title">@product.Name</h5>
+            <p class="card-text">@product.Description</p>
+            <p><strong>Preț:</strong> @product.Price.ToString("0.00") RON</p>
+            <p><strong>Stoc:</strong> @product.Stock buc.</p>
+            <a href="/Products/Show/@product.Id" class="btn btn-success">Afișare produs</a>
+        </div>
     </div>
-
-    <br />
-    <br />
 }
+</div>
 
 @* Afisarea paginata a produselor *@
 
