@@ -21,7 +21,7 @@ html {
 }
 
 body {
-    margin-bottom: 60px;
+    margin-bottom: 200px;
 }
 
 .navbar {
@@ -67,7 +67,7 @@ a.nav-link {
     }
 
 .footer-position {
-    position: fixed;
+    /*position: fixed;*/
     left: 0;
     bottom: 0;
     width: 100%;
@@ -84,4 +84,10 @@ a.nav-link {
     -moz-box-orient: vertical;
     /* Limit the text block to x lines */
     -webkit-line-clamp: 5;
+}
+.chat-section {
+    margin-bottom: 60px;
+}
+.home-footer-spacing {
+    margin-bottom: 120px;
 }
