@@ -105,12 +105,20 @@ namespace OnlineCleaningShop.Controllers
 
             if (subtotal < 300)
             {
-                TempData["message"] = "Mai adauga produse in valoare de " + (300 - subtotal) + " lei pentru a beneficia de livrare gratuita!";
-                TempData["messageType"] = "alert-info";
-                if (orders.DeliveryMethod == DeliveryMethod.Courier)
-                    deliveryFee = 15;
-                else if (orders.DeliveryMethod == DeliveryMethod.Easybox)
-                    deliveryFee = 8;
+                if (orders.DeliveryMethod == DeliveryMethod.WarehousePickup)
+                {
+                    TempData["message"] = "Livrare gratuita la ridicarea de la depozit!";
+                    TempData["messageType"] = "alert-success";
+                }
+                else
+                {
+                    TempData["message"] = "Mai adauga produse in valoare de " + (300 - subtotal) + " lei pentru a beneficia de livrare gratuita!";
+                    TempData["messageType"] = "alert-info";
+                    if (orders.DeliveryMethod == DeliveryMethod.Courier)
+                        deliveryFee = 15;
+                    else if (orders.DeliveryMethod == DeliveryMethod.Easybox)
+                        deliveryFee = 8;
+                }
             }
             else
             {
