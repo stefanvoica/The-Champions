@@ -20,7 +20,6 @@
 * Implementare opțiuni de livrare (ridicare din depozit, easybox, livrare prin curier).
 * Implementare sistem de transport gratuit/reduceri în funcție de suma din coș.
 * Permitere utilizatorilor să folosească coduri promoționale la finalizarea comenzii.
-* Implementare chatbox pentru usurarea experientei utilizatorului in cadrul magazinului
 ## Sprint 4: Recenzii și Evaluări
 * Implementare funcționalitate de lăsare review-uri și rating (1-5 stele) pentru produsele achiziționate.
 * Calcul automat al ratingului mediu pentru fiecare produs.
@@ -29,4 +28,4 @@
 * Implementare opțiuni de sortare a produselor după preț și rating (crescător/descrescător).
 ## Sprint 6: Administrare și Securitate
 * Implementare funcționalitate pentru administratori de a schimba drepturile utilizatorilor.
-* Implementare aplicație mobilă cu toate funcționalitățile magazinului online.
+* Implementare chatbox pentru usurarea experientei utilizatorului in cadrul magazinului.
