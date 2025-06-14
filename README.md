@@ -51,8 +51,8 @@ Ca utilizator, vreau să am acces la un HelpAI care să includă o opțiune de c
 
 ###  2. Diagrame UML / Workflow
 - Diagrama conceptuală
+  
 - Diagrama entitate-relație
-> (Imaginile se vor adăuga aici sau în wiki)
 
 ###  3. Source control folosind Git
 Gestionarea codului sursă se realizează prin GitHub, folosind cele mai bune practici:
@@ -104,11 +104,39 @@ Integrare - După aprobare, modificările sunt integrate în branch-ul principal
 
 
 ###  6. Comentarii cod & code standards
-- Codul respectă ghidul PEP8 / PSR12
-- Comentarii clare în fișierele `.py` / `.js`
+#### Code Standards
+Folosim StyleCop pentru C# și ESLint pentru JavaScript/TypeScript
+Respectăm convențiile de denumire specifice fiecărui limbaj
+Aplicăm principiile SOLID și Clean Code
+#### Comentarii Cod
+Fiecare clasă și metodă publică are comentarii XML pentru documentație
+Algoritmii complexi sunt documentați cu explicații detaliate
+Folosim comentarii pentru a explica deciziile de arhitectură și design
+###  7. Design Patterns
+În cadrul proiectului am utilizat mai multe pattern-uri standard de proiectare:
 
-###  7. Design Patterns (1p)
-- Aplicate pattern-uri precum MVC, Singleton, Factory (unde e cazul)
+1. Dependency Injection (DI)
+Aplicat extensiv în Program.cs, unde serviciile sunt înregistrate și injectate în controlere sau servicii:
+
+AddScoped<IBraintreeService, BraintreeService>()
+
+AddTransient<EmailService>()
+
+AddSingleton<GeminiService>()
+
+2. Interface-based Programming
+Interfața IBraintreeService este folosită pentru a defini contractul serviciului de plată, implementat de BraintreeService, permițând testabilitate și extensibilitate crescută.
+
+3. Factory Pattern (prin configurație)
+În BraintreeService, obiectul BraintreeGateway este creat pe baza valorilor de configurare, funcționând ca o instanțiere dinamică în funcție de mediu, ceea ce reflectă un pattern de tip Factory.
+
+4. Singleton Pattern
+Serviciile statice precum GeminiService sunt înregistrate ca singleton-uri, pentru a reutiliza aceeași instanță pe durata aplicației și a reduce consumul de resurse.
+
+5. Seeder Pattern (Custom Initialization)
+Clasa SeedData aplică un pattern de tip initializer, folosit pentru a popula baza de date cu roluri și utilizatori inițiali într-un mod controlat și repetabil.
+
+Aceste pattern-uri contribuie la o arhitectură modulară, scalabilă și ușor de întreținut.
 
 ###  8. Prompt Engineering & AI Tools (2p)
 
