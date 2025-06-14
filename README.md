@@ -51,8 +51,14 @@ Ca utilizator, vreau să am acces la un HelpAI care să includă o opțiune de c
 
 ###  2. Diagrame UML / Workflow
 - Diagrama conceptuală
-  
+  ![image](https://github.com/user-attachments/assets/22ac1199-b3f6-4131-b896-e3402ff6f35f)
+
 - Diagrama entitate-relație
+![image](https://github.com/user-attachments/assets/fc7885cc-1381-48f2-9853-47658ffee39c)
+
+-Diagrama claselor
+![image](https://github.com/user-attachments/assets/ceee5b3a-4e6d-499f-86ad-f5c612117df2)
+
 
 ###  3. Source control folosind Git
 Gestionarea codului sursă se realizează prin GitHub, folosind cele mai bune practici:
@@ -83,7 +89,7 @@ Se respectă convențiile de denumire:
 
 
 ###  4. Teste automate
-- 
+- Efectuam teste automate pentru useri categorii comenzi si produse
 
 ###  5. Raportare bug & rezolvare folosind pull request-uri
 ![image](https://github.com/user-attachments/assets/98cb4750-8e3d-4db1-8573-34961a583a4b)
@@ -138,11 +144,38 @@ Clasa SeedData aplică un pattern de tip initializer, folosit pentru a popula ba
 
 Aceste pattern-uri contribuie la o arhitectură modulară, scalabilă și ușor de întreținut.
 
-###  8. Prompt Engineering & AI Tools (2p)
+### 8. Prompt Engineering & AI Tools
 
-  La una dintre cerinte am implementat un chat box in cadrul caruia am folosit un API de Gemini, pe care
-utilizatorul il poate intreba diverse detalii despre produse (ex: o comparatie intre produse, care este cel
-mai bun)
-  - ChatGPT pentru clarificări de sintaxă și optimizări
-  - Documentarea prompturilor este disponibilă [aici](#)
+La una dintre cerințe am implementat un chat box în cadrul căruia am folosit un API de Gemini, pe care
+utilizatorul îl poate întreba diverse detalii despre produse (ex: o comparație între produse, care este cel
+mai bun, sugestii pentru nevoi specifice etc.).
+
+Funcționalitatea este implementată în serviciul `GeminiService.cs`, care gestionează apelurile către modelul
+lingvistic generativ al Gemini, folosind mesaje în format JSON. Integrarea permite răspunsuri contextuale,
+fiind o extensie inovatoare a interfeței aplicației.
+
+#### Utilizare AI în procesul de dezvoltare
+
+**GitHub Copilot**
+- Generarea codului repetitiv și a metodelor standard
+- Completarea automată a funcțiilor pe baza comentariilor
+- Sugestii pentru scrierea testelor unitare
+
+**ChatGPT**
+- Generarea specificațiilor pentru endpoint-urile API
+- Asistență în rezolvarea bug-urilor dificile
+- Optimizarea interogărilor LINQ și SQL
+- Scrierea expresiilor regex pentru validări
+
+**Microsoft Copilot**
+- Refactorizarea componentelor complexe
+- Generarea documentației tehnice pentru controlere și servicii
+
+#### Exemple
+- `GeminiService.cs`: generarea metodei `AskGemini()` cu asistență AI
+- `ProductsController.cs`: optimizarea metodelor de filtrare
+- Generarea de expresii regex pentru validarea codurilor promoționale
+- Suport în construirea structurii folderelor și organizarea logicii aplicației
+
+
 
