@@ -57,7 +57,7 @@ Ca utilizator, vreau să am acces la un HelpAI care să includă o opțiune de c
 ###  3. Source control folosind Git
 Gestionarea codului sursă se realizează prin GitHub, folosind cele mai bune practici:
 
-####Branch Creation și Workflow
+#### Branch Creation și Workflow
 Folosim modelul GitFlow, cu următoarele ramuri principale:
 
 main – cod stabil, gata de producție
@@ -70,14 +70,14 @@ bugfix/nume-bug – rezolvarea bug-urilor identificate
 
 hotfix/nume-problema – intervenții rapide în producție
 
-####Merge și Rebase
+#### Merge și Rebase
 Modificările sunt integrate prin Pull Requests, cu verificare și aprobare în echipă
 
 Se utilizează rebase pentru menținerea unui istoric liniar și curat
 
 Merge se face doar după code review și rezolvarea tuturor comentariilor
 
-####Commits
+#### Commits
 Proiectul conține peste 50 de commits
 
 Se respectă convențiile de denumire:
