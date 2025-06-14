@@ -49,7 +49,7 @@ Ca utilizator, vreau sa am posibilitatea de a ma abona la newsletter pentru a ma
 Ca utilizator, vrea sa pot folosi coduri promotionale in comenzile mele.
 Ca utilizator, vreau să am acces la un HelpAI care să includă o opțiune de chat pentru a primi asistență rapidă și clarificări legate de produse, comenzi și funcționalitățile platformei.
 
-###  2. Diagrame UML / Workflow (1p)
+###  2. Diagrame UML / Workflow
 - Diagrama conceptuală
 - Diagrama entitate-relație
 > (Imaginile se vor adăuga aici sau în wiki)
@@ -78,7 +78,7 @@ Se utilizează rebase pentru menținerea unui istoric liniar și curat
 Merge se face doar după code review și rezolvarea tuturor comentariilor
 
 #### Commits
-Proiectul conține peste 50 de commits
+Proiectul conține peste 85 de commit-uri
 
 Se respectă convențiile de denumire:
 
@@ -91,14 +91,14 @@ refactor: pentru restructurarea codului
 docs: pentru documentație
 
 
-###  4. Teste automate (2p)
+###  4. Teste automate
 - 
 
-###  5. Raportare bug & rezolvare (1p)
+###  5. Raportare bug & rezolvare folosind pull request-uri
 - Exemple de buguri raportate în Issues
 - Fixate prin PR-uri dedicate
 
-###  6. Comentarii cod & code standards (1p)
+###  6. Comentarii cod & code standards
 - Codul respectă ghidul PEP8 / PSR12
 - Comentarii clare în fișierele `.py` / `.js`
 
