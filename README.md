@@ -59,16 +59,11 @@ Gestionarea codului sursă se realizează prin GitHub, folosind cele mai bune pr
 
 #### Branch Creation și Workflow
 Folosim modelul GitFlow, cu următoarele ramuri principale:
-
-main – cod stabil, gata de producție
-
-develop – integrare continuă a funcționalităților
-
-feature/nume-funcționalitate – dezvoltare de noi funcții
-
-bugfix/nume-bug – rezolvarea bug-urilor identificate
-
-hotfix/nume-problema – intervenții rapide în producție
+- main – cod stabil, gata de producție
+- develop – integrare continuă a funcționalităților
+- feature/nume-funcționalitate – dezvoltare de noi funcții
+- bugfix/nume-bug – rezolvarea bug-urilor identificate
+- hotfix/nume-problema – intervenții rapide în producție
 
 #### Merge și Rebase
 Modificările sunt integrate prin Pull Requests, cu verificare și aprobare în echipă
@@ -81,25 +76,21 @@ Merge se face doar după code review și rezolvarea tuturor comentariilor
 Proiectul conține peste 85 de commit-uri
 
 Se respectă convențiile de denumire:
-
-feat: pentru funcționalități noi
-
-fix: pentru rezolvări de bug-uri
-
-refactor: pentru restructurarea codului
-
-docs: pentru documentație
+- feat: pentru funcționalități noi
+- fix: pentru rezolvări de bug-uri
+- refactor: pentru restructurarea codului
+- docs: pentru documentație
 
 
 ###  4. Teste automate
 - 
 
 ###  5. Raportare bug & rezolvare folosind pull request-uri
-![image](https://github.com/user-attachments/assets/f27740dc-793a-4991-8f0d-86d62ec6b7a8)
+![image](https://github.com/user-attachments/assets/98cb4750-8e3d-4db1-8573-34961a583a4b)
+
 Gestionarea bug-urilor se realizează prin:
 
-Identificarea și Raportarea 
-- Utilizăm sistemul de Issues din GitHub pentru a documenta bug-urile descoperite
+Identificarea și Raportarea - Utilizăm sistemul de Issues din GitHub pentru a documenta bug-urile descoperite
 
 Analiza și Prioritizarea - Evaluăm impactul și urgența fiecărui bug pentru a stabili prioritatea
 
