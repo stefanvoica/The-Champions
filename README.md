@@ -7,7 +7,23 @@
 - Cristescu Ciprian (252)
 - Coman Irina (233)
 
-## Live Demo
+## Prezentare
+  Proiectul propune dezvoltarea unei platforme complete de comerț online, care integrează
+funcționalități esențiale pentru gestionarea utilizatorilor, produselor, comenzilor și a proceselor
+administrative. Scopul este crearea unei experiențe fluide și sigure atât pentru cumpărători, cât și
+pentru colaboratori și administratori.
+  Aplicația va permite utilizatorilor să creeze conturi, să se autentifice în siguranță folosind
+verificare în doi pași și să navigheze printre produse organizate pe categorii. Vor putea adăuga
+produse în coș, plasa comenzi, alege metode de livrare și folosi coduri promoționale. După
+finalizarea comenzii, utilizatorii vor primi automat factura prin e-mail.
+Colaboratorii vor avea posibilitatea de a adăuga și gestiona produse, iar administratorii vor
+aproba aceste produse și vor avea control deplin asupra conținutului din platformă, inclusiv
+categorii, recenzii și drepturile utilizatorilor.
+  Platforma va include funcționalități moderne precum sistem de recenzii și evaluări, motor de
+căutare performant, sortare după preț și rating si chatbox pentru suport în timp real care va replica toate funcțiile site-ului.
+Securitatea și scalabilitatea sunt priorități-cheie, astfel încât proiectul este gândit pentru a putea fi
+extins ușor și integrat cu servicii externe (plăți online, notificări SMS/email, livrări automate
+etc.).
 Demo video: [AICI](#)
 
 
@@ -28,9 +44,8 @@ Ca administrator, vreau sa pot edita si sterge produse si comentarii.
 Ca utilizator, vreau ca la finalul comenzii sa fiu redirectionat catre o pagina de plati online.
 Ca utilizator, vreau sa primesc mail cu factura autogenerata in urma comenzii efectuate in magazin.
 Ca utilizator, vreau sa pot alege din mai multe metode de livrare (ridicare din depozit, easybox, livrare prin curier).
-Ca utilizator, vreau sa beneficiez de transport gratuit sau reduceri începând cu suma x din cosul de cumparaturi.
+Ca utilizator, vreau sa beneficiez de transport gratuit sau reduceri începând cu o anumita suma  a produselor din cosul de cumparaturi.
 Ca utilizator, vreau sa am posibilitatea de a ma abona la newsletter pentru a ma informa din cele mai recente surse si a descoperi cele mai noi reduceri.
-Ca utilizator, pe langa aplicatia web mentionata mai sus, vreau sa pot descarca o aplicatie mobila cu toate functionalitatile.
 Ca utilizator, vrea sa pot folosi coduri promotionale in comenzile mele.
 Ca utilizator, vreau să am acces la un HelpAI care să includă o opțiune de chat pentru a primi asistență rapidă și clarificări legate de produse, comenzi și funcționalitățile platformei.
 
@@ -40,8 +55,42 @@ Ca utilizator, vreau să am acces la un HelpAI care să includă o opțiune de c
 > (Imaginile se vor adăuga aici sau în wiki)
 
 ###  3. Source control folosind Git
-- Fiecare funcționalitate a fost dezvoltată pe branch separat
-- Pull request-uri și rebase-uri
+Gestionarea codului sursă se realizează prin GitHub, folosind cele mai bune practici:
+
+Branch Creation și Workflow
+Folosim modelul GitFlow, cu următoarele ramuri principale:
+
+main – cod stabil, gata de producție
+
+develop – integrare continuă a funcționalităților
+
+feature/nume-funcționalitate – dezvoltare de noi funcții
+
+bugfix/nume-bug – rezolvarea bug-urilor identificate
+
+hotfix/nume-problema – intervenții rapide în producție
+
+Merge și Rebase
+Modificările sunt integrate prin Pull Requests, cu verificare și aprobare în echipă
+
+Se utilizează rebase pentru menținerea unui istoric liniar și curat
+
+Merge se face doar după code review și rezolvarea tuturor comentariilor
+
+Commits
+Proiectul conține peste 50 de commits
+
+Se respectă convențiile de denumire:
+
+feat: pentru funcționalități noi
+
+fix: pentru rezolvări de bug-uri
+
+refactor: pentru restructurarea codului
+
+docs: pentru documentație
+
+test: pentru testare automată
 
 ###  4. Teste automate (2p)
 - 
@@ -58,8 +107,10 @@ Ca utilizator, vreau să am acces la un HelpAI care să includă o opțiune de c
 - Aplicate pattern-uri precum MVC, Singleton, Factory (unde e cazul)
 
 ###  8. Prompt Engineering & AI Tools (2p)
-- Am folosit:
-  - GitHub Copilot pentru generarea inițială a codului de validare email
+
+  La una dintre cerinte am implementat un chat box in cadrul caruia am folosit un API de Gemini, pe care
+utilizatorul il poate intreba diverse detalii despre produse (ex: o comparatie intre produse, care este cel
+mai bun)
   - ChatGPT pentru clarificări de sintaxă și optimizări
   - Documentarea prompturilor este disponibilă [aici](#)
 
