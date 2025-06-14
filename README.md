@@ -56,7 +56,7 @@ Ca utilizator, vreau să am acces la un HelpAI care să includă o opțiune de c
 - Diagrama entitate-relație
 ![image](https://github.com/user-attachments/assets/fc7885cc-1381-48f2-9853-47658ffee39c)
 
--Diagrama claselor
+- Diagrama claselor
 ![image](https://github.com/user-attachments/assets/ceee5b3a-4e6d-499f-86ad-f5c612117df2)
 
 
