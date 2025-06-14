@@ -95,8 +95,22 @@ docs: pentru documentație
 - 
 
 ###  5. Raportare bug & rezolvare folosind pull request-uri
-- Exemple de buguri raportate în Issues
-- Fixate prin PR-uri dedicate
+![image](https://github.com/user-attachments/assets/f27740dc-793a-4991-8f0d-86d62ec6b7a8)
+Gestionarea bug-urilor se realizează prin:
+
+Identificarea și Raportarea 
+- Utilizăm sistemul de Issues din GitHub pentru a documenta bug-urile descoperite
+
+Analiza și Prioritizarea - Evaluăm impactul și urgența fiecărui bug pentru a stabili prioritatea
+
+Rezolvarea - Creăm branch-uri dedicate pentru rezolvarea bug-urilor (bugfix/nume-bug)
+
+Pull Request și Review - Soluțiile sunt verificate prin PR-uri și code review
+
+Testare - Verificăm că rezolvarea nu afectează alte funcționalități
+
+Integrare - După aprobare, modificările sunt integrate în branch-ul principal
+
 
 ###  6. Comentarii cod & code standards
 - Codul respectă ghidul PEP8 / PSR12
