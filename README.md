@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/0ec3e745-c139-40cb-b8f6-73023051322d)# Proiect MDS 2025 – OnlineCleaningShop
+# Proiect MDS 2025 – OnlineCleaningShop
 
 ## Autori
 - Voica Ștefan-Alexandru (251)
@@ -87,8 +87,7 @@ Se respectă convențiile de denumire:
 
 ###  4. Teste automate
 - Efectuam teste automate pentru useri, categorii, comenzi si produse.
-![image](https://github.com/user-attachments/assets/847bddad-803b-44fc-beeb-4a0c4c67bed8)
-
+![image](https://github.com/user-attachments/assets/0ec3e745-c139-40cb-b8f6-73023051322d)
 
 ###  5. Raportare bug & rezolvare folosind pull request-uri
 ![image](https://github.com/user-attachments/assets/98cb4750-8e3d-4db1-8573-34961a583a4b)
