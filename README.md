@@ -1,4 +1,4 @@
-# Proiect MDS 2025 – OnlineCleaningShop
+![image](https://github.com/user-attachments/assets/0ec3e745-c139-40cb-b8f6-73023051322d)# Proiect MDS 2025 – OnlineCleaningShop
 
 ## Autori
 - Voica Ștefan-Alexandru (251)
@@ -24,32 +24,32 @@ căutare performant, sortare după preț și rating si chatbox pentru suport în
 Securitatea și scalabilitatea sunt priorități-cheie, astfel încât proiectul este gândit pentru a putea fi
 extins ușor și integrat cu servicii externe (plăți online, notificări SMS/email, livrări automate
 etc.).
-Demo video: [AICI](#)
+Demo video: [AICI](https://youtu.be/ubOrXbEjcHU)
 
 
 ##  Procesul de dezvoltare software
 
 ###  1. User Stories și Backlog
-Ca vizitator, vreau sa ma pot inregistra pentru a avea acces la functionalitati suplimentare.
-Ca utilizator, vreau sa ma pot autentifica in 2 pasi, primind un mail/sms cu un cod de validare.
-Ca utilizator colaborator, vreau sa pot adauga, edita si sterge produse in magazin, care sa fie apoi aprobate sau respinse de administrator.
-Ca administrator, vreau sa pot adauga, edita si sterge categorii de produse pentru a organiza magazinul.
-Ca administrator, vreau sa pot schimba drepturile de acces ale utilizatorilor.
-Ca utilizator, vreau sa pot lasa un rating si un review text pentru produsele achizitionate.
-Ca utilizator neinregistrat, vreau doar sa pot vizualiza produsele si comentariile, fara a putea adauga produse in cos si lasa recenzii.
-Ca utilizator inregistrat, vreau sa pot adauga produse in cos si sa plasez comenzi.
-Ca utilizator, vreau sa pot cauta produse dupa denumire sau fragmente din numele acestora.
-Ca utilizator, vreau sa pot sorta produsele dupa pret sau rating, crescator sau descrescator.
-Ca administrator, vreau sa pot edita si sterge produse si comentarii.
-Ca utilizator, vreau ca la finalul comenzii sa fiu redirectionat catre o pagina de plati online.
-Ca utilizator, vreau sa primesc mail cu factura autogenerata in urma comenzii efectuate in magazin.
-Ca utilizator, vreau sa pot alege din mai multe metode de livrare (ridicare din depozit, easybox, livrare prin curier).
-Ca utilizator, vreau sa beneficiez de transport gratuit sau reduceri începând cu o anumita suma  a produselor din cosul de cumparaturi.
-Ca utilizator, vreau sa am posibilitatea de a ma abona la newsletter pentru a ma informa din cele mai recente surse si a descoperi cele mai noi reduceri.
-Ca utilizator, vrea sa pot folosi coduri promotionale in comenzile mele.
-Ca utilizator, vreau să am acces la un HelpAI care să includă o opțiune de chat pentru a primi asistență rapidă și clarificări legate de produse, comenzi și funcționalitățile platformei.
+- Ca vizitator, vreau sa ma pot inregistra pentru a avea acces la functionalitati suplimentare.
+- Ca utilizator, vreau sa ma pot autentifica in 2 pasi, primind un mail/sms cu un cod de validare.
+- Ca utilizator colaborator, vreau sa pot adauga, edita si sterge produse in magazin, care sa fie apoi aprobate sau respinse de administrator.
+- Ca administrator, vreau sa pot adauga, edita si sterge categorii de produse pentru a organiza magazinul.
+- Ca administrator, vreau sa pot schimba drepturile de acces ale utilizatorilor.
+- Ca utilizator, vreau sa pot lasa un rating si un review text pentru produsele achizitionate.
+- Ca utilizator neinregistrat, vreau doar sa pot vizualiza produsele si comentariile, fara a putea adauga produse in cos si lasa recenzii.
+- Ca utilizator inregistrat, vreau sa pot adauga produse in cos si sa plasez comenzi.
+- Ca utilizator, vreau sa pot cauta produse dupa denumire sau fragmente din numele acestora.
+- Ca utilizator, vreau sa pot sorta produsele dupa pret sau rating, crescator sau descrescator.
+- Ca administrator, vreau sa pot edita si sterge produse si comentarii.
+- Ca utilizator, vreau ca la finalul comenzii sa fiu redirectionat catre o pagina de plati online.
+- Ca utilizator, vreau sa primesc mail cu factura autogenerata in urma comenzii efectuate in magazin.
+- Ca utilizator, vreau sa pot alege din mai multe metode de livrare (ridicare din depozit, easybox, livrare prin curier).
+- Ca utilizator, vreau sa beneficiez de transport gratuit sau reduceri începând cu o anumita suma a produselor din cosul de cumparaturi.
+- Ca utilizator, vreau sa am posibilitatea de a ma abona la newsletter pentru a ma informa din cele mai recente surse si a descoperi cele mai noi reduceri.
+- Ca utilizator, vrea sa pot folosi coduri promotionale in comenzile mele.
+- Ca utilizator, vreau să am acces la un HelpAI care să includă o opțiune de chat pentru a primi asistență rapidă și clarificări legate de produse, comenzi și funcționalitățile platformei.
 
-###  2. Diagrame UML / Workflow
+###  2. Diagrame
 - Diagrama conceptuală
   ![image](https://github.com/user-attachments/assets/22ac1199-b3f6-4131-b896-e3402ff6f35f)
 
@@ -79,17 +79,16 @@ Se utilizează rebase pentru menținerea unui istoric liniar și curat
 Merge se face doar după code review și rezolvarea tuturor comentariilor
 
 #### Commits
-Proiectul conține peste 85 de commit-uri
+Proiectul conține peste 85 de commit-uri.
 
 Se respectă convențiile de denumire:
 - feat: pentru funcționalități noi
-- fix: pentru rezolvări de bug-uri
-- refactor: pentru restructurarea codului
-- docs: pentru documentație
-
+- bug: pentru rezolvări de bug-uri
 
 ###  4. Teste automate
-- Efectuam teste automate pentru useri categorii comenzi si produse
+- Efectuam teste automate pentru useri, categorii, comenzi si produse.
+![image](https://github.com/user-attachments/assets/847bddad-803b-44fc-beeb-4a0c4c67bed8)
+
 
 ###  5. Raportare bug & rezolvare folosind pull request-uri
 ![image](https://github.com/user-attachments/assets/98cb4750-8e3d-4db1-8573-34961a583a4b)
@@ -176,6 +175,3 @@ fiind o extensie inovatoare a interfeței aplicației.
 - `ProductsController.cs`: optimizarea metodelor de filtrare
 - Generarea de expresii regex pentru validarea codurilor promoționale
 - Suport în construirea structurii folderelor și organizarea logicii aplicației
-
-
-
